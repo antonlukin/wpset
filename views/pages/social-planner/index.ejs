@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html class="">
+<head>
+<%- include(views + '/parts/header', meta) %>
+</head>
+
+<body>
+    <header class="header">
+        <span class="logo"><a href="/">wpget.org</a>/social-planner</span>
+
+        <%- include(views + '/parts/mode' ) %>
+    </header>
+
+    <section class="hero">
+        <h1>Social Planner</h1>
+
+        <p>
+            Social Planner is a <strong>WordPress plugin</strong> for scheduling announcements of posts to your social networks accounts.
+            The following providers are currently supported:
+            <strong>Facebook</strong>, <strong>Twitter</strong>, <strong>VK.com</strong>, <strong>OK.ru</strong>, <strong>Telegram</strong>,
+            but you can easily add a new one yourself.
+        </p>
+
+        <figure>
+            <a href="/images/social-planner/screenshot.png" target="_blank">
+                <img src="/images/social-planner/screenshot.png" alt="Social Planner WordPress plugin general screenshot">
+            </a>
+        </figure>
+
+        <p>
+            The whole process is completely automated. Just write a new post and either entire post or it’s nicely
+            formatted announcement with backlink will be published to all your configured social networks.
+            Plugin works with profiles, business pages, community pages, groups, etc.
+        </p>
+
+        <div class="manager">
+            <a class="button" href="https://wordpress.org/plugins/social-planner/" target="_blank">Download</a>
+            <a class="button button-outline" href="https://github.com/antonlukin/social-planner/" target="_blank">Github</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="installation">
+            <span>Installation</span>
+
+            <a aria-hidden="true" href="#installation">
+                <%- include(views + '/icons/anchor.svg' ) %>
+            </a>
+        </h2>
+
+        <p>
+            Just search <code>social-planner</code> and activate the plugin from your admin dashboard.
+            You can also manually upload the <a href="https://downloads.wordpress.org/plugin/social-planner.zip"
+                target="_blank">latest release</a>
+            to <code>/wp-content/plugins</code> and activate it.
+        </p>
+
+        <p>
+            Due to the restrictions of the WordPress scheduling system, announcements on social networks may be delayed.
+            To avoid this, it is advisable to configure the work of the <strong>system cron</strong>.
+            If you are unable to implement it yourself, contact your hoster or system administrator.
+            Read more <a href="https://developer.wordpress.org/plugins/cron/hooking-wp-cron-into-the-system-task-scheduler/" target="_blank">here</a>.
+        </p>
+
+        <p>
+            Before using the plugin, you need to configure it.
+            Immediately after installation, go to the plugin page.
+            It is located in the <strong>Settings</strong> section.
+            Here you need to add options for the required providers.
+        </p>
+
+        <figure>
+            <a href="/images/social-planner/installation.png" target="_blank">
+                <img src="/images/social-planner/installation.png" alt="Social Planner WordPress plugin installation">
+            </a>
+        </figure>
+
+        <p>
+            Pay attention to the <strong>Subtitle</strong> optional field on each provider.
+            Fill it out if you want to use several accounts of the same social network or just for your convenience when
+            scheduling.
+        </p>
+
+        <p>
+            Select a social network from the list below to read the detailed <a href="/social-planner/setup">setup guide</a>.
+        </p>
+
+        <nav class="tabs">
+            <a class="tab" href="/social-planner/setup#telegram">
+                <%- include(views + '/icons/telegram.svg' ) %>
+                <span>Telegram</span>
+            </a>
+
+            <a class="tab" href="/social-planner/setup#facebook">
+                <%- include(views + '/icons/facebook.svg' ) %>
+                <span>Facebook</span>
+            </a>
+            <a class="tab" href="/social-planner/setup#vk">
+                <%- include(views + '/icons/vk.svg' ) %>
+                <span>VK.com</span>
+            </a>
+
+            <a class="tab" href="/social-planner/setup#twitter">
+                <%- include(views + '/icons/twitter.svg' ) %>
+                <span>Twitter</span>
+            </a>
+
+            <a class="tab" href="/social-planner/setup#ok">
+                <%- include(views + '/icons/ok.svg' ) %>
+                <span>OK.ru</span>
+            </a>
+        </nav>
+
+        <p>
+            <strong>Getting social networks Authentication tokens can be a little tricky</strong>.
+            <strong>Please note that the plugin cannot affect this.</strong>
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="task-scheduling">
+            <span>Task scheduling</span>
+
+            <a aria-hidden="true" href="#task-scheduling">
+                <%- include(views + '/icons/anchor.svg' ) %>
+            </a>
+        </h2>
+
+        <p>
+            Once you have configured the plugin, you can start scheduling social media announcements.
+            Go to the post edit page and scroll to the end of the screen. There you will see the metabox for scheduling.
+        </p>
+
+        <figure>
+            <a href="/images/social-planner/scheduling-1.png" target="_blank">
+                <img src="/images/social-planner/scheduling-1.png" alt="Social Planner task scheduling">
+            </a>
+
+            <figcaption>This is how the metabox you need looks like.</figcaption>
+        </figure>
+
+        <p>
+            Choose the time at which you want to schedule the release of the announcement,
+            social networks and enter the text.
+            If you want to attach a poster, click on the big button with a plus sign.
+        </p>
+
+        <p>
+            To delete the selected poster, click on the image again.
+        </p>
+
+        <p>
+            Some social networks allow you to generate a preview of the link and load the poster and other opengraph
+            tags into the post.
+            You can disable this by enabling the checkbox on the bottom right.
+            Experiment with this behavior on test accounts to decide how you want to display links.
+        </p>
+
+        <p>
+            After filling in the meta box fields, update or publish the entry.
+            If the time was chosen for the announcement, then the task will be automatically scheduled.
+        </p>
+
+        <p>
+            If the publication date of the post itself is later than the date of the task,
+            then the announcement will be automatically rescheduled to the post release date.
+        </p>
+
+        <figure>
+            <a href="/images/social-planner/scheduling-2.png" target="_blank">
+                <img src="/images/social-planner/scheduling-2.png" alt="Social Planner task scheduling">
+            </a>
+
+            <figcaption>Scheduled task.</figcaption>
+        </figure>
+
+        <p>
+            After publishing, you will be able to see links to published posts in place of providers' checkboxes.
+            Or errors in the same place in case of problems with sending.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="faq">
+            <span>FAQ</span>
+
+            <a aria-hidden="true" href="#faq">
+                <%- include(views + '/icons/anchor.svg' ) %>
+            </a>
+        </h2>
+
+        <p>
+            This section describes common problems when using the plugin and how to solve them.
+            If you haven't found your question, it is best to ask it in the official repository on
+            <a href="https://github.com/antonlukin/social-planner/issues" target="_blank">Github</a>.
+            If you want to extend the functionality of the plugin, use special actions and filters.
+            The list of all available hooks is collected on a <a href="/social-planner/hooks">separate page</a>.
+        </p>
+
+        <article class="article">
+            <h3 class="anchor" id="faq-tokens">
+                <span>Can I avoid storing social networks tokens in the database?</span>
+
+                <a aria-hidden="true" href="#faq-tokens">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                Yes, you can define a constant <code>SOCIAL_PLANNER_PROVIDERS</code> with your settings.
+                The best place for this constant is in the file <code>wp-config.php</code> or in the
+                <code>functions.php</code>.
+            </p>
+
+            <p>
+                Define provider key as <code>{network_name}-{index}</code>,
+                where <code>index</code> is something alphanumeric and unique.
+
+                You can see correct network name and all availible network fields in
+                <a href="https://github.com/antonlukin/social-planner/tree/master/networks" target="_blank">source
+                    code</a>.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        define( 'SOCIAL_PLANNER_PROVIDERS', array(
+                            'vk-1' => array(
+                                'token' => 'token',
+                                'group' => '-123',
+                            ),
+
+                            'telegram-1' => array(
+                                'token' => '123:token',
+                                'group' => '123',
+                            ),
+
+                            'facebook-1' => array(
+                                'token' => 'token',
+                                'group' => '123',
+                                'title' => 'Facebook',
+                            ),
+
+                            'twitter-1' => array(
+                                'consumer_key'    => 'key',
+                                'consumer_secret' => 'secret',
+                                'access_token'    => 'token',
+                                'access_secret'   => 'secret'
+                            )
+                        ) );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="faq-settings">
+                <span>How can I show the settings page only to some users?</span>
+
+                <a aria-hidden="true" href="#faq-settings">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                You can use <a href="/social-planner/hooks#social_planner_hide_settings">filter</a> <code>social_planner_hide_settings</code>.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        function my_hide_settings( $hide_settings ) {
+                            $user = wp_get_current_user();
+
+                            if ( empty( $user->user_login ) || 'admin' !== $user->user_login ) {
+                                $hide_settings = true;
+                            }
+
+                            return $hide_settings;
+                        }
+
+                        add_filter( 'social_planner_hide_settings', 'my_hide_settings' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="faq-html">
+                <span>Can I use html in the summary field when scheduling a new task?</span>
+
+                <a aria-hidden="true" href="#faq-html">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                You can use only Markdown <code>**text here**</code> for <strong>bold</strong> and
+                <code>__text here__</code> for <em>italic</em> to beatify Telegram announcements.
+            </p>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="faq-post-types">
+                <span>How to hide the metabox for custom post types?</span>
+
+                <a aria-hidden="true" href="#faq-post-types">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                Plugin shows metabox for all public post types except attachments.
+                You can override this behavior with the <code>social_planner_post_types</code> <a href="/social-planner/hooks#social_planner_post_types">filter</a>.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        function my_post_types( $post_types ) {
+                            // Remove metabox from pages.
+                            foreach ( $post_types as $i => $name ) {
+                                if ( 'page' === $name ) {
+                                    unset( $post_types[ $i ] );
+                                }
+                            }
+
+                            return $post_types;
+                        }
+
+                        add_filter( 'social_planner_post_types', 'my_post_types' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="faq-deletion">
+                <span>What happens when you delete the plugin?</span>
+
+                <a aria-hidden="true" href="#faq-deletion">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                By default, when uninstalling the plugin through the admin panel, all database options are deleted,
+                including data on submitted tasks. If you want to keep them uninstall the plugin indirectly via the
+                filesystem.
+            </p>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="faq-new-provider">
+                <span>Can I add a new provider?</span>
+
+                <a aria-hidden="true" href="#faq-new-provider">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                Only 5 social networks are available for posting now.
+                Some more are likely to be added soon, but until that happens, you might want to write your own extension.
+                And it's not that hard to do.
+            </p>
+
+            <p>
+                You need to create a special social network class and connect it to the plugin.
+                There is an <code>Example</code> of a non-existent network in below.
+                Copy it and replace the information in the methods.
+            </p>
+
+            <p>
+                Your class must provide <code>NETWORK_NAME</code> constant and public static <code>send_message</code>
+                method.
+                You can see how the other classes of social networks of the plugin are implemented in the
+                <a href="https://github.com/antonlukin/social-planner/tree/master/networks" target="_blank">repository</a>.
+                Connect your class with a <a href="/social-planner/hooks#social_planner_networks">filter</a> <code>social_planner_networks</code>.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Example of the provider class</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        &lt;?php
+
+                        function add_example_network( $networks ) {
+                            $networks['My_Network_Example'] = get_template_directory() . '/inc/class-network-example.php';
+
+                            return $networks;
+                        }
+
+                        // This filter must execute before the `init` event.
+                        add_filter( 'social_planner_networks', 'add_example_network' );
+
+                        class My_Network_Example {
+                            /**
+                            * Unique network slug.
+                            * Use latin alphanumeric characters and underscore only.
+                            */
+                            const NETWORK_NAME = 'example';
+
+                            /**
+                            * Return human-readable network label
+                            */
+                            public static function get_label() {
+                                return 'Example';
+                            }
+
+                            /**
+                            * Return network required settings fields
+                            */
+                            public static function get_fields() {
+                                $fields = array(
+                                    'token' => array(
+                                        'label'       => 'Token',
+                                        'placeholder' => '123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11',
+                                        'required'    => true,
+                                    ),
+
+                                    'group' => array(
+                                        'label'    => 'Group ID',
+                                        'required' => true,
+                                    ),
+
+                                    'title' => array(
+                                        'label' => 'Subtitle',
+                                        'hint'  => 'Optional field.'
+                                    ),
+                                );
+
+                                return $fields;
+                            }
+
+                            /**
+                            * Send message method
+                            *
+                            * @param array $message  Message data.
+                            * @param array $settings Settings array from options.
+                            */
+                            public static function send_message( $message, $settings ) {
+                                // You should write this sending method using $message and $settings.
+                                $response = self::my_sending_method( $message, $settings );
+
+                                // If something went wrong you should return WP_Error.
+                                if ( empty( $response ) ) {
+                                    return new WP_Error( 'sending', 'Example sending error' );
+                                }
+
+                                // If it is ok, you should return a message link or ID.
+                                return 'https://example.com/' . $response;
+                            }
+                    </code>
+                </pre>
+            </details>
+
+            <p>
+                That's all you need. Now check if the new provider has appeared on the Settings page.
+            </p>
+        </article>
+    </section>
+
+    <script>
+        document.querySelectorAll('pre code').forEach(element => {
+            var html = element.innerHTML;
+            var pattern = html.match(/\s*\n[\t\s]*/);
+
+            element.innerHTML = html.replace(new RegExp(pattern, "g"), "\n");
+        });
+
+        if (window.hljs) {
+            hljs.initHighlightingOnLoad();
+        }
+    </script>
+
+    <%- include(views + '/parts/footer') %>
+</body>
+</html>

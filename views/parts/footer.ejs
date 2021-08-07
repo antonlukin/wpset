@@ -1,0 +1,61 @@
+<footer class="footer">
+    <nav class="menu">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contacts">Contacts</a>
+    </nav>
+
+    <p>Designed with love by <a href="https://lukin.me" target="_blank">Anton Lukin</a></p>
+</footer>
+
+<script src="https://antonlukin.github.io/social-planner/highlight.js"></script>
+<script>
+    document.querySelectorAll('pre code').forEach(element => {
+        var html = element.innerHTML;
+        var pattern = html.match(/\s*\n[\t\s]*/);
+
+        element.innerHTML = html.replace(new RegExp(pattern, "g"), "\n");
+    });
+
+    if (window.hljs) {
+        hljs.initHighlightingOnLoad();
+    }
+</script>
+
+<script>
+    const btn = document.querySelector(".mode");
+
+    // Check for dark mode preference at the OS level
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+    // Get the user's theme preference from local storage, if it's available
+    const currentTheme = localStorage.getItem("theme");
+
+    // If the user's preference in localStorage is dark...
+    if (currentTheme == "dark") {
+        document.documentElement.classList.toggle("dark");
+    } else if (currentTheme == "light") {
+        document.documentElement.classList.toggle("dark");
+    }
+
+    // Listen for a click on the button
+    btn.addEventListener("click", function () {
+        document.documentElement.classList.toggle("dark");
+
+        /*
+        // If the user's OS setting is dark and matches our .dark-mode class...
+        if (prefersDarkScheme.matches) {
+            // ...then toggle the light mode class
+            document.documentElement.classList.toggle("dark");
+            // ...but use .dark-mode if the .light-mode class is already on the body,
+            var theme = document.documentElement.classList.contains("dark") ? "light" : "dark";
+        } else {
+            // Otherwise, let's do the same thing, but for .dark-mode
+            document.body.classList.toggle("dark-mode");
+            var theme = document.documentElement.classList.contains("dark-mode") ? "dark" : "light";
+        }
+        */
+        // Finally, let's save the current preference to localStorage to keep using it
+        //localStorage.setItem("theme", theme);
+    });
+</script>

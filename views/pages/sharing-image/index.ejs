@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html class="">
+<head>
+    <%- include(views + '/parts/header') %>
+</head>
+
+<body>
+    <header class="header">
+        <span class="logo"><a href="/">wpget.org</a>/sharing-image</span>
+
+        <%- include(views + '/parts/mode' ) %>
+    </header>
+
+    <section class="hero">
+        <h1>Sharing Image</h1>
+
+        <p>
+            Social Planner is a <strong>WordPress plugin</strong> for scheduling announcements of posts to your social networks accounts.
+            The following providers are currently supported:
+            <strong>Facebook</strong>, <strong>Twitter</strong>, <strong>VK.com</strong>, <strong>OK.ru</strong>, <strong>Telegram</strong>,
+            but you can easily add a new one yourself.
+        </p>
+
+        <figure>
+            <a href="/images/social-planner/screenshot.png" target="_blank">
+                <img src="/images/social-planner/screenshot.png" alt="Social Planner WordPress plugin general screenshot">
+            </a>
+        </figure>
+
+        <p>
+            The whole process is completely automated. Just write a new post and either entire post or it’s nicely
+            formatted announcement with backlink will be published to all your configured social networks.
+            Plugin works with profiles, business pages, community pages, groups, etc.
+        </p>
+
+        <div class="manager">
+            <a class="button" href="https://wordpress.org/plugins/social-planner/" target="_blank">Download</a>
+            <a class="button button-outline" href="https://github.com/antonlukin/social-planner/" target="_blank">Github</a>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('pre code').forEach(element => {
+            var html = element.innerHTML;
+            var pattern = html.match(/\s*\n[\t\s]*/);
+
+            element.innerHTML = html.replace(new RegExp(pattern, "g"), "\n");
+        });
+
+        if (window.hljs) {
+            hljs.initHighlightingOnLoad();
+        }
+    </script>
+
+    <%- include(views + '/parts/footer') %>
+</body>
+</html>

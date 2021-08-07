@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html>
+<head>
+<%- include(views + '/parts/header', meta) %>
+</head>
+
+<body>
+    <header class="header">
+        <span class="logo"><a href="/">wpget.org</a>/<a href="/social-planner/">social-planner</a>/hooks</span>
+
+        <%- include(views + '/parts/mode' ) %>
+    </header>
+
+    <section class="hero">
+        <h1>Social Planner: hooks</h1>
+
+        <p>
+            Social Planner provides developers with a large number of hooks that can be used to change the behavior of
+            the plugin.
+            Put the hook code in <code>functions.php</code> file of your theme or in your plugin.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="actions">
+            <span>Actions</span>
+
+            <a aria-hidden="true" href="#actions">
+                <%- include(views + '/icons/anchor.svg' ) %>
+            </a>
+        </h2>
+
+        <p>
+            WordPress actions are benchmarks where the developer need to execute a specific code at a specific event.
+        </p>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_dashboard_before">
+                <span>social_planner_dashboard_before</span>
+
+                <a aria-hidden="true" href="social_planner_dashboard_before">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                Use this action to add something before the dashboard widget.
+            </p>
+
+            <p>
+                Note that the content inside the widget is composed with js and if you want to change it,
+                you need to use the <code>social_planner_dashboard_object</code> filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        function my_dashboard_before() {
+                            echo 'This text will be displayed in the dashboard widget';
+                        }
+
+                        add_action( 'social_planner_dashboard_before', 'my_dashboard_before' );
+                    </code>
+                </pre>
+
+            </details>
+        </article>
+
+        <article class="article">
+            <h3>social_planner_metabox_before</h3>
+
+            <p>
+                Use this action to add something before metabox in post edition screen.
+            </p>
+
+            <p>
+                Note that the content inside the metabox is composed with js and if you want to change it,
+                you need to use the <code>social_planner_metabox_object</code> filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        function my_metabox_before() {
+                            echo 'This text will be displayed in the metabox';
+                        }
+
+                        add_action( 'social_planner_metabox_before', 'my_metabox_before' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_task_sent">
+                <span>social_planner_task_sent</span>
+
+                <a aria-hidden="true" href="social_planner_task_sent">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                Use this action to do something with the task results right after sending.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array  $results List of results after task sending.
+                     * @param string $key     Task key.
+                     * @param int    $post_id Post ID.
+                     */
+                    function my_task_sent( $results, $key, $post_id ) {
+                        my_save_results( $results, $key );
+                    }
+
+                    add_action( 'social_planner_task_sent', 'my_task_sent', 10, 3 );
+                </code>
+            </pre>
+            </details>
+        </article>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="hooks">
+            <span>Filters</span>
+
+            <a aria-hidden="true" href="#hooks">
+                <%- include(views + '/icons/anchor.svg' ) %>
+            </a>
+        </h2>
+
+        <p>
+            WordPress filters have the same idea as actions, but the main difference is that filters are used to modify
+            variables.
+            Unlike actions, filters code must return a value, which is the modified copy of the original value.
+        </p>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_networks">
+                <span>social_planner_networks</span>
+
+                <a aria-hidden="true" href="social_planner_networks">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                The filter is used to add a custom social network for sending announcements.
+                Read more about this in the <a href="/social-planner#faq-new-provider">FAQ</a> section of this
+                documentation.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param array $networks A key-value array with class name key and path to the file as value.
+                         */
+                        function add_example_network( $networks ) {
+                            $networks['My_Network_Example'] = get_template_directory() . '/inc/class-network-example.php';
+
+                            return $networks;
+                        }
+
+                        // This filter must execute before the `init` event.
+                        add_filter( 'social_planner_networks', 'add_example_network' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_network_label">
+                <span>social_planner_network_label</span>
+
+                <a aria-hidden="true" href="social_planner_network_label">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                You can change network labels in the metabox and settings with this filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param string $label Network label.
+                     * @param string $class Current network class.
+                     */
+                    function my_network_label( $label, $class ) {
+                        if ( 'Social_Planner\Network_Telegram' === $class ) {
+                            $label = 'My custom ' . $label;
+                        }
+
+                        return $label;
+                    }
+
+                    add_filter( 'social_planner_network_label', 'my_network_label', 10, 2 );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_time_format">
+                <span>social_planner_time_format</span>
+
+                <a aria-hidden="true" href="social_planner_time_format">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                You can change the date format used by the plugin with this filter.
+                The default is the format from the WordPress settings.
+                Read more in <a href="https://wordpress.org/support/section/formatting-date-and-time/"
+                    target="_blank">codex section</a>.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param string $format Datetime format.
+                     */
+                    function my_time_format( $format ) {
+                        return 'F j, Y h:i';
+                    }
+
+                    add_filter( 'social_planner_time_format', 'my_time_format' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_hide_dashboard">
+                <span>social_planner_hide_dashboard</span>
+
+                <a aria-hidden="true" href="social_planner_hide_dashboard">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                You can use this filter to hide the dashboard from some users or roles.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param bool $hide_dashboard Set true to hide dashboard.
+                     */
+                    function my_hide_dashboard( $hide_dashboard ) {
+                        if ( ! current_user_can( 'manage_options' ) ) {
+                            $hide_dashboard = true;
+                        }
+
+                        return $hide_dashboard;
+                    }
+
+                    add_filter( 'social_planner_hide_dashboard', 'my_hide_dashboard' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_dashboard_object">
+                <span>social_planner_dashboard_object</span>
+
+                <a aria-hidden="true" href="social_planner_dashboard_object">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter allows you to manage an object with the dashboard settings.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array $object Array of dashboard script object.
+                     */
+                    function my_dashboard_object( $object ) {
+                        $object['tasks'] = my_dashboard_handler( 'tasks' );
+
+                        return $object;
+                    }
+
+                    add_filter( 'social_planner_dashboard_object', 'my_dashboard_object' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_sanitize_tasks">
+                <span>social_planner_sanitize_tasks</span>
+
+                <a aria-hidden="true" href="social_planner_sanitize_tasks">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>You can update tasks right after sanitization on the metabox saving with this filter.</p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array $sanitized List of tasks after sanitization.
+                     * @param array $tasks     List of tasks before sanitization.
+                     */
+                    function my_sanitize_tasks( $sanitized_tasks, $tasks ) {
+                        return my_tasks_sanitization( $tasks );
+                    }
+
+                    add_filter( 'social_planner_sanitize_tasks', 'my_sanitize_tasks', 10, 2 );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_get_tasks">
+                <span>social_planner_get_tasks</span>
+
+                <a aria-hidden="true" href="social_planner_get_tasks">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter allows you to change the array with tasks during the get_post_meta request.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array $tasks   List of tasks from post meta.
+                     * @param int   $post_id Post ID.
+                     */
+                    function my_get_tasks( $tasks, $post_id ) {
+                        if ( 0 === $post_id ) {
+                            $tasks = array();
+                        }
+
+                        return $tasks;
+                    }
+
+                    add_filter( 'social_planner_get_tasks', 'my_get_tasks', 10, 2 );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_update_tasks">
+                <span>social_planner_update_tasks</span>
+
+                <a aria-hidden="true" href="social_planner_update_tasks">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter allows you to change the array with tasks right before the update_post_meta request.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array  $tasks   List of tasks from post meta.
+                     * @param int    $post_id Post ID.
+                     */
+                    function my_update_tasks( $tasks, $post_id ) {
+                        if ( 0 === $post_id ) {
+                            $tasks = array();
+                        }
+
+                        return $tasks;
+                    }
+
+                    add_filter( 'social_planner_update_tasks', 'my_update_tasks', 10, 2 );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_get_results">
+                <span>social_planner_get_results</span>
+
+                <a aria-hidden="true" href="social_planner_get_results">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter allows you to change the array with results during the get_post_meta request.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array $results List of results from post meta.
+                     * @param int   $post_id Post ID.
+                     */
+                    function my_get_results( $results, $post_id ) {
+                        if ( 0 === $post_id ) {
+                            $results = array();
+                        }
+
+                        return $results;
+                    }
+
+                    add_filter( 'social_planner_get_results', 'my_get_results', 10, 2 );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_update_results">
+                <span>social_planner_update_results</span>
+
+                <a aria-hidden="true" href="social_planner_update_results">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter allows you to change the array with results right before the update_post_meta request.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array $results List of tasks from post meta.
+                     * @param int   $post_id Post ID.
+                     */
+                    function my_update_results( $results, $post_id ) {
+                        if ( 0 === $post_id ) {
+                            $results = array();
+                        }
+
+                        return $results;
+                    }
+
+                    add_filter( 'social_planner_update_results', 'my_update_results', 10, 2 );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_metabox_object">
+                <span>social_planner_metabox_object</span>
+
+                <a aria-hidden="true" href="social_planner_metabox_object">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter allows you to manage an object with the metabox settings.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array $object  Array of metabox script object.
+                     * @param int   $post_id Current post ID.
+                     */
+                    function my_metabox_object( $object, $post_id ) {
+                        $object = array(
+                            'meta'      => my_metabox_handler( 'meta' ),
+                            'action'    => my_metabox_handler( 'action' ),
+                            'nonce'     => my_metabox_handler( 'nonce' ),
+                            'tasks'     => my_metabox_handler( 'tasks' ),
+                            'results'   => my_metabox_handler( 'results' ),
+                            'offset'    => my_metabox_handler( 'offset' ),
+                            'calendar'  => my_metabox_handler( 'calendar' ),
+                            'providers' => my_metabox_handler( 'providers' ),
+                            'schedules' => my_metabox_handler( 'schedules' ),
+                        );
+
+                        return $object;
+                    }
+
+                    add_filter( 'social_planner_metabox_object', 'my_metabox_object', 10, 2 );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_hide_metabox">
+                <span>social_planner_hide_metabox</span>
+
+                <a aria-hidden="true" href="social_planner_hide_metabox">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                You can use this filter to hide the metabox from some users or roles.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param bool $hide_metabox Set true to hide metabox.
+                     */
+                     function my_hide_metabox( $hide_metabox ) {
+                        if ( ! current_user_can( 'manage_options' ) ) {
+                            $hide_metabox = true;
+                        }
+
+                        return $hide_metabox;
+                    }
+
+                    add_filter( 'social_planner_hide_metabox', 'my_hide_metabox' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_post_types">
+                <span>social_planner_post_types</span>
+
+                <a aria-hidden="true" href="social_planner_post_types">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                By default, the plugin shows the metabox for all public post types except attachments.
+                You can override this behavior with this filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array $post_types Array of post types for which the metabox is displayed.
+                     */
+                    function my_post_types( $post_types ) {
+                        $post_types[] = 'my_hidden_type';
+
+                        foreach ( $post_types as $i => $name ) {
+                            if ( 'page' === $name ) {
+                                unset( $post_types[ $i ] );
+                            }
+                        }
+
+                        return $post_types;
+                    }
+
+                    add_filter( 'social_planner_post_types', 'my_post_types' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_calendar_days">
+                <span>social_planner_calendar_days</span>
+
+                <a aria-hidden="true" href="social_planner_calendar_days">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter manages the number of future days in schedule select box.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param int $days_count Number of days in task calendar select box.
+                     */
+                    function my_calendar_days( $days_number ) {
+                        return 7;
+                    }
+
+                    add_filter( 'social_planner_calendar_days', 'my_calendar_days' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_time_offset">
+                <span>social_planner_time_offset</span>
+
+                <a aria-hidden="true" href="social_planner_time_offset">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter sets a time offset. By default, it is a value between UTC and WordPress time in seconds.
+                This offset is used in admin-side metabox to choose the time for planning.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param int $offset Time offset in seconds from UTC.
+                     */
+                    function my_time_offset( $offset ) {
+                        $offset = timezone_offset_get( wp_timezone(), date_create( 'now' ) );
+
+                        return $offset;
+                    }
+
+                    add_filter( 'social_planner_time_offset', 'my_time_offset' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_post_statuses">
+                <span>social_planner_post_statuses</span>
+
+                <a aria-hidden="true" href="social_planner_post_statuses">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter sets post statuses that can be scheduled.
+                By default, we can schedule only posts with statuses 'publish' or 'future'.
+                You can change this behavior.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array $statuses List of post statuses.
+                     */
+                    function my_post_statuses( $statuses ) {
+                        $statuses = array( 'private', 'pending', 'future', 'publish' );
+
+                        return $statuses;
+                    }
+
+                    add_filter( 'social_planner_post_statuses', 'my_post_statuses' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_poster_prepare_message">
+                <span>social_poster_prepare_message</span>
+
+                <a aria-hidden="true" href="social_poster_prepare_message">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter allows updating message array right before network sending method execution.
+                This is a great place, for example, to add some text to the excerpt field or replace a post link.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array  $message Sending message data.
+                     * @param string $target  Target provider name.
+                     * @param array  $task    Scheduled task data.
+                     */
+                    function my_prepare_message( $message, $target, $task ) {
+                        $message['link'] = my_message_link( $message['post_id'] );
+
+                        if ( ! empty( $message['excerpt'] ) ) {
+                            $message['excerpt'] = $message['excerpt'] . "\n\n" . '#some_hashtag';
+                        }
+
+                        return $message;
+                    }
+
+                    add_filter( 'social_poster_prepare_message', 'my_prepare_message', 10, 3 );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_hide_settings">
+                <span>social_planner_hide_settings</span>
+
+                <a aria-hidden="true" href="social_planner_hide_settings">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                You can use this filter to hide settings page from some users or roles.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param bool $hide_settings Set true to hide settings page.
+                     */
+                     function my_hide_settings( $hide_settings ) {
+                        $user = wp_get_current_user();
+
+                        if ( empty( $user->user_login ) || 'admin' !== $user->user_login ) {
+                            $hide_settings = true;
+                        }
+
+                        return $hide_settings;
+                    }
+
+                    add_filter( 'social_planner_hide_settings', 'my_hide_settings' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_get_providers">
+                <span>social_planner_get_providers</span>
+
+                <a aria-hidden="true" href="social_planner_get_providers">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                You can filter the list of providers from options. It can be handy to use options bypassing the
+                settings page.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array $providers List of provders options.
+                     */
+                     function my_get_providers( $providers ) {
+                        $providers = array(
+                            'facebook-1' => array(
+                                'token' => 'token',
+                                'group' => 'group',
+                            ),
+                        );
+
+                        return $providers;
+                    }
+
+                    add_filter( 'social_planner_get_providers', 'my_get_providers' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_settings_object">
+                <span>social_planner_settings_object</span>
+
+                <a aria-hidden="true" href="social_planner_settings_object">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>
+                This filter allows you to manage settings script object.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param array $object Array of settings script object.
+                     */
+                    function my_settings_object( $object ) {
+                        $object = array(
+                            'option'    => my_settings_handler( 'option' ),
+                            'networks'  => my_settings_handler( 'networks' ),
+                            'providers' => my_settings_handler( 'providers' ),
+                        );
+
+                        return $object;
+                    }
+
+                    add_filter( 'social_planner_settings_object', 'my_settings_object' );
+                </code>
+            </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h3 class="anchor" id="social_planner_prepare_excerpt">
+                <span>social_planner_prepare_excerpt</span>
+
+                <a aria-hidden="true" href="social_planner_prepare_excerpt">
+                    <%- include(views + '/icons/anchor.svg' ) %>
+                </a>
+            </h3>
+
+            <p>The last chance to filter message excerpt before sending to social network account.</p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                    <%- include(views + '/icons/chevron.svg' ) %>
+                </summary>
+
+                <pre>
+                <code class="language-php">
+                    /**
+                     * @param string $excerpt Message excerpt.
+                     * @param array  $message Original message array.
+                     * @param string $network Network name.
+                     */
+                    function my_prepare_excerpt( $excerpt, $message, $network ) {
+                        if ( empty( $excerpt ) ) {
+                            $excerpt = get_the_title( $message[ $post_id ] );
+                        }
+
+                        return $message;
+                    }
+
+                    add_filter( 'social_planner_prepare_excerpt', 'my_prepare_excerpt', 10, 3 );
+                </code>
+            </pre>
+            </details>
+        </article>
+    </section>
+
+    <a class="back" href="/social-planner">
+        <%- include(views + '/icons/left.svg' ) %>
+            <span>Back to <strong>Social Planner</strong> summary</span>
+    </a>
+
+    <%- include(views + '/parts/footer' ) %>
+</body>
+
+</html>
