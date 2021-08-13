@@ -8,6 +8,7 @@
 
 const express = require('express');
 const path = require('path');
+const expurl = require('express-normalizeurl');
 const version = require('project-version');
 
 // Create express instance.
@@ -16,19 +17,17 @@ const server = express();
 // Solve the trailing slashes problem.
 server.enable('strict routing');
 
+// Add trailing slashes
+server.use(expurl());
+
 // Add assets and images folders.
 server.use('/assets/', express.static('assets'));
 server.use('/images/', express.static('images'));
 
+// Set root local variable.
 server.use((req, res, next) => {
-  if (req.path.substr(-1) !== '/' || req.path.length <= 1) {
-    return next();
-  }
-
-  const query = req.url.slice(req.path.length);
-
-  // Redirect to slug w/out trailing slash.
-  res.redirect(301, req.path.slice(0, -1) + query);
+  server.locals.root = req.protocol + '://' + req.get('host');
+  next();
 });
 
 // Set views engine and templates path.
@@ -49,7 +48,13 @@ server.disable('x-powered-by');
 const routes = require('./routes');
 
 server.get('/', (req, res, next) => {
-  res.render(path.join('parts', 'footer'));
+  const meta = {
+    title: 'Social Planner',
+    description: 'Description',
+    url: '/social-planner',
+  };
+
+  res.render('pages/index', {meta: meta});
 });
 
 server.use('/social-planner', routes['social-planner']);

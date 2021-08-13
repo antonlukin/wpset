@@ -1,8 +1,14 @@
 module.exports = {
   plugins: {
-    'tailwindcss': {},
-    'autoprefixer': {},
     'postcss-import': {},
-    'cssnano': {preset: 'default'},
+    'postcss-nested': {},
+    'postcss-svg': {
+      dirs: ['./src/'],
+    },
+    'postcss-inline-svg': {
+      paths: ['./src/'],
+    },
+    'autoprefixer': {},
+    'cssnano': {},
   },
 };

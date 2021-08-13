@@ -1,11 +1,11 @@
 <footer class="footer">
     <nav class="menu">
         <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contacts">Contacts</a>
+        <a href="/about/">About</a>
+        <a href="/contacts/">Contacts</a>
     </nav>
 
-    <p>Designed with love by <a href="https://lukin.me" target="_blank">Anton Lukin</a></p>
+    <p>Designed by <a href="https://lukin.me" target="_blank">Anton Lukin</a></p>
 </footer>
 
 <script src="https://antonlukin.github.io/social-planner/highlight.js"></script>
@@ -33,14 +33,14 @@
 
     // If the user's preference in localStorage is dark...
     if (currentTheme == "dark") {
-        document.documentElement.classList.toggle("dark");
+        document.documentElement.classList.toggle("is-dark");
     } else if (currentTheme == "light") {
-        document.documentElement.classList.toggle("dark");
+        document.documentElement.classList.toggle("is-dark");
     }
 
     // Listen for a click on the button
     btn.addEventListener("click", function () {
-        document.documentElement.classList.toggle("dark");
+        document.documentElement.classList.toggle("is-dark");
 
         /*
         // If the user's OS setting is dark and matches our .dark-mode class...

@@ -1,0 +1,36 @@
+.anchor {
+  display: flex;
+  align-items: center;
+
+  & > a {
+    display: block;
+
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-left: 0.5rem;
+
+    mask-image: svg-load('icons/anchor.svg');
+
+    background-color: var(--color-links);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+
+    transition: opacity 250ms;
+
+    @media screen and (min-width: 768px) {
+      width: 1rem;
+      height: 1rem;
+
+      margin-left: 0.75rem;
+    }
+
+    @media (hover: hover) {
+      opacity: 0;
+    }
+  }
+
+  &:hover > a {
+    opacity: 1
+  }
+}

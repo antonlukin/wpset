@@ -1,0 +1,23 @@
+:root {
+  --color-background: #ffffff;
+  --color-text: #000000;
+
+  --color-links: #0284C7;
+  --color-border: #0369A1;
+  --color-divider: #E4E4E7;
+  --color-dimmed: #71717A;
+  --color-field: #F4F4F5;
+
+  --color-button: #FFFFFF;
+}
+
+html.is-dark {
+  --color-background: #18181B;
+  --color-text: #fafafa;
+
+  --color-links: #38BDF8;
+  --color-border: #0284C7;
+  --color-divider: #27272A;
+  --color-dimmed: #A1A1AA;
+  --color-field: #27272A;
+}

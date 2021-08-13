@@ -1,0 +1,49 @@
+.backlink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  margin: 2rem 0;
+  padding: 0.75rem;
+  line-height: 1.25;
+
+  color: var(--color-links);
+  border: solid 2px var(--color-links);
+  border-radius: var(--rounded-md);
+
+  &::before {
+    content: '';
+    display: block;
+
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-right: 0.75rem;
+
+    mask-image: svg-load('icons/left.svg');
+    background-color: var(--color-links);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    @media screen and (min-width: 768px) {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  &:hover {
+    color: var(--color-button);
+    background-color: var(--color-links);
+    border-color: var(--color-links);
+
+    &::before {
+      background-color: var(--color-button);
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    margin: 3rem 0;
+    padding: 1rem;
+  }
+}

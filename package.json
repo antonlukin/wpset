@@ -11,9 +11,9 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-normalizeurl": "^1.5.1",
     "express-slash": "^2.0.1",
-    "project-version": "^2.0.0",
-    "pug": "^3.0.2"
+    "project-version": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.1",
@@ -29,7 +29,11 @@
     "gulp-postcss": "^9.0.0",
     "gulp-rename": "^2.0.0",
     "postcss": "^8.3.6",
+    "postcss-css-variables": "^0.18.0",
     "postcss-import": "^14.0.2",
-    "tailwindcss": "^2.2.7"
+    "postcss-inline-svg": "^5.0.0",
+    "postcss-nested": "^5.0.6",
+    "postcss-svg": "^3.0.0",
+    "postcss-write-svg": "^3.0.1"
   }
 }

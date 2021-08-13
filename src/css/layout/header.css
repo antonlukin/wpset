@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 0 0 1rem;
+  padding: 1rem 0;
+
+  color: var(--color-dimmed);
+  border-bottom: solid 1px var(--color-divider);
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 2rem;
+  }
+}
