@@ -1,0 +1,97 @@
+.table {
+  width: 100%;
+  font-size: var(--font-sm);
+  border-collapse: collapse;
+
+  thead, tbody {
+    position: relative;
+  }
+
+  thead tr {
+    display: none;
+    background-color: var(--color-table-head);
+
+
+    @media screen and (min-width: 768px) {
+      display: table-row;
+    }
+  }
+
+  tbody tr {
+    & + tr {
+      border-top: 1px solid var(--color-divider);
+    }
+
+    @media screen and (min-width: 768px) {
+      &:nth-child(even) {
+        background-color: var(--color-table-even);
+      }
+    }
+  }
+
+  tbody td {
+    display: block;
+
+    &:first-child {
+      font-weight: var(--font-semibold);
+
+      @media screen and (min-width: 768px) {
+        font-weight: var(--font-normal);
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      display: table-cell;
+    }
+  }
+
+  tr {
+    display: block;
+    text-align: left;
+
+    @media screen and (min-width: 768px) {
+      display: table-row;
+    }
+  }
+
+  td, th {
+    padding: 0.125rem;
+
+    @media screen and (min-width: 768px) {
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  &.table--manager {
+    td {
+      padding: 0;
+      font-size: var(--font-2xs);
+
+      @media screen and (min-width: 768px) {
+        padding: 0.5rem 1rem;
+        font-size: var(--font-sm);
+
+        &:last-child {
+          text-align: center;
+        }
+      }
+    }
+
+    td:first-child, td:last-child {
+      padding: 0.5rem 0;
+      font-size: var(--font-sm);
+
+      @media screen and (min-width: 768px) {
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    overflow: hidden;
+    background-color: var(--color-table-back);
+
+    box-shadow: var(--shadow-md);
+    border-radius: var(--rounded);
+  }
+}

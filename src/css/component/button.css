@@ -8,13 +8,13 @@
   font-size: var(--font-sm);
   font-weight: var(--font-medium);
 
-  color: var(--color-button);
-  background-color: var(--color-links);
+  color: var(--color-white);
+  background-color: var(--color-button);
   border: solid 2px var(--color-border);
   border-radius: var(--rounded);
 
   cursor: pointer;
-  transition: 200ms ease-in-out;
+  transition: background 200ms, color 200ms;
 
   &:hover {
     background-color: var(--color-border);
@@ -27,7 +27,7 @@
   }
 
   &.button--outline:hover {
-    color: var(--color-button);
+    color: var(--color-white);
     background-color: var(--color-border);
   }
 

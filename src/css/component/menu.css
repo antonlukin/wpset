@@ -6,6 +6,10 @@
     margin-right: 0.75rem;
   }
 
+  :last-child {
+    margin-right: 0;
+  }
+
   @media screen and (min-width: 768px) {
     margin-top: 0;
     margin-left: 0;

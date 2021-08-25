@@ -10,6 +10,7 @@
     margin-left: 0.5rem;
 
     mask-image: svg-load('icons/anchor.svg');
+    mask-size: contain;
 
     background-color: var(--color-links);
     background-repeat: no-repeat;

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include(views + '/parts/header') %>
+</head>
+
+<body>
+    <header class="header">
+        <span class="logo"><a href="/">wpget.org</a>/<a href="/sharing-image/">sharing-image</a>/licenses/</span>
+        <button class="mode" id="switch-theme">Switch theme</button>
+    </header>
+
+    <section class="section">
+        <h1>Sharing Image:
+            <form action="/sharing-image/licenses/logout/" method="POST">
+                <strong>licenses</strong>
+                <button class="logout" title="Log out" type="submit">Log out</button>
+            </form>
+        </h1>
+
+        <p>
+            This is a tool for managing your access key to the <a href="/sharing-image/premium/">premium</a> <strong>Sharing Image</strong> plugin features.
+            Use it to view your license data and delete outdated domains here.
+            If you have any problems with your key or need other help, please <a href="/contacts/">contact us</a> in any convenient way.
+        </p>
+    </section>
+
+    <section class="section">
+        <p class="warning">
+            <%= warning %>
+        </p>
+
+        <table class="table table--manager">
+            <thead>
+                <tr>
+                    <th>Domain</th>
+                    <th>Request ip</th>
+                    <th>Creation date</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <% hosts.forEach((host) => { %>
+                <tr>
+                    <td data-label="Domain"><%= host.domain %></td>
+                    <td><%= host.ip %></td>
+                    <td><%= host.created %></td>
+                    <td>
+                        <a href="/sharing-image/licenses/?delete=<%= host.id %>&nonce=<%= host.nonce %>">Delete</a>
+                    </td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+
+        <p class="hint">
+            You used <strong><%= hosts.length %> out of <%= license.limit %></strong> domains available for your license key <strong><%= license.key %></strong>.
+        </p>
+    </section>
+
+    <%- include(views + '/parts/footer' ) %>
+</body>
+</html>

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%- include(views + '/parts/header', meta) %>
+    <%- include(views + '/parts/header') %>
 </head>
 
 <body>
     <header class="header">
         <span class="logo"><a href="/">wpget.org</a>/social-planner/</span>
-        <button class="mode">Switch theme</button>
+        <button class="mode" id="switch-theme">Switch theme</button>
     </header>
 
-    <section class="section section--hero">
+    <section class="section">
         <h1>Social Planner</h1>
 
         <p>
@@ -21,8 +21,8 @@
         </p>
 
         <figure>
-            <a href="/images/social-planner/screenshot.png" target="_blank">
-                <img src="/images/social-planner/screenshot.png" alt="Social Planner WordPress plugin general screenshot">
+            <a href="/images/social-planner/screenshot.jpg" target="_blank">
+                <img src="/images/social-planner/screenshot.jpg" alt="Social Planner WordPress plugin general screenshot">
             </a>
         </figure>
 
@@ -32,7 +32,7 @@
             Plugin works with profiles, business pages, community pages, groups, etc.
         </p>
 
-        <div class="fieldset">
+        <div class="pitch">
             <a class="button" href="https://wordpress.org/plugins/social-planner/" target="_blank">Download</a>
             <a class="button button--outline" href="https://github.com/antonlukin/social-planner/" target="_blank">Github</a>
         </div>
@@ -57,6 +57,13 @@
             If you are unable to implement it yourself, contact your hoster or system administrator.
             Read more <a href="https://developer.wordpress.org/plugins/cron/hooking-wp-cron-into-the-system-task-scheduler/" target="_blank">here</a>.
         </p>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="configuration">
+            <span>Configuration</span>
+            <a aria-hidden="true" href="#configuration">#</a>
+        </h2>
 
         <p>
             Before using the plugin, you need to configure it.
@@ -65,12 +72,6 @@
             Here you need to add options for the required providers.
         </p>
 
-        <figure>
-            <a href="/images/social-planner/installation.png" target="_blank">
-                <img src="/images/social-planner/installation.png" alt="Social Planner WordPress plugin installation">
-            </a>
-        </figure>
-
         <p>
             Pay attention to the <strong>Subtitle</strong> optional field on each provider.
             Fill it out if you want to use several accounts of the same social network or just for your convenience when
@@ -78,63 +79,7 @@
         </p>
 
         <p>
-            Select a social network from the list below to read the detailed <a href="/social-planner/setup/">setup guide</a>.
-        </p>
-
-        <nav class="tabs">
-            <a href="/social-planner/setup/#telegram">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="#0088cc">
-                    <path
-                        d="M1007.36 119.45c-3.584-10.394-7.834-13.21-14.438-15.77-14.541-5.478-39.168 2.816-39.168 2.816s-871.526 313.242-921.293 347.904c-10.752 7.475-14.336 11.776-16.077 16.896-8.602 24.678 18.227 35.533 18.227 35.533l224.614 73.216s8.346 1.178 11.366-0.768c51.098-32.256 514.048-324.608 540.826-334.336 4.25-1.331 7.322 0.102 6.502 3.072-10.752 37.376-412.826 394.854-412.826 394.854s-1.536 1.894-2.56 4.096l-0.512-0.256-20.992 222.822s-8.704 68.25 59.546 0c48.128-48.128 94.72-88.371 118.067-108.032 77.312 53.248 160.461 112.333 196.301 143.206 18.022 15.514 33.075 18.022 45.568 17.51 33.997-1.178 43.52-38.605 43.52-38.605s158.771-639.181 164.096-724.89c0.512-8.346 1.229-13.67 1.28-19.456 0-7.987-0.768-16.026-2.048-19.814z">
-                    </path>
-                </svg>
-
-                <span>Telegram</span>
-            </a>
-
-            <a href="/social-planner/setup/#facebook">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="#1877f2">
-                    <path
-                        d="M1023.656 511.664c0-282.822-229.17-511.992-511.992-511.992s-511.992 229.17-511.992 511.992c0 255.67 187.444 467.623 431.854 506.033v-357.673h-129.825v-147.708h129.825v-112.594c0-128.493 76.171-199.372 193.399-199.372 56.298 0 114.584 9.936 114.584 9.936v125.845h-64.243c-63.591 0-83.449 39.734-83.449 80.138v96.044h141.738l-22.519 147.708h-119.218v357.673c245.064-38.412 431.854-250.365 431.854-506.033v0z">
-                    </path>
-                </svg>
-
-                <span>Facebook</span>
-            </a>
-            <a href="/social-planner/setup/#vk">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="#45668e">
-                    <path
-                        d="M669.177 0h-314.355c-286.893 0-354.823 67.93-354.823 354.823v314.355c0 286.893 67.93 354.823 354.823 354.823h314.355c286.893 0 354.823-67.93 354.823-354.823v-314.355c0-286.893-68.652-354.823-354.823-354.823zM826.715 730.603h-74.434c-28.184 0-36.855-22.402-87.441-73.71-44.081-42.637-63.594-48.417-74.434-48.417-15.175 0-19.511 4.336-19.511 25.293v67.208c0 18.066-5.782 28.906-53.477 28.906-78.77 0-166.21-47.695-227.636-136.582-92.501-130.078-117.791-227.636-117.791-247.869 0-10.84 4.336-20.957 25.293-20.957h74.434c18.789 0 26.015 8.671 33.242 28.906 36.855 106.229 98.281 199.452 123.573 199.452 9.395 0 13.731-4.336 13.731-28.184v-109.843c-2.891-50.586-29.628-54.921-29.628-72.988 0-8.671 7.227-17.344 18.789-17.344h117.069c15.898 0 21.68 8.671 21.68 27.462v148.144c0 15.898 7.227 21.68 11.562 21.68 9.395 0 17.344-5.782 34.688-23.124 53.477-59.981 91.776-152.48 91.776-152.48 5.058-10.84 13.731-20.957 32.519-20.957h74.434c22.402 0 27.462 11.562 22.402 27.462-9.395 43.359-100.449 171.99-100.449 171.99-7.949 13.009-10.84 18.789 0 33.242 7.949 10.84 33.964 33.242 51.308 53.477 31.797 36.133 56.368 66.483 62.87 87.441 7.227 20.957-3.613 31.797-24.571 31.797z">
-                    </path>
-                </svg>
-
-                <span>VK.com</span>
-            </a>
-
-            <a href="/social-planner/setup/#twitter">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="#1da1f2">
-                    <path
-                        d="M1024 192c-34.133 17.067-76.8 25.6-119.467 34.133 42.667-25.6 76.8-68.267 93.867-110.933-42.667 25.6-85.333 42.667-136.533 51.2-34.133-42.667-93.867-68.267-153.6-68.267-119.467 0-213.333 93.867-213.333 204.8 0 17.067 0 34.133 8.533 42.667-170.667-8.533-332.8-93.867-435.2-213.333-17.067 34.133-25.6 68.267-25.6 110.933 0 68.267 34.133 136.533 93.867 170.667-34.133 0-68.267-8.533-93.867-25.6v0c0 102.4 68.267 179.2 170.667 204.8-17.067 8.533-34.133 8.533-51.2 8.533s-25.6 0-42.667 0c25.6 85.333 102.4 145.067 196.267 145.067-68.267 51.2-162.133 85.333-264.533 85.333-17.067 0-34.133 0-51.2 0 93.867 59.733 204.8 93.867 324.267 93.867 384 0 597.333-315.733 597.333-588.8 0-8.533 0-17.067 0-25.6 34.133-34.133 68.267-76.8 102.4-119.467v0z">
-                    </path>
-                </svg>
-
-                <span>Twitter</span>
-            </a>
-
-            <a href="/social-planner/setup/#ok">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="#ed812b">
-                    <path
-                        d="M618.88 744.064l147.84 147.84c30.208 30.080 30.208 79.168 0 109.44-30.272 30.208-79.36 30.208-109.44 0l-145.28-145.28-145.984 145.28c-14.72 15.104-34.56 22.656-54.4 22.656s-39.68-7.552-54.4-22.656c-30.72-30.272-30.72-79.36 0-109.44l147.84-147.84c-53.824-12.224-105.664-33.472-153.408-63.552-36.224-22.784-47.104-70.528-24.32-106.752 22.72-36.224 70.528-47.168 106.752-24.32 108.16 68.032 247.552 68.032 355.84 0 36.224-22.848 83.968-11.904 106.752 24.32 22.784 36.16 11.904 83.968-24.192 106.752-47.872 30.016-99.84 51.392-153.6 63.552zM512 528.512c-145.728 0-264.32-118.528-264.32-264.192 0-145.792 118.592-264.32 264.32-264.32s264.32 118.528 264.32 264.32c0 145.664-118.528 264.192-264.32 264.192zM512 154.88c-60.288 0-109.44 49.088-109.44 109.44 0 60.288 49.152 109.44 109.44 109.44 60.352 0 109.44-49.152 109.44-109.44 0-60.352-49.088-109.44-109.44-109.44z">
-                    </path>
-                </svg>
-
-                <span>OK.ru</span>
-            </a>
-        </nav>
-
-        <p>
-            <strong>Getting social networks Authentication tokens can be a little tricky</strong>.
-            <strong>Please note that the plugin cannot affect this.</strong>
+            Read the detailed <a href="/social-planner/setup/">configuration guide</a> for each social network on a separate page.
         </p>
     </section>
 
@@ -200,6 +145,25 @@
     </section>
 
     <section class="section">
+        <h2 class="anchor" id="enhancement">
+            <span>Enhancement</span>
+
+            <a aria-hidden="true" href="#enhancement">#</a>
+        </h2>
+
+        <p>
+            The plugin was originally designed as a framework, so it has a lot of extensibility.
+            Besides adding your own provider, you can manage a lot of other settings and functions.
+            Most of the plugin methods return WordPress hooks.
+            To work with them you can write your own plugin or use your theme's <code>functions.php</code> file.
+        </p>
+
+        <p>
+            The entire list of <a href="/social-planner/hooks/">actions and filters</a> is collected on a separate page.
+        </p>
+    </section>
+
+    <section class="section">
         <h2 class="anchor" id="faq">
             <span>FAQ</span>
 
@@ -210,8 +174,6 @@
             This section describes common problems when using the plugin and how to solve them.
             If you haven't found your question, it is best to ask it in the official repository on
             <a href="https://github.com/antonlukin/social-planner/issues" target="_blank">Github</a>.
-            If you want to extend the functionality of the plugin, use special actions and filters.
-            The list of all available hooks is collected on a <a href="/social-planner/hooks">separate page</a>.
         </p>
 
         <article class="article">
@@ -280,7 +242,7 @@
             </h3>
 
             <p>
-                You can use <a href="/social-planner/hooks#social_planner_hide_settings">filter</a> <code>social_planner_hide_settings</code>.
+                You can use <a href="/social-planner/hooks/#social_planner_hide_settings">filter</a> <code>social_planner_hide_settings</code>.
             </p>
 
             <details>
@@ -479,19 +441,6 @@
                 That's all you need. Now check if the new provider has appeared on the Settings page.
             </p>
         </article>
-    </section>
-
-    <section class="section section--related">
-        <h2 class="anchor" id="related">
-            <span>Related pages</span>
-
-            <a aria-hidden="true" href="#related">#</a>
-        </h2>
-
-        <ul>
-            <li><a href="/social-planner/setup/">Plugin setup guide</a></li>
-            <li><a href="/social-planner/hooks/">Actions and filters</a></li>
-        </ul>
     </section>
 
     <%- include(views + '/parts/footer') %>

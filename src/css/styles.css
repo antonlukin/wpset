@@ -3,16 +3,22 @@
 @import url('base/colors.css');
 @import url('base/fonts.css');
 @import url('base/rounded.css');
+@import url('base/shadows.css');
 @import url('base/reset.css');
 
 @import url('component/mode.css');
 @import url('component/button.css');
+@import url('component/table.css');
 @import url('component/anchor.css');
-@import url('component/fieldset.css');
+@import url('component/logout.css');
+@import url('component/pitch.css');
+@import url('component/control.css');
 @import url('component/backlink.css');
 @import url('component/logo.css');
+@import url('component/hint.css');
 @import url('component/menu.css');
 @import url('component/tabs.css');
+@import url('component/warning.css');
 
 @import url('layout/header.css');
 @import url('layout/footer.css');

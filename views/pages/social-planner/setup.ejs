@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%- include(views + '/parts/header', meta) %>
+    <%- include(views + '/parts/header') %>
 </head>
 
 <body>
     <header class="header">
-        <span class="logo"><a href="/">wpget.org</a>/<a href="/social-planner">social-planner</a>/setup/</span>
-        <button class="mode">Switch theme</button>
+        <span class="logo"><a href="/">wpget.org</a>/<a href="/social-planner/">social-planner</a>/setup/</span>
+        <button class="mode" id="switch-theme">Switch theme</button>
     </header>
 
-    <section class="hero">
-        <h1>Social Planner: setup</h1>
+    <section class="section">
+        <h1>Social Planner: <strong>setup</strong></h1>
 
         <p>
             This section describes in sufficient detail the process of configuring providers for sending messages.
@@ -100,7 +100,7 @@
             Then you need to find out the group or channel ID.
             If the chat has a <strong>public link</strong>, then you can use its <strong>username</strong> (in the
             format @channelusername).<br>
-            Otherwise you can write the message to <a href="username_to_id_bot"
+            Otherwise you can write the message to <a href="https://t.me/username_to_id_bot"
                 target="_blank">@username_to_id_bot</a> or use <a
                 href="https://stackoverflow.com/a/56546442/8495047" target="_blank">this guide</a>.
             Note that chat ID can be negative.
@@ -283,7 +283,7 @@
             Insert this ID to the field below and push the button to generate your Token.
         </p>
 
-        <form class="fieldset" action="https://oauth.vk.com/authorize" method="GET" target="_blank">
+        <form class="control" action="https://oauth.vk.com/authorize" method="GET" target="_blank">
             <input type="text" name="client_id" value="" placeholder="7722553" required>
 
             <input type="hidden" name="scope" value="offline,photos,wall">
@@ -383,7 +383,7 @@
                 While creating a new post on my WordPress site, I can schedule the task to send this post to Twitter
                 with custom excerpt or image.
                 The detailed process is described in the documentation for the plugin
-                (https://antonlukin.github.io/social-planner/#task-scheduling).
+                (https://wpget.org/social-planner/#task-scheduling).
             </p>
         </blockquote>
 
@@ -543,7 +543,7 @@
         </figure>
     </section>
 
-    <a class="backlink" href="/social-planner">
+    <a class="backlink" href="/social-planner/">
         <span>Back to <strong>Social Planner</strong> summary</span>
     </a>
 

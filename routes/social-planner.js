@@ -2,33 +2,33 @@ const express = require('express');
 const router = new express.Router();
 
 router.get('/', (req, res) => {
-  const meta = {
+  res.locals.meta = {
     title: 'Social Planner',
     description: 'Description',
-    url: '/social-planner',
+    url: '/social-planner/',
   };
 
-  res.render('pages/social-planner/index', {meta: meta});
+  res.render('pages/social-planner/index');
 });
 
 router.get('/setup/', (req, res) => {
-  const meta = {
+  res.locals.meta = {
     title: 'Social Planner: setup',
     description: 'Description',
-    url: '/social-planner/setup',
+    url: '/social-planner/setup/',
   };
 
-  res.render('pages/social-planner/setup', {meta: meta});
+  res.render('pages/social-planner/setup');
 });
 
 router.get('/hooks/', (req, res) => {
-  const meta = {
+  res.locals.meta = {
     title: 'Social Planner: hooks',
     description: 'Description',
-    url: '/social-planner/hooks',
+    url: '/social-planner/hooks/',
   };
 
-  res.render('pages/social-planner/hooks', {meta: meta});
+  res.render('pages/social-planner/hooks');
 });
 
 module.exports = router;

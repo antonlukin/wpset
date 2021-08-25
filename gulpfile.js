@@ -1,6 +1,7 @@
 const gulp = require('gulp');
-const rename = require('gulp-rename');
+const concat = require('gulp-concat');
 const plumber = require('gulp-plumber');
+const uglify = require('gulp-uglify');
 
 gulp.task('css', (done) => {
   const postcss = require('gulp-postcss');
@@ -8,7 +9,21 @@ gulp.task('css', (done) => {
   gulp.src('./src/css/styles.css')
       .pipe(plumber())
       .pipe(postcss())
-      .pipe(rename('styles.min.css'))
+      .pipe(concat('styles.min.css'))
+      .pipe(gulp.dest('./assets/'));
+
+  done();
+});
+
+gulp.task('js', (done) => {
+  const babel = require('gulp-babel');
+
+  gulp.src('./src/js/*.js')
+      .pipe(babel({
+        presets: ['@babel/env'],
+      }))
+      .pipe(uglify())
+      .pipe(concat('scripts.min.js'))
       .pipe(gulp.dest('./assets/'));
 
   done();
@@ -16,13 +31,13 @@ gulp.task('css', (done) => {
 
 // Watch soruces and update styles and scripts
 gulp.task('watch', (done) => {
-  gulp.watch(['./src/**/*', './views/**/*'], gulp.parallel('css'));
+  gulp.watch(['./src/**/*', './views/**/*'], gulp.parallel('css', 'js'));
 
   done();
 });
 
 // Build static files
-gulp.task('build', gulp.parallel('css'));
+gulp.task('build', gulp.parallel('css', 'js'));
 
 // Build static files and watch changes by default.
-gulp.task('serve', gulp.parallel('css', 'watch'));
+gulp.task('serve', gulp.parallel('css', 'js', 'watch'));

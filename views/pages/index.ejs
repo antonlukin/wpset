@@ -1,39 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%- include(views + '/parts/header', meta) %>
+    <%- include(views + '/parts/header') %>
 </head>
 
 <body>
     <header class="header">
         <h1 class="logo"><a href="/">wpget.org</a>/</h1>
-        <button class="mode">Switch theme</button>
+        <button class="mode" id="switch-theme">Switch theme</button>
     </header>
 
-    <section class="hero">
+    <section class="section">
         <p>
-            Social Planner is a <strong>WordPress plugin</strong> for scheduling announcements of posts to your social networks accounts.
-            The following providers are currently supported:
-            <strong>Facebook</strong>, <strong>Twitter</strong>, <strong>VK.com</strong>, <strong>OK.ru</strong>, <strong>Telegram</strong>,
-            but you can easily add a new one yourself.
+            We create progressive software solutions for <strong>WordPress</strong>.
+            Our ultimate goal is to build secure and confidential applications for the needs of your business or personal projects.
+            All of our tools are open source and free to redistribute.
+        </p>
+
+        <p>
+            <a href="/about/">Read more</a> about our studio or <a href="/contact/">contact us</a> if you have any questions.
         </p>
     </section>
 
     <section class="section">
-        <h2 class="anchor" id="installation">
-            <span>Plugins</span>
+        <div class="catalog">
+            <h2 class="anchor" id="plugins">
+                <span>Plugins</span>
 
-            <a aria-hidden="true" href="#plugins">#</a>
+                <a aria-hidden="true" href="#plugins">#</a>
+            </h2>
+
+            <article class="catalog-item">
+                <figure class="catalog-poster">
+                    <img src="/images/sharing-image/screenshot.jpg">
+                </figure>
+
+                <div class="catalog-info">
+                    <a class="catalog-title" href="/sharing-image/">Sharing Image</a>
+
+                    <p class="catalog-summary">
+                        Plugin for <strong>generating sharing posters</strong> in social networks.
+                        Allows you to use text, watermarks and various filters.<br>
+                        It is possible to create different posters for any posts types, archives and taxonomies.
+                        Compatible with various SEO plugins.
+                    </p>
+
+                    <div class="catalog-links">
+                        <a href="/sharing-image/premium/">Get premium</a>
+                        <a href="/sharing-image/licenses/">Manage licenses</a>
+                        <a href="/sharing-image/hooks/">Actions and filters</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="catalog-item">
+                <figure class="catalog-poster">
+                    <img src="/images/social-planner/screenshot.jpg">
+                </figure>
+
+                <div class="catalog-info">
+                    <a class="catalog-title" href="/social-planner/">Social Planner</a>
+
+                    <p class="catalog-summary">
+                        WordPress plugin for <strong>scheduling announcements</strong> of posts to your social networks accounts.
+                        <strong>Facebook</strong>, <strong>Twitter</strong>, <strong>VK.com</strong>, <strong>OK.ru</strong>, <strong>Telegram</strong> currently supported.
+                        <br>
+                        Plugin works with profiles, business pages, community pages, groups, etc.
+                    </p>
+
+                    <div class="catalog-links">
+                        <a href="/social-planner/setup/">Setup guide</a>
+                        <a href="/social-planner/hooks/">Actions and filters</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="themes">
+            <span>Themes</span>
+
+            <a aria-hidden="true" href="#themes">#</a>
         </h2>
 
         <div class="catalog">
-            <div>
-                123
-            </div>
+            <article class="catalog-item">
+                <figure class="catalog-poster">
+                    <img src="/images/instapress/screenshot.jpg">
+                </figure>
 
-            <div>
-                123
-            </div>
+                <div class="catalog-info">
+                    <a class="catalog-title" href="/instapress/">Instapress</a>
+
+                    <p class="catalog-summary">
+                        Fast and furious WordPress theme to <strong>share photos</strong> with small description.
+                        Inspired by <strong>Instagram</strong>, it also allows you to leave comments,
+                        supports categories, sticky posts, tags, search page and much more.
+                        Works great out of the box and is easily expandable with filters.
+                    </p>
+
+                    <div class="catalog-links">
+                        <a href="/instapress/hooks/">Actions and filters</a>
+                    </div>
+                </div>
+            </article>
         </div>
     </section>
 

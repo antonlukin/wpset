@@ -21,7 +21,7 @@ body {
   font-family: var(--font-sans);
   font-weight: var(--font-normal);
 
-  line-height: 1.75em;
+  line-height: 1.625em;
   letter-spacing: 0.025em;
 
   color: var(--color-text);
@@ -37,7 +37,7 @@ a {
   border-bottom: solid 1px transparent;
 
   text-decoration: none;
-  transition: border 200ms;
+  transition: background 200ms, color 200ms;
 
   &:hover {
     border-color: inherit;
@@ -50,6 +50,14 @@ h1 {
 
   font-size: var(--font-xl);
   font-weight: var(--font-semibold);
+
+  strong {
+    font-weight: var(--font-light);
+  }
+
+  form {
+    display: inline-flex;
+  }
 
   @media screen and (min-width: 480px) {
     font-size: var(--font-2xl);
@@ -132,13 +140,6 @@ p {
   }
 }
 
-button {
-  padding: 0;
-
-  background: none;
-  border: none;
-}
-
 img {
   max-width: 100%;
   height: auto;
@@ -151,6 +152,9 @@ button {
   color: inherit;
   font: inherit;
   line-height: inherit;
+
+  background: none;
+  border: none;
 
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
@@ -223,14 +227,17 @@ figure {
   }
 
   img {
+    display: block;
+
     border-radius: var(--rounded-lg);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-md);
   }
 }
 
 figcaption {
   display: block;
 
+  margin-top: 0.5rem;
   font-size: var(--font-xs);
   color: var(--color-dimmed);
 
@@ -287,6 +294,7 @@ blockquote {
   padding: 0.25rem 1rem;
 
   font-size: var(--font-xs);
+  line-height: 1.5em;
 
   background-color: var(--color-field);
   border-left: solid 4px var(--color-links);

@@ -1,14 +1,18 @@
 .logo {
   display: block;
 
-  margin: 0;
+  margin: 0 1rem 0 0;
   padding: 0;
+  overflow: hidden;
 
   font-size: var(--font-sm);
   font-weight: var(--fond-medium);
 
   color: var(--color-dimmed);
   cursor: default;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   @media screen and (min-width: 768px) {
     font-size: var(--font-md);

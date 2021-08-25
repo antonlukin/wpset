@@ -6,17 +6,19 @@
 
   text-indent: -9999rem;
 
-  mask-image: svg-load('icons/light.svg');
-
   background-color: var(--color-dimmed);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 
+  mask-image: svg-load('icons/light.svg');
   cursor: pointer;
-  transition: 250ms;
 
   &:hover {
+    background-color: var(--color-links);
+  }
+
+  &:focus-visible {
     background-color: var(--color-links);
   }
 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include(views + '/parts/header') %>
+</head>
+
+<body>
+    <header class="header">
+        <span class="logo"><a href="/">wpget.org</a>/<a href="/sharing-image/">sharing-image</a>/licenses/</span>
+        <button class="mode" id="switch-theme">Switch theme</button>
+    </header>
+
+    <section class="section">
+        <h1>Sharing Image: <strong>licenses</strong></h1>
+
+        <p>
+            This is a tool for managing your access key to the <a href="/sharing-image/premium/">premium</a> <strong>Sharing Image</strong> plugin features.
+            Use it to view your license data and delete outdated domains here.
+            If you have any problems with your key or need other help, please <a href="/contacts/">contact us</a> in any convenient way.
+        </p>
+
+        <form class="control control--button" action="/sharing-image/licenses/login/" method="POST">
+            <input type="text" name="key" value="" placeholder="be0-f93-a0c" required="">
+            <button class="button" type="submit">Login</button>
+        </form>
+
+        <p class="warning">
+            <%= warning %>
+        </p>
+    </section>
+
+    <%- include(views + '/parts/footer' ) %>
+</body>
+</html>
