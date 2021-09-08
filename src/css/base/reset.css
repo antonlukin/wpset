@@ -27,7 +27,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-background);
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     font-size: var(--font-md);
   }
 }
@@ -63,7 +63,7 @@ h1 {
     font-size: var(--font-2xl);
   }
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     font-size: var(--font-3xl);
   }
 }
@@ -76,7 +76,7 @@ h2 {
   font-weight: var(--font-semibold);
 
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     font-size: var(--font-2xl);
   }
 }
@@ -89,8 +89,24 @@ h3 {
   font-weight: var(--font-semibold);
 
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     font-size: var(--font-xl);
+  }
+}
+
+h4 {
+  margin: 0;
+  padding-top: 0.5rem;
+
+  font-size: var(--font-sm);
+  font-weight: var(--font-semibold);
+
+  @media screen and (min-width: 480px) {
+    font-size: var(--font-md);
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: var(--font-lg);
   }
 }
 
