@@ -57,6 +57,7 @@ server.disable('x-powered-by');
 
 // Require app routes.
 const routes = require('./routes');
+server.use('/', routes);
 
 // Add json answers middleware.
 server.use((req, res, next) => {
@@ -75,37 +76,33 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/social-planner', routes['social-planner']);
-server.use('/sharing-image', routes['sharing-image']);
-
-server.get('/', (req, res, next) => {
-  res.locals.meta = {
-    title: 'wpget.org/',
-    description: 'Description',
-    url: '/',
-  };
-
-  res.render('pages/index');
-});
-
 server.use((err, req, res, next) => {
   if (!err) {
     return next();
   }
 
+  console.error(err);
+
+  res.locals.meta = {
+    title: 'Server error / wpget.org',
+  };
+
   res.status(err.status || 500);
-  res.render('pages/error', {meta: {}});
-
-  if (err.console) {
-    console.error(err.console);
-  }
+  res.render('pages/error', {
+    message: 'An unexpected server error has occurred. Contact us if it happens again.',
+  });
 });
 
-server.use(function(req, res) {
+server.use((req, res) => {
+  res.locals.meta = {
+    title: 'Page not found / wpget.org',
+  };
+
   res.status(404);
-  res.render('pages/error', {meta: {}});
+  res.render('pages/error', {
+    message: 'The link you followed may be broken, or the page may have been removed.',
+  });
 });
-
 
 // Start express app.
 server.listen(process.env.PORT || 3000);

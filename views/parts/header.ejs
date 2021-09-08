@@ -2,10 +2,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="/assets/styles.min.css?v=<%- version %>">
+<link rel="icon" type="image/png" href="/assets/icon-128.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/icon-512.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/assets/icon-180.png">
 
 <title><%- meta.title %></title>
-
-<meta name="description" content="<%- meta.description %>">
-<meta property="og:url" content="<%- root + meta.url %>">
 <meta property="og:title" content="<%- meta.title %>">
-<meta property="og:description" content="<%- meta.description %>">
+
+<% if (meta.url) { %>
+    <meta property="og:url" content="<%- root + meta.url %>">
+<% } %>
+<% if (meta.description) { %>
+    <meta name="description" content="<%- meta.description %>">
+    <meta property="og:description" content="<%- meta.description %>">
+<% } %>

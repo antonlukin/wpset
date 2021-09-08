@@ -1,6 +1,10 @@
 .section {
   margin-bottom: 1.5rem;
 
+  &.section--message {
+    padding: 10% 0;
+  }
+
   @media screen and (min-width: 480px) {
     margin-bottom: 2rem;
   }

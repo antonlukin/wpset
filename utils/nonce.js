@@ -1,6 +1,6 @@
 'use strict';
 
-const sha1 = require('sha1');
+const md5 = require('md5');
 
 /**
  * Lifespan of nonces in seconds.
@@ -25,7 +25,7 @@ const getNonceTick = () => {
  * @return {String}
  */
 const createNonce = (user, action) => {
-  return sha1(user + action + getNonceTick()).substring(0, 10);
+  return md5(user + action + getNonceTick()).substring(0, 10);
 };
 
 /**
@@ -43,13 +43,13 @@ const verifyNonce = (nonce, user, action) => {
     return false;
   }
 
-  let expected = sha1(user + action + tick).substring(0, 10);
+  let expected = md5(user + action + tick).substring(0, 10);
 
   if (expected === nonce) {
     return true;
   }
 
-  expected = sha1(user + action + (tick - 1)).substring(0, 10);
+  expected = md5(user + action + (tick - 1)).substring(0, 10);
 
   if (expected === nonce) {
     return true;

@@ -10,15 +10,15 @@
 
   color: var(--color-white);
   background-color: var(--color-button);
-  border: solid 2px var(--color-border);
+  border: solid 2px var(--color-bright);
   border-radius: var(--rounded);
 
   cursor: pointer;
   transition: background 200ms, color 200ms;
 
   &:hover {
-    background-color: var(--color-border);
-    border-color: var(--color-border);
+    background-color: var(--color-bright);
+    border-color: var(--color-bright);
   }
 
   &.button--outline {
@@ -28,7 +28,7 @@
 
   &.button--outline:hover {
     color: var(--color-white);
-    background-color: var(--color-border);
+    background-color: var(--color-bright);
   }
 
   @media screen and (min-width: 768px) {

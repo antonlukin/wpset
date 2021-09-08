@@ -36,8 +36,8 @@
 
   &:hover {
     color: var(--color-white);
-    background-color: var(--color-border);
-    border-color: var(--color-border);
+    background-color: var(--color-bright);
+    border-color: var(--color-bright);
 
     &::before {
       background-color: var(--color-white);

@@ -1,5 +1,4 @@
 const express = require('express');
-const onerror = require('http-errors');
 const router = new express.Router();
 
 const nonce = require('../utils/nonce');
@@ -37,7 +36,7 @@ router.post('/licenses/login/', async (req, res) => {
     return res.redirect('/sharing-image/licenses/login/?message=3');
   }
 
-  res.cookie('key', req.body.key, {
+  res.cookie('sharing-image-premium', req.body.key, {
     maxAge: 604800000,
     path: '/sharing-image/licenses/',
     httpOnly: true,
@@ -47,7 +46,7 @@ router.post('/licenses/login/', async (req, res) => {
 });
 
 router.get('/licenses/login/', async (req, res) => {
-  if (req.cookies.key) {
+  if (req.cookies['sharing-image-premium']) {
     return res.redirect('/sharing-image/licenses/');
   }
 
@@ -79,36 +78,36 @@ router.get('/licenses/login/', async (req, res) => {
 });
 
 router.post('/licenses/logout/', async (req, res) => {
-  res.clearCookie('key', {path: '/sharing-image/licenses/'});
+  res.clearCookie('sharing-image-premium', {
+    path: '/sharing-image/licenses/',
+  });
   res.redirect('/sharing-image/licenses/login/');
 });
 
 router.get('/licenses/', async (req, res, next) => {
-  if (!req.cookies.key) {
+  if (!req.cookies['sharing-image-premium']) {
     return res.redirect('/sharing-image/licenses/login/');
   }
 
+  const premium = req.cookies['sharing-image-premium'];
+
   try {
     const license = await key.findOne({
-      where: {key: req.cookies.key},
+      where: {key: premium},
     });
 
-    if (null === license) {
-      return res.clearCookie('key').redirect('/sharing-image/licenses/login/');
+    if (license && 'valid' === license.status) {
+      res.locals.license = license;
+      return next();
     }
-
-    if ('blocked' === license.status) {
-      return res.clearCookie('key').redirect('/sharing-image/licenses/login/');
-    }
-
-    res.locals.license = license;
   } catch (err) {
-    return next(onerror(500, 'The license key could not be verified', {
-      console: err.message,
-    }));
+    return next(err);
   }
 
-  return next();
+  res.clearCookie('sharing-image-premium', {
+    path: '/sharing-image/licenses/',
+  });
+  return res.redirect('/sharing-image/licenses/login/');
 });
 
 router.get('/licenses/', async (req, res, next) => {
@@ -140,9 +139,7 @@ router.get('/licenses/', async (req, res, next) => {
       return res.redirect('/sharing-image/licenses/?message=2');
     }
   } catch (err) {
-    return next(onerror(500, 'The license key could not be verified', {
-      console: err.message,
-    }));
+    return next(err);
   }
 
   return res.redirect('/sharing-image/licenses/');
@@ -164,9 +161,7 @@ router.get('/licenses/', async (req, res, next) => {
       host.created = new Date(host.createdAt).toLocaleString();
     });
   } catch (err) {
-    return next(onerror(500, 'The license key could not be verified', {
-      console: err.message,
-    }));
+    return next(err);
   }
 
   let warning = null;
@@ -214,6 +209,10 @@ router.post('/verify/', async (req, res) => {
 
     if ('blocked' === license.status) {
       return res.answer(false, 400, 'KEY_BLOCKED');
+    }
+
+    if ('expired' === license.status) {
+      return res.answer(false, 400, 'KEY_EXPIRED');
     }
 
     for (let i = 0; i < license.hosts.length; i++) {

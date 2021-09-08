@@ -5,7 +5,19 @@
 </head>
 
 <body>
-    error
+    <header class="header">
+        <h1 class="logo"><a href="/">wpget.org</a>/</h1>
+        <button class="mode" id="switch-theme">Switch theme</button>
+    </header>
+
+    <section class="section section--message">
+        <h1>Something went wrong</h1>
+
+        <% if (message) { %>
+            <p><%- message %></p>
+        <% } %>
+    </section>
+
     <%- include(views + '/parts/footer') %>
 </body>
 </html>

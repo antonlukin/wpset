@@ -13,5 +13,6 @@
     },
     "ignorePatterns": ["assets/**/*.js"],
     "rules": {
+        "max-len": ["error", {"ignoreStrings": true}]
     }
 }

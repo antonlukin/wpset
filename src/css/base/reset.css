@@ -37,7 +37,7 @@ a {
   border-bottom: solid 1px transparent;
 
   text-decoration: none;
-  transition: background 200ms, color 200ms;
+  transition: background 200ms, color 200ms, border 200ms;
 
   &:hover {
     border-color: inherit;
@@ -129,6 +129,33 @@ ol {
   @media screen and (min-width: 768px) {
     margin-left: 1.5rem;
     padding-left: 1.5rem;
+  }
+}
+
+dl {
+  display: block;
+  margin: 0.75rem 0;
+  font-size: var(--font-sm);
+
+  dt {
+    display: inline;
+    margin-right: 0.125rem;
+  }
+
+  dd {
+    display: inline;
+    margin: 0;
+    font-weight: var(--font-semibold);
+
+    &:after {
+      content: "";
+      display: block;
+      margin-top: 0.25rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    margin: 1rem 0;
   }
 }
 
@@ -271,6 +298,10 @@ summary {
     background-color: var(--color-links);
 
     transition: transform 200ms;
+  }
+
+  &:hover span::after {
+    background-color: var(--color-bright);
   }
 
   &::-webkit-details-marker {

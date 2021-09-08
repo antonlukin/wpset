@@ -15,11 +15,11 @@
   cursor: pointer;
 
   &:hover {
-    background-color: var(--color-links);
+    background-color: var(--color-bright);
   }
 
   &:focus-visible {
-    background-color: var(--color-links);
+    background-color: var(--color-bright);
   }
 
   html.is-dark & {

@@ -4,7 +4,7 @@
 
   --color-links: #0284C7;
   --color-button: #0284C7;
-  --color-border: #0369A1;
+  --color-bright: #0369A1;
   --color-divider: #E4E4E7;
   --color-dimmed: #71717A;
   --color-field: #F4F4F5;
@@ -23,7 +23,7 @@ html.is-dark {
 
   --color-links: #38BDF8;
   --color-button: #0EA5E9;
-  --color-border: #0284C7;
+  --color-bright: #0284C7;
   --color-divider: #27272A;
   --color-dimmed: #A1A1AA;
   --color-field: #27272A;
