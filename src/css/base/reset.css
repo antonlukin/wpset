@@ -98,12 +98,8 @@ h4 {
   margin: 0;
   padding-top: 0.5rem;
 
-  font-size: var(--font-sm);
+  font-size: var(--font-md);
   font-weight: var(--font-semibold);
-
-  @media screen and (min-width: 480px) {
-    font-size: var(--font-md);
-  }
 
   @media screen and (min-width: 768px) {
     font-size: var(--font-lg);
