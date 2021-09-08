@@ -6,7 +6,7 @@
     "url": "https://lukin.me"
   },
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",

@@ -72,12 +72,9 @@ h2 {
   margin: 0;
   padding-top: 0.5rem;
 
-  font-size: var(--font-lg);
+  font-size: var(--font-xl);
   font-weight: var(--font-semibold);
 
-  @media screen and (min-width: 480px) {
-    font-size: var(--font-xl);
-  }
 
   @media (min-width: 768px) {
     font-size: var(--font-2xl);
@@ -88,12 +85,9 @@ h3 {
   margin: 0;
   padding-top: 0.5rem;
 
-  font-size: var(--font-md);
+  font-size: var(--font-lg);
   font-weight: var(--font-semibold);
 
-  @media screen and (min-width: 480px) {
-    font-size: var(--font-lg);
-  }
 
   @media (min-width: 768px) {
     font-size: var(--font-xl);

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include(views + '/parts/header') %>
+</head>
+
+<body>
+    <header class="header">
+        <span class="logo"><a href="/">wpget.org</a>/instapress/</span>
+        <button class="mode" id="switch-theme">Switch theme</button>
+    </header>
+
+    <section class="section">
+        <h1>Instapress</h1>
+
+        <p>
+            Fast and furious WordPress theme to <strong>share photos</strong> with small description.
+            Inspired by <strong>Instagram</strong>, it also allows you to leave comments,
+            supports categories, sticky posts, tags, search page and much more.
+            Works great out of the box and is easily expandable with child theme.
+            Ideal for personal and collective <strong>travel blogs</strong>.
+        </p>
+
+        <p>
+            Instapress provides small customization options without code – footer description,
+            post author visibility and displaying any post meta in summaries, which can be useful for photobloggers
+            who include location data, such as latitude and longitude for their posts.
+        </p>
+
+        <div class="pitch">
+            <a class="button" href="https://wordpress.org/themes/instapress/" target="_blank">Download</a>
+            <a class="button button--outline" href="https://github.com/antonlukin/instapress/" target="_blank">Github</a>
+        </div>
+
+        <figure>
+            <a href="/images/instapress/screenshot.jpg" target="_blank">
+                <img src="/images/instapress/screenshot.jpg" alt="Instapress WordPress theme general screenshot">
+            </a>
+        </figure>
+
+        <p>
+            Take a look at a <a href="https://lukin.blog/" target="_blank">live example</a> of this theme on the personal photoblog website.
+            Pay attention to the post styles and comments form on another <a href="/images/instapress/comments.png" target="_blank">sample site</a> screenshot.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="installation">
+            <span>Installation</span>
+            <a aria-hidden="true" href="#installation">#</a>
+        </h2>
+
+        <p>
+            Just search <strong>Instapress</strong> and activate theme from your WordPress admin dashboard.
+            You can also manually upload <a href="https://downloads.wordpress.org/theme/instapress.zip" target="_blank">latest release</a> to <code>/wp-content/themes</code> and activate it.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="customization">
+            <span>Customization</span>
+            <a aria-hidden="true" href="#customization">#</a>
+        </h2>
+
+        <p>
+            By default, you have several settings available to change the appearance of the theme.
+            Use the built-in customizer to change the text in the footer and author visibility in post summary.
+            Besides this, you can easily manage the main menu of the site.
+        </p>
+
+        <figure>
+            <a href="/images/instapress/configuration.jpg" target="_blank">
+                <img src="/images/instapress/configuration.jpg" alt="Instapress WordPress theme configuration">
+            </a>
+
+            <figcaption>Customize theme settings.</figcaption>
+        </figure>
+
+        <p>
+            In order to enable site search, you need to create a separate page and select the <strong>Search page</strong> template in attributes.
+            You can place the search link, for example, in the main menu.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="enhancement">
+            <span>Enhancement</span>
+
+            <a aria-hidden="true" href="#enhancement">#</a>
+        </h2>
+
+        <p>
+            This theme does not contain any hooks or filters,
+            however, you can create a <a href="https://developer.wordpress.org/themes/advanced-topics/child-themes/" target="_blank">child theme</a> or
+            <a href="https://wordpress.org/support/article/must-use-plugins/" target="_blank">must use plugin</a> and expand the functionality.
+            Please do not make changes to the theme files — they will be lost during the update.
+        </p>
+    </section>
+
+    <%- include(views + '/parts/footer') %>
+</body>
+</html>

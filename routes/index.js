@@ -33,5 +33,6 @@ router.get('/', (req, res, next) => {
 
 router.use('/social-planner/', require('./social-planner'));
 router.use('/sharing-image/', require('./sharing-image'));
+router.use('/instapress/', require('./instapress'));
 
 module.exports = router;
