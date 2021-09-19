@@ -55,10 +55,6 @@ server.locals.version = version;
 // Hide specific Express header.
 server.disable('x-powered-by');
 
-// Require app routes.
-const routes = require('./routes');
-server.use('/', routes);
-
 // Add json answers middleware.
 server.use((req, res, next) => {
   const answer = {};
@@ -75,6 +71,10 @@ server.use((req, res, next) => {
 
   next();
 });
+
+// Require app routes.
+const routes = require('./routes');
+server.use('/', routes);
 
 server.use((err, req, res, next) => {
   if (!err) {

@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include(views + '/parts/header') %>
+</head>
+
+<body>
+    <header class="header">
+        <span class="logo"><a href="/">wpget.org</a>/<a href="/sharing-image/">sharing-image</a>/hooks/</span>
+        <button class="mode" id="switch-theme">Switch theme</button>
+    </header>
+
+    <section class="section">
+        <h1>Sharing Image: <strong>hooks</strong></h1>
+
+        <p>
+            This plugin provides developers with a large number of hooks that can be used to change the behavior of
+            the plugin.
+            Put the hook code in <code>functions.php</code> file of your theme or in your plugin.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="actions">
+            <span>Actions</span>
+
+            <a aria-hidden="true" href="#actions">#</a>
+        </h2>
+
+        <p>
+            WordPress actions are benchmarks where the developer need to execute a specific code at a specific event.
+        </p>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_settings">
+                <span>sharing_image_settings</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_settings">#</a>
+            </h4>
+
+            <p>
+                Use this action to add something before the settings widget.
+                If you want to extend js object inside settings page, use the <code>sharing_image_settings_object</code> filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        function my_settings_before() {
+                            echo 'This text will be displayed in the settings page';
+                        }
+
+                        add_action( 'sharing_image_settings', 'my_settings_before' );
+                    </code>
+                </pre>
+
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_widget">
+                <span>sharing_image_widget</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_widget">#</a>
+            </h4>
+
+            <p>
+                Use this action to add something before metabox in post or taxonomy edition screen.
+            </p>
+
+            <p>
+                Note that the content inside the metabox is composed with js and if you want to change it,
+                you need to use the <code>sharing_image_widget_object</code> filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        function my_widget_before() {
+                            echo 'This text will be displayed in the metabox';
+                        }
+
+                        add_action( 'sharing_image_widget', 'my_widget_before' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="hooks">
+            <span>Filters</span>
+
+            <a aria-hidden="true" href="#hooks">#</a>
+        </h2>
+
+        <p>
+            WordPress filters have the same idea as actions, but the main difference is that filters are used to modify
+            variables.
+            Unlike actions, filters code must return a value, which is the modified copy of the original value.
+        </p>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_poster_src">
+                <span>sharing_image_poster_src</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_poster_src">#</a>
+            </h4>
+
+            <p>
+                You can filter public poster url, width and height for current Object (Post or Term taxonomy) ID with this hook.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param array|false $image     List of image data, or boolean false if no image is available.
+                         * @param int         $object_id Post ID or Taxonomy term ID.
+                         */
+                        function my_poster_src( $poster, $object_id ) {
+                            $poster = array(
+                                'https://example.org/image.png',
+                                1200,
+                                630,
+                            );
+
+                            return $poster;
+                        }
+
+                        add_filter( 'sharing_image_poster_src', 'my_poster_src', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_singular_poster_meta">
+                <span>sharing_image_singular_poster_meta</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_singular_poster_meta">#</a>
+            </h4>
+
+            <p>
+                Use this filter to update poster singular meta by Post ID.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param array|false $meta    Singular poster meta.
+                         * @param int         $post_id Post ID.
+                         */
+                        function my_singular_poster_meta( $meta, $post_id ) {
+                            if ( 1 === $post_id ) {
+                                $meta = array(
+                                    'https://example.org/image.png',
+                                    1200,
+                                    630,
+                                );
+                            }
+
+                            return $meta;
+                        }
+
+                        add_filter( 'sharing_image_singular_poster_meta', 'my_singular_poster_meta', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_taxonomy_poster_meta">
+                <span>sharing_image_taxonomy_poster_meta</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_taxonomy_poster_meta">#</a>
+            </h4>
+
+            <p>
+                Use this filter to update poster taxonomy meta by Term ID.
+                Please note that this hook is only available for Premium license.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param array $meta    Term poster image meta.
+                         * @param int   $post_id Term ID.
+                         */
+                        function my_taxonomy_poster_meta( $meta, $term_id ) {
+                            if ( false === $meta ) {
+                                $meta = array(
+                                    'https://example.org/image.png',
+                                    1200,
+                                    630,
+                                );
+                            }
+
+                            return $meta;
+                        }
+
+                        add_filter( 'sharing_image_taxonomy_poster_meta', 'my_taxonomy_poster_meta', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_plugin_classes">
+                <span>sharing_image_plugin_classes</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_plugin_classes">#</a>
+            </h4>
+
+            <p>
+                The filter is used to update automatically initialized plugin classes.
+                You can remove or add custom class on plugin load.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param array $classes List of classes.
+                         */
+                        function my_update_classes( $classes ) {
+                            unset( $classes['Sharing_Image\Meta'] );
+
+                            return $classes;
+                        }
+
+                        // This filter must execute before the `plugins_loaded` event.
+                        add_filter( 'sharing_image_plugin_classes', 'my_update_classes' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_prepare_template">
+                <span>sharing_image_prepare_template</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_prepare_template">#</a>
+            </h4>
+
+            <p>
+                Prepare template before creating poster with this filter.
+                Used to update fieldset texts and background image.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param array   $template List of template data.
+                         * @param array   $fieldset Fieldset data from picker.
+                         * @param integer $index    Template index from editor.
+                         */
+                        function my_prepare_template( $template, $fieldset, $index ) {
+                            $template['fill'] = '#fff';
+
+                            return $template;
+                        }
+
+                        add_filter( 'sharing_image_prepare_template', 'my_prepare_template', 10, 3 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_get_fontpath">
+                <span>sharing_image_get_fontpath</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_get_fontpath">#</a>
+            </h4>
+
+            <p>
+                Replace font path while poster generation according layer data.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param string $path  Font file path.
+                         * @param array  $layer Layer data.
+                         */
+                        function my_get_fontpath( $path, $layer ) {
+                            return WP_PLUGIN_DIR . '/my-plugin/font.ttf';
+                        }
+
+                        add_filter( 'sharing_image_get_fontpath', 'my_get_fontpath', 10, 3 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_get_upload_file">
+                <span>sharing_image_get_upload_file</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_get_upload_file">#</a>
+            </h4>
+
+            <p>
+                You can filter generated poster file path and url.
+                By default used unique file name and upload directory from settings.
+                Use <code>sharing_image_upload_dir</code> hook to update upload directory.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param array  $file Server file path and url to image.
+                         * @param string $name Unique file name.
+                         */
+                        function my_get_upload_file( $file, $name ) {
+                            $custom = 'custom.png';
+
+                            // Replace unique file name with custom one in image url and path.
+                            foreach ( $file as &$value ) {
+                                $value = str_replace( $name, $custom, $value );
+                            }
+
+                            return $file;
+                        }
+
+                        add_filter( 'sharing_image_get_upload_file', 'my_get_upload_file', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_hide_settings">
+                <span>sharing_image_hide_settings</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_hide_settings">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_get_upload_file() {
+                        }
+
+                        add_filter( 'sharing_image_hide_settings', 'my_hide_settings' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_allow_custom_fonts">
+                <span>sharing_image_allow_custom_fonts</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_allow_custom_fonts">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_allow_custom_fonts() {
+                        }
+
+                        add_filter( 'sharing_image_allow_custom_fonts', 'my_allow_custom_fonts' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_get_templates">
+                <span>sharing_image_get_templates</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_get_templates">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_get_templates() {
+                        }
+
+                        add_filter( 'sharing_image_get_templates', 'my_get_templates' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_update_templates">
+                <span>sharing_image_update_templates</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_templates">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_get_templates() {
+                        }
+
+                        add_filter( 'sharing_image_update_templates', 'my_update_templates' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_get_config">
+                <span>sharing_image_get_config</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_get_config">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_get_config() {
+                        }
+
+                        add_filter( 'sharing_image_get_config', 'my_get_config' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_update_config">
+                <span>sharing_image_update_config</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_config">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_update_config() {
+                        }
+
+                        add_filter( 'sharing_image_update_config', 'my_update_config' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_develop">
+                <span>sharing_image_develop</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_develop">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_update_config() {
+                        }
+
+                        add_filter( 'sharing_image_develop', 'my_develop' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_get_license">
+                <span>sharing_image_get_license</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_get_license">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_get_license() {
+                        }
+
+                        add_filter( 'sharing_image_get_license', 'my_get_license' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_upload_dir">
+                <span>sharing_image_upload_dir</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_upload_dir">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_upload_dir() {
+                        }
+
+                        add_filter( 'sharing_image_upload_dir', 'my_upload_dir' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_file_format">
+                <span>sharing_image_file_format</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_file_format">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_file_format() {
+                        }
+
+                        add_filter( 'sharing_image_file_format', 'my_file_format' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_poster_quality">
+                <span>sharing_image_poster_quality</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_poster_quality">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_poster_quality() {
+                        }
+
+                        add_filter( 'sharing_image_poster_quality', 'my_poster_quality' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_default_poster_src">
+                <span>sharing_image_default_poster_src</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_default_poster_src">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_default_poster_src() {
+                        }
+
+                        add_filter( 'sharing_image_default_poster_src', 'my_default_poster_src' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_settings_object">
+                <span>sharing_image_settings_object</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_settings_object">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_settings_object() {
+                        }
+
+                        add_filter( 'sharing_image_settings_object', 'my_settings_object' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_sanitize_editor">
+                <span>sharing_image_sanitize_editor</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_sanitize_editor">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_sanitize_editor() {
+                        }
+
+                        add_filter( 'sharing_image_sanitize_editor', 'my_sanitize_editor' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_sanitize_config">
+                <span>sharing_image_sanitize_config</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_sanitize_config">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_sanitize_config() {
+                        }
+
+                        add_filter( 'sharing_image_sanitize_config', 'my_sanitize_config' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_settings_tabs">
+                <span>sharing_image_settings_tabs</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_settings_tabs">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_settings_tabs() {
+                        }
+
+                        add_filter( 'sharing_image_settings_tabs', 'my_settings_tabs' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_poster_fonts">
+                <span>sharing_image_poster_fonts</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_poster_fonts">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_poster_fonts() {
+                        }
+
+                        add_filter( 'sharing_image_poster_fonts', 'my_poster_fonts' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_directory_permissions">
+                <span>sharing_image_directory_permissions</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_directory_permissions">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_directory_permissions() {
+                        }
+
+                        add_filter( 'sharing_image_directory_permissions', 'my_directory_permissions' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_hide_metabox">
+                <span>sharing_image_hide_metabox</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_hide_metabox">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_hide_metabox() {
+                        }
+
+                        add_filter( 'sharing_image_hide_metabox', 'my_hide_metabox' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_update_post_meta">
+                <span>sharing_image_update_post_meta</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_post_meta">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_update_post_meta() {
+                        }
+
+                        add_filter( 'sharing_image_update_post_meta', 'my_update_post_meta' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_update_term_meta">
+                <span>sharing_image_update_term_meta</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_term_meta">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_update_post_meta() {
+                        }
+
+                        add_filter( 'sharing_image_update_term_meta', 'my_update_term_meta' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_sanitize_picker">
+                <span>sharing_image_sanitize_picker</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_sanitize_picker">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_sanitize_picker() {
+                        }
+
+                        add_filter( 'sharing_image_sanitize_picker', 'my_sanitize_picker' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_widget_object">
+                <span>sharing_image_widget_object</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_widget_object">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_widget_object() {
+                        }
+
+                        add_filter( 'sharing_image_widget_object', 'my_widget_object' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_metabox_post_types">
+                <span>sharing_image_metabox_post_types</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_metabox_post_types">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_metabox_post_types() {
+                        }
+
+                        add_filter( 'sharing_image_metabox_post_types', 'my_metabox_post_types' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="sharing_image_widget_taxonomies">
+                <span>sharing_image_widget_taxonomies</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_widget_taxonomies">#</a>
+            </h4>
+
+            <p>
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        function my_widget_taxonomies() {
+                        }
+
+                        add_filter( 'sharing_image_widget_taxonomies', 'my_widget_taxonomies' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+    </section>
+
+    <a class="backlink" href="/sharing-image/">
+        <span>Back to <strong>Sharing Image</strong> summary</span>
+    </a>
+
+    <%- include(views + '/parts/footer' ) %>
+</body>
+</html>

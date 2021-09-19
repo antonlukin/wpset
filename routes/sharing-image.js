@@ -15,6 +15,16 @@ router.get('/', (req, res) => {
   res.render('pages/sharing-image/index');
 });
 
+router.get('/hooks/', (req, res) => {
+  res.locals.meta = {
+    title: 'Sharing Image: hooks',
+    description: 'Description',
+    url: '/sharing-image/hooks/',
+  };
+
+  res.render('pages/sharing-image/hooks');
+});
+
 router.post('/licenses/login/', async (req, res) => {
   if (!req.body.key) {
     return res.redirect('/sharing-image/licenses/login/');
@@ -236,7 +246,7 @@ router.post('/verify/', async (req, res) => {
     return res.answer(false, 500, 'SERVER_ERROR');
   }
 
-  return res.answer(true);
+  return res.answer();
 });
 
 module.exports = router;

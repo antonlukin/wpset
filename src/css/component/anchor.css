@@ -1,22 +1,22 @@
 .anchor {
-  display: flex;
-  align-items: center;
+  display: block;
 
   & > a {
-    display: block;
+    display: inline-block;
 
     width: 0.75rem;
     height: 0.75rem;
-    margin-left: 0.5rem;
 
     mask-image: svg-load('icons/anchor.svg');
     mask-size: contain;
+    mask-repeat: no-repeat;
 
     background-color: var(--color-links);
     background-repeat: no-repeat;
     background-position: center;
     border: none;
 
+    transform: translate(0.5rem, 0.25rem);
     transition: opacity 250ms;
 
     &:hover {
@@ -27,7 +27,7 @@
       width: 1rem;
       height: 1rem;
 
-      margin-left: 0.75rem;
+      transform: translate(0.75rem, 0.375rem);
     }
 
     @media (hover: hover) {

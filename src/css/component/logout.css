@@ -19,12 +19,12 @@
     background-color: var(--color-bright);
   }
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     width: 1.5rem;
     height: 1.5rem;
   }
 
-  @media (min-width: 480px) {
+  @media screen and (min-width: 480px) {
     width: 1.25rem;
     height: 1.25rem;
   }
