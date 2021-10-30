@@ -1,3 +1,7 @@
+/**
+ * Activate dark color scheme
+ */
+
 (function() {
   const root = document.documentElement;
 

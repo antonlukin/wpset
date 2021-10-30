@@ -1,0 +1,17 @@
+.message {
+  display: block;
+  margin: -1.5rem 0 1rem;
+  padding: 0.5rem 0 0;
+
+  &.message--error {
+    color: var(--color-error);
+  }
+
+  &.message--success {
+    color: var(--color-success)
+  }
+
+  @media screen and (min-width: 768px) {
+    margin: -1.5rem 0 1.5rem;
+  }
+}

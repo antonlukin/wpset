@@ -66,17 +66,46 @@
 
         <p>
             Plugin usage is divided into 2 stages: template preparation and poster generation.
+        </p>
+    </section>
 
+    <section class="section">
+        <h2 class="anchor" id="premium">
+            <span>Premium license</span>
+
+            <a aria-hidden="true" href="#premium">#</a>
+        </h2>
+
+        <p>
+            The Premium version of the plugin adds new features and helps the product develop.
+            For this it is worth getting a Premium:
+        </p>
+
+        <ul>
+            <li>Use of several templates with the ability to quickly switch between them when generating.</li>
+            <li>Generating posters in taxonomy archives.</li>
+            <li>Priority tech support.</li>
+            <li>Adding new functionality at your request.</li>
+        </ul>
+
+        <p>
+            To get Premium access, enter your email address to which the license key will be sent.
+            While the plugin is in beta testing, it is <strong>absolutely free</strong>.
+            Each key can be used up to <strong>5 times</strong> on different sites.
+            If you need to change this limit, please <a href="/contact/">contact us</a>.
         </p>
 
         <p>
-            Pay attention to the <strong>Subtitle</strong> optional field on each provider.
-            Fill it out if you want to use several accounts of the same social network or just for your convenience when
-            scheduling.
+            We guarantee that your email <strong>will not be used for automatic mailings</strong> and will never be transferred to third parties without your explicit consent.
         </p>
 
-        <p>
-            Read the detailed <a href="/social-planner/setup/">configuration guide</a> for each social network on a separate page.
+        <form class="control control--button" action="/sharing-image/registration/" method="POST">
+            <input type="email" name="email" value="" placeholder="example@example.com" required="required">
+            <button class="button" type="submit">Receive</button>
+        </form>
+
+        <p class="message <%= message.class %>">
+            <%= message.title %>
         </p>
     </section>
 

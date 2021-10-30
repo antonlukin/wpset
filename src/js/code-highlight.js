@@ -1,3 +1,7 @@
+/**
+ * Highlight all pre code blocks
+ */
+
 (function() {
   const codes = document.querySelectorAll('pre code');
 

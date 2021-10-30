@@ -1,0 +1,12 @@
+Hi there!
+
+Someone have requested a Premium license key for the Sharing Image plugin.
+If this wasn’t you, please ignore this email.
+
+Your Premium key: %key%
+
+To see detailed setup instructions visit https://wpget.org/sharing-image/
+You can manage your key visiting https://wpget.org/sharing-image/licenses/
+
+Best Regards,
+The wpget.org team.

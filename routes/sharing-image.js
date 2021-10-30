@@ -2,19 +2,63 @@ const express = require('express');
 const router = new express.Router();
 
 const nonce = require('../utils/nonce');
+const randomizer = require('../utils/randomizer');
+const mailer = require('../utils/mailer');
 const models = require('../models');
 const {key, host} = models['sharing-image'];
 
+/**
+ * Show index page
+ */
 router.get('/', (req, res) => {
+  let message = {};
+
+  switch (req.query.message) {
+    case '1':
+      message = {
+        title: 'The Premium license key has been successfully sent to your email.',
+        class: 'message--success',
+      };
+
+      break;
+
+    case '2':
+      message = {
+        title: 'The entered email looks incorrect. Try another one.',
+        class: 'message--error',
+      };
+
+      break;
+
+    case '3':
+      message = {
+        title: 'The entered email address already registered.',
+        class: 'message--error',
+      };
+
+      break;
+
+    case '4':
+      message = {
+        title: 'Failed to send email. Try again later.',
+        class: 'message--error',
+      };
+  }
+
   res.locals.meta = {
     title: 'Sharing Image',
     description: 'Description',
     url: '/sharing-image/',
   };
 
-  res.render('pages/sharing-image/index');
+  res.render('pages/sharing-image/index', {
+    message: message,
+  });
 });
 
+/**
+ * Show hooks page
+ */
 router.get('/hooks/', (req, res) => {
   res.locals.meta = {
     title: 'Sharing Image: hooks',
@@ -25,25 +69,32 @@ router.get('/hooks/', (req, res) => {
   res.render('pages/sharing-image/hooks');
 });
 
-router.post('/licenses/login/', async (req, res) => {
+/**
+ * Authenticate license
+ */
+router.post('/licenses/login/', async (req, res, next) => {
   if (!req.body.key) {
     return res.redirect('/sharing-image/licenses/login/');
   }
 
-  const license = await key.findOne({
-    where: {key: req.body.key},
-  });
+  try {
+    const license = await key.findOne({
+      where: {key: req.body.key},
+    });
 
-  if (null === license) {
-    return res.redirect('/sharing-image/licenses/login/?message=1');
-  }
+    if (null === license) {
+      return res.redirect('/sharing-image/licenses/login/?message=1');
+    }
 
-  if ('blocked' === license.status) {
-    return res.redirect('/sharing-image/licenses/login/?message=2');
-  }
+    if ('blocked' === license.status) {
+      return res.redirect('/sharing-image/licenses/login/?message=2');
+    }
 
-  if ('expired' === license.status) {
-    return res.redirect('/sharing-image/licenses/login/?message=3');
+    if ('expired' === license.status) {
+      return res.redirect('/sharing-image/licenses/login/?message=3');
+    }
+  } catch (err) {
+    return next(err);
   }
 
   res.cookie('sharing-image-premium', req.body.key, {
@@ -55,24 +106,39 @@ router.post('/licenses/login/', async (req, res) => {
   res.redirect('/sharing-image/licenses/');
 });
 
+/**
+ * Show message on invaild login
+ */
 router.get('/licenses/login/', async (req, res) => {
   if (req.cookies['sharing-image-premium']) {
     return res.redirect('/sharing-image/licenses/');
   }
 
-  let warning = null;
+  let message = {};
 
   switch (req.query.message) {
     case '1':
-      warning = 'The premium key is invalid.';
+      message = {
+        title: 'The premium key is invalid.',
+        class: 'message--error',
+      };
+
       break;
 
     case '2':
-      warning = 'The premium key was blocked.';
+      message = {
+        title: 'The premium key was blocked.',
+        class: 'message--error',
+      };
+
       break;
 
     case '3':
-      warning = 'The premium key expired.';
+      message = {
+        title: 'The premium key is expired.',
+        class: 'message--error',
+      };
+
       break;
   }
 
@@ -83,10 +149,13 @@ router.get('/licenses/login/', async (req, res) => {
   };
 
   res.render('pages/sharing-image/login', {
-    warning: warning,
+    message: message,
   });
 });
 
+/**
+ * Logout license
+ */
 router.post('/licenses/logout/', async (req, res) => {
   res.clearCookie('sharing-image-premium', {
     path: '/sharing-image/licenses/',
@@ -94,6 +163,9 @@ router.post('/licenses/logout/', async (req, res) => {
   res.redirect('/sharing-image/licenses/login/');
 });
 
+/**
+ * Authorize license
+ */
 router.get('/licenses/', async (req, res, next) => {
   if (!req.cookies['sharing-image-premium']) {
     return res.redirect('/sharing-image/licenses/login/');
@@ -117,9 +189,13 @@ router.get('/licenses/', async (req, res, next) => {
   res.clearCookie('sharing-image-premium', {
     path: '/sharing-image/licenses/',
   });
+
   return res.redirect('/sharing-image/licenses/login/');
 });
 
+/**
+ * Delete host license
+ */
 router.get('/licenses/', async (req, res, next) => {
   if (!req.query.delete) {
     return next();
@@ -128,13 +204,13 @@ router.get('/licenses/', async (req, res, next) => {
   const license = res.locals.license;
 
   if (!req.query.nonce) {
-    return res.redirect('/sharing-image/licenses/?message=1');
+    return res.redirect('/sharing-image/licenses/?message=2');
   }
 
   const action = `sharing-image-${req.query.delete}`;
 
   if (!nonce.verify(req.query.nonce, license.key, action)) {
-    return res.redirect('/sharing-image/licenses/?message=1');
+    return res.redirect('/sharing-image/licenses/?message=2');
   }
 
   try {
@@ -146,15 +222,18 @@ router.get('/licenses/', async (req, res, next) => {
     });
 
     if (!destroy) {
-      return res.redirect('/sharing-image/licenses/?message=2');
+      return res.redirect('/sharing-image/licenses/?message=3');
     }
   } catch (err) {
     return next(err);
   }
 
-  return res.redirect('/sharing-image/licenses/');
+  return res.redirect('/sharing-image/licenses/?message=1');
 });
 
+/**
+ * Show licenses list
+ */
 router.get('/licenses/', async (req, res, next) => {
   let hosts = [];
 
@@ -174,15 +253,31 @@ router.get('/licenses/', async (req, res, next) => {
     return next(err);
   }
 
-  let warning = null;
+  let message = {};
 
   switch (req.query.message) {
     case '1':
-      warning = 'The security token is invalid or expired. Try again.';
+      message = {
+        title: 'The domain successfully deleted.',
+        class: 'message--success',
+      };
+
       break;
 
     case '2':
-      warning = 'Could not delete the domain, it may have been done earlier.';
+      message = {
+        title: 'The security token is invalid or expired. Try again.',
+        class: 'message--error',
+      };
+
+      break;
+
+    case '3':
+      message = {
+        title: 'Could not delete the domain, it may have been done earlier.',
+        class: 'message--error',
+      };
+
       break;
   }
 
@@ -194,10 +289,13 @@ router.get('/licenses/', async (req, res, next) => {
 
   res.render('pages/sharing-image/licenses', {
     hosts: hosts,
-    warning: warning,
+    message: message,
   });
 });
 
+/**
+ * Verify remote request
+ */
 router.post('/verify/', async (req, res) => {
   if (!req.body.key) {
     return res.answer(false, 400);
@@ -247,6 +345,50 @@ router.post('/verify/', async (req, res) => {
   }
 
   return res.answer();
+});
+
+
+router.post('/registration/', async (req, res, next) => {
+  if (!req.body.email) {
+    return res.redirect('/sharing-image/');
+  }
+
+  if (!req.body.email.match(/@/)) {
+    return res.redirect('/sharing-image/?message=2');
+  }
+
+  try {
+    const license = await key.findOne({
+      where: {email: req.body.email},
+    });
+
+    if (license) {
+      return res.redirect('/sharing-image/?message=3');
+    }
+
+    const random = randomizer();
+
+    await key.create({
+      key: random,
+      limit: 5,
+      email: req.body.email,
+      status: 'valid',
+    });
+
+    const params = {
+      from: process.env.MAILGUN_FROM,
+      to: req.body.email,
+      subject: 'Sharing Image Premium license key',
+    };
+
+    await mailer('sharing-image/registration', params, {
+      key: random,
+    });
+  } catch (err) {
+    return res.redirect('/sharing-image/?message=4');
+  }
+
+  res.redirect('/sharing-image/?message=1');
 });
 
 module.exports = router;

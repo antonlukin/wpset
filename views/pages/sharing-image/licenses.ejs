@@ -19,15 +19,15 @@
         </h1>
 
         <p>
-            This is a tool for managing your access key to the <a href="/sharing-image/premium/">premium</a> <strong>Sharing Image</strong> plugin features.
+            This is a tool for managing your access key to the <a href="/sharing-image/#premium">premium</a> <strong>Sharing Image</strong> plugin features.
             Use it to view your license data and delete outdated domains here.
             If you have any problems with your key or need other help, please <a href="/contact/">contact us</a> in any convenient way.
         </p>
     </section>
 
     <section class="section">
-        <p class="warning">
-            <%= warning %>
+        <p class="message <%= message.class %>">
+            <%= message.title %>
         </p>
 
         <% if (hosts.length > 0) { %>

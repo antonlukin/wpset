@@ -8,7 +8,8 @@
   --color-divider: #E4E4E7;
   --color-dimmed: #71717A;
   --color-field: #F4F4F5;
-  --color-warning: #bf1f1f;
+  --color-error: #bf1f1f;
+  --color-success: #237c23;
 
   --color-table-back: #fff;
   --color-table-head: #e8e8e8;
@@ -27,7 +28,8 @@ html.is-dark {
   --color-divider: #27272A;
   --color-dimmed: #A1A1AA;
   --color-field: #27272A;
-  --color-warning: #ff4545;
+  --color-error: #ff4545;
+  --color-success: #20af20;
 
   --color-table-back: #25252b;
   --color-table-head: #2e2e3a;
