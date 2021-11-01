@@ -47,7 +47,7 @@ router.get('/', (req, res) => {
 
   res.locals.meta = {
     title: 'Sharing Image',
-    description: 'Description',
+    description: 'WordPress plugin for generating sharing posters in social networks. Allows you to use text, watermarks and various filters.',
     url: '/sharing-image/',
   };
 
@@ -62,7 +62,7 @@ router.get('/', (req, res) => {
 router.get('/hooks/', (req, res) => {
   res.locals.meta = {
     title: 'Sharing Image: hooks',
-    description: 'Description',
+    description: 'The plugin provides developers with a large number of hooks that can be used to change its the behavior.',
     url: '/sharing-image/hooks/',
   };
 
@@ -144,7 +144,7 @@ router.get('/licenses/login/', async (req, res) => {
 
   res.locals.meta = {
     title: 'Sharing Image',
-    description: 'Description',
+    description: 'Tool for managing your access key to the premium Sharing Image plugin features.',
     url: '/sharing-image/licenses/login/',
   };
 
@@ -283,7 +283,7 @@ router.get('/licenses/', async (req, res, next) => {
 
   res.locals.meta = {
     title: 'Sharing Image',
-    description: 'Description',
+    description: 'Tool for managing your access key to the premium Sharing Image plugin features.',
     url: '/sharing-image/licenses/',
   };
 

@@ -4,7 +4,7 @@ const router = new express.Router();
 router.get('/', (req, res) => {
   res.locals.meta = {
     title: 'Social Planner',
-    description: 'Description',
+    description: 'WordPress plugin for scheduling announcements of posts to your social networks accounts.',
     url: '/social-planner/',
   };
 
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 router.get('/setup/', (req, res) => {
   res.locals.meta = {
     title: 'Social Planner: setup',
-    description: 'Description',
+    description: 'Detailed plugin configuration instruction.',
     url: '/social-planner/setup/',
   };
 
@@ -24,7 +24,7 @@ router.get('/setup/', (req, res) => {
 router.get('/hooks/', (req, res) => {
   res.locals.meta = {
     title: 'Social Planner: hooks',
-    description: 'Description',
+    description: 'The plugin provides developers with a large number of hooks that can be used to change its the behavior.',
     url: '/social-planner/hooks/',
   };
 

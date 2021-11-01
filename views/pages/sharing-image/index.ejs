@@ -136,6 +136,24 @@
             Load the background and enter text if necessary, then generate a poster and save the post.
             All is ready!
         </p>
+
+        <figure>
+            <a href="/images/sharing-image/meta.png" target="_blank">
+                <picture>
+                    <source type="image/webp" srcset="/images/sharing-image/meta.webp">
+                    <source type="image/png" srcset="/images/sharing-image/meta.png">
+                    <img src="/images/sharing-image/meta.png" alt="Sharing Image poster example in Twitter">
+                </picture>
+            </a>
+
+            <figcaption>Example of a poster in Twitter feed.</figcaption>
+        </figure>
+
+        <p>
+            By default, posters are displayed in the page meta tags for all posts,
+            if you want to manage this yourself, you can disable the meta display using <code>sharing_image_hide_meta</code> <a href="/sharing-image/hooks/#sharing_image_hide_meta">filter</a>.
+            To display the poster manually, use the <code>sharing_image_poster()</code> or <code>sharing_image_poster_src()</code> functions.
+        </p>
     </section>
 
     <section class="section">
