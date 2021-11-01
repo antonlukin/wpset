@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     case '1':
       message = {
         title: 'The Premium license key has been successfully sent to your email.',
-        class: 'message--success',
+        class: 'success',
       };
 
       break;
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
     case '2':
       message = {
         title: 'The entered email looks incorrect. Try another one.',
-        class: 'message--error',
+        class: 'error',
       };
 
       break;
@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
     case '3':
       message = {
         title: 'The entered email address already registered.',
-        class: 'message--error',
+        class: 'error',
       };
 
       break;
@@ -41,7 +41,7 @@ router.get('/', (req, res) => {
     case '4':
       message = {
         title: 'Failed to send email. Try again later.',
-        class: 'message--error',
+        class: 'error',
       };
   }
 
@@ -120,7 +120,7 @@ router.get('/licenses/login/', async (req, res) => {
     case '1':
       message = {
         title: 'The premium key is invalid.',
-        class: 'message--error',
+        class: 'error',
       };
 
       break;
@@ -128,7 +128,7 @@ router.get('/licenses/login/', async (req, res) => {
     case '2':
       message = {
         title: 'The premium key was blocked.',
-        class: 'message--error',
+        class: 'error',
       };
 
       break;
@@ -136,7 +136,7 @@ router.get('/licenses/login/', async (req, res) => {
     case '3':
       message = {
         title: 'The premium key is expired.',
-        class: 'message--error',
+        class: 'error',
       };
 
       break;
@@ -259,7 +259,7 @@ router.get('/licenses/', async (req, res, next) => {
     case '1':
       message = {
         title: 'The domain successfully deleted.',
-        class: 'message--success',
+        class: 'success',
       };
 
       break;
@@ -267,7 +267,7 @@ router.get('/licenses/', async (req, res, next) => {
     case '2':
       message = {
         title: 'The security token is invalid or expired. Try again.',
-        class: 'message--error',
+        class: 'error',
       };
 
       break;
@@ -275,7 +275,7 @@ router.get('/licenses/', async (req, res, next) => {
     case '3':
       message = {
         title: 'Could not delete the domain, it may have been done earlier.',
-        class: 'message--error',
+        class: 'error',
       };
 
       break;
