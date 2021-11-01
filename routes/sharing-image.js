@@ -368,13 +368,6 @@ router.post('/registration/', async (req, res, next) => {
 
     const random = randomizer();
 
-    await key.create({
-      key: random,
-      limit: 5,
-      email: req.body.email,
-      status: 'valid',
-    });
-
     const params = {
       from: process.env.MAILGUN_FROM,
       to: req.body.email,
@@ -383,6 +376,13 @@ router.post('/registration/', async (req, res, next) => {
 
     await mailer('sharing-image/registration', params, {
       key: random,
+    });
+
+    await key.create({
+      key: random,
+      limit: 5,
+      email: req.body.email,
+      status: 'valid',
     });
   } catch (err) {
     return res.redirect('/sharing-image/?message=4');
