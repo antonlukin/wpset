@@ -3,7 +3,6 @@
  *
  * @author Anton Lukin
  * @license MIT
- * @version 1.0.0
  */
 
 const express = require('express');

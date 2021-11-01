@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const concat = require('gulp-concat');
 const plumber = require('gulp-plumber');
 const uglify = require('gulp-uglify');
+const webp = require('gulp-webp');
 
 gulp.task('css', (done) => {
   const postcss = require('gulp-postcss');
@@ -29,6 +30,14 @@ gulp.task('js', (done) => {
   done();
 });
 
+gulp.task('images', (done) => {
+  gulp.src('./images/**/*.png')
+      .pipe(webp({quality: 80}))
+      .pipe(gulp.dest('./images/'));
+
+  done();
+});
+
 // Watch soruces and update styles and scripts
 gulp.task('watch', (done) => {
   gulp.watch(['./src/**/*', './views/**/*'], gulp.parallel('css', 'js'));
@@ -37,7 +46,7 @@ gulp.task('watch', (done) => {
 });
 
 // Build static files
-gulp.task('build', gulp.parallel('css', 'js'));
+gulp.task('build', gulp.parallel('css', 'js', 'images'));
 
 // Build static files and watch changes by default.
-gulp.task('serve', gulp.parallel('css', 'js', 'watch'));
+gulp.task('serve', gulp.parallel('css', 'js', 'images', 'watch'));
