@@ -38,10 +38,13 @@ a {
   border-bottom: solid 1px transparent;
 
   text-decoration: none;
-  transition: background 200ms, color 200ms, border 200ms;
 
   &:hover {
     border-color: inherit;
+  }
+
+  @media (hover: hover) {
+    transition: background 200ms, color 200ms, border 200ms;
   }
 }
 
