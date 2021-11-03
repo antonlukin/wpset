@@ -5,6 +5,9 @@
     "email": "anton@lukin.me",
     "url": "https://lukin.me"
   },
+  "scripts": {
+    "build": "./node_modules/gulp-cli/bin/gulp.js build"
+  },
   "license": "MIT",
   "version": "1.0.0",
   "dependencies": {
