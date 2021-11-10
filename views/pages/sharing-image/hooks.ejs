@@ -324,7 +324,7 @@
                             return WP_PLUGIN_DIR . '/my-plugin/font.ttf';
                         }
 
-                        add_filter( 'sharing_image_get_fontpath', 'my_get_fontpath', 10, 3 );
+                        add_filter( 'sharing_image_get_fontpath', 'my_get_fontpath', 10, 2 );
                     </code>
                 </pre>
             </details>
@@ -379,6 +379,7 @@
             </h4>
 
             <p>
+                You can use this filter to hide settings page from some users or roles.
             </p>
 
             <details>
@@ -388,7 +389,17 @@
 
                 <pre>
                     <code>
-                        function my_get_upload_file() {
+                        /**
+                         * @param bool $hide_settings Set true to hide settings page.
+                         */
+                        function my_hide_settings( $hide_settings ) {
+                           $user = wp_get_current_user();
+
+                           if ( empty( $user->user_login ) || 'admin' !== $user->user_login ) {
+                               $hide_settings = true;
+                           }
+
+                           return $hide_settings;
                         }
 
                         add_filter( 'sharing_image_hide_settings', 'my_hide_settings' );
@@ -398,13 +409,15 @@
         </article>
 
         <article class="article">
-            <h4 class="anchor" id="sharing_image_allow_custom_fonts">
-                <span>sharing_image_allow_custom_fonts</span>
+            <h4 class="anchor" id="sharing_image_disable_custom_fonts">
+                <span>sharing_image_disable_custom_fonts</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_allow_custom_fonts">#</a>
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_disable_custom_fonts">#</a>
             </h4>
 
             <p>
+                Use this filter to disable uploading custom fonts for templates editor.
+                It can be useful for security reasons. Return true to disable uploading.
             </p>
 
             <details>
@@ -414,10 +427,14 @@
 
                 <pre>
                     <code>
-                        function my_allow_custom_fonts() {
+                        /**
+                         * @param bool $disable_fonts Set true to disable fonts uploading.
+                         */
+                        function my_disable_custom_fonts( $disable_fonts ) {
+                            return true;
                         }
 
-                        add_filter( 'sharing_image_allow_custom_fonts', 'my_allow_custom_fonts' );
+                        add_filter( 'sharing_image_disable_custom_fonts', 'my_disable_custom_fonts' );
                     </code>
                 </pre>
             </details>
@@ -431,6 +448,8 @@
             </h4>
 
             <p>
+                You can filter out the templates received from options.
+                In addition to the settings, these templates are used in the post and taxonomy widget.
             </p>
 
             <details>
@@ -440,10 +459,14 @@
 
                 <pre>
                     <code>
-                        function my_get_templates() {
+                        /**
+                         * @param array $templates List of templates.
+                         */
+                        function my_get_templates( $templates ) {
+                            return $templates;
                         }
 
-                        add_filter( 'sharing_image_get_templates', 'my_get_templates' );
+                        add_filter( 'sharing_image_update_templates', 'my_get_templates' );
                     </code>
                 </pre>
             </details>
@@ -457,6 +480,7 @@
             </h4>
 
             <p>
+                Update templates before saving them in database with this filter.
             </p>
 
             <details>
@@ -466,7 +490,11 @@
 
                 <pre>
                     <code>
-                        function my_get_templates() {
+                        /**
+                         * @param array $templates List of reindexed templates.
+                         */
+                        function my_update_templates( $templates ) {
+                            return $templates;
                         }
 
                         add_filter( 'sharing_image_update_templates', 'my_update_templates' );
@@ -483,6 +511,7 @@
             </h4>
 
             <p>
+                Use this filter to update settigns config right after receiving from database.
             </p>
 
             <details>
@@ -492,7 +521,11 @@
 
                 <pre>
                     <code>
-                        function my_get_config() {
+                        /**
+                         * @param array List of plugin config settings.
+                         */
+                        function my_get_config( $config ) {
+                            return $config;
                         }
 
                         add_filter( 'sharing_image_get_config', 'my_get_config' );
@@ -509,6 +542,7 @@
             </h4>
 
             <p>
+                This filter is used to update config options before their update in database.
             </p>
 
             <details>
@@ -518,7 +552,8 @@
 
                 <pre>
                     <code>
-                        function my_update_config() {
+                        function my_update_config( $config ) {
+                            return $config;
                         }
 
                         add_filter( 'sharing_image_update_config', 'my_update_config' );
@@ -535,6 +570,8 @@
             </h4>
 
             <p>
+                If you don't have a Premium license, but you need to access all the features of the plugin for development purposes,
+                you can use it in special mode. To do this, simply set the filter to <code>true</code>.
             </p>
 
             <details>
@@ -544,7 +581,11 @@
 
                 <pre>
                     <code>
-                        function my_update_config() {
+                        /**
+                         * @param bool Current development state. Disabled by default.
+                         */
+                        function my_develop( $is_develop ) {
+                            return true;
                         }
 
                         add_filter( 'sharing_image_develop', 'my_develop' );
@@ -561,6 +602,8 @@
             </h4>
 
             <p>
+                Use this filter to update license data right after receiving it from database options.
+                Please be careful with this filter and do not use it to violate the plugin licensing policy.
             </p>
 
             <details>
@@ -570,7 +613,11 @@
 
                 <pre>
                     <code>
-                        function my_get_license() {
+                        /**
+                         * @param array List of plugin license settings.
+                         */
+                        function my_get_license( $license ) {
+                            return $license;
                         }
 
                         add_filter( 'sharing_image_get_license', 'my_get_license' );
@@ -587,6 +634,8 @@
             </h4>
 
             <p>
+                You can update the directory to uploaded posters with this filter.
+                Note that the parameter is an array with the local path to the directory on the server and its external url.
             </p>
 
             <details>
@@ -596,7 +645,13 @@
 
                 <pre>
                     <code>
-                        function my_upload_dir() {
+                        /**
+                         * @param array $dir Path and url to upload directory.
+                         */
+                        function my_upload_dir( $dir ) {
+                            $uploads = $dir;
+
+                            return array( $uploads['path'], $uploads['url'] );
                         }
 
                         add_filter( 'sharing_image_upload_dir', 'my_upload_dir' );
@@ -613,6 +668,8 @@
             </h4>
 
             <p>
+                Replace generated poster extension with this filter.
+                By default it is taken from plugin settings.
             </p>
 
             <details>
@@ -622,7 +679,11 @@
 
                 <pre>
                     <code>
-                        function my_file_format() {
+                        /**
+                         * @param string $format Image file format.
+                         */
+                        function my_file_format( $format ) {
+                            return 'png';
                         }
 
                         add_filter( 'sharing_image_file_format', 'my_file_format' );
@@ -639,6 +700,9 @@
             </h4>
 
             <p>
+                You can rewrite generated poster quality with this filter.
+                By default it is taken from plugin settings.
+                Works only for JPEG posters. Set 0 for low resoulation posters and 100 for best quality.
             </p>
 
             <details>
@@ -648,7 +712,11 @@
 
                 <pre>
                     <code>
-                        function my_poster_quality() {
+                        /**
+                         * @param string $quality Image quality.
+                         */
+                        function my_poster_quality( $quality ) {
+                            return 50;
                         }
 
                         add_filter( 'sharing_image_poster_quality', 'my_poster_quality' );
@@ -665,6 +733,8 @@
             </h4>
 
             <p>
+                Use this filter to hide og:image meta tags from wp_head section.
+                Useful if you want to output these tags manually or disable them completely.
             </p>
 
             <details>
@@ -674,7 +744,11 @@
 
                 <pre>
                     <code>
-                        function my_default_hide_meta() {
+                        /**
+                         * @param bool $hide_header Set true to hide poster meta.
+                         */
+                        function my_default_hide_meta( $hide_meta ) {
+                            return true;
                         }
 
                         add_filter( 'sharing_image_hide_meta', 'my_default_hide_meta' );
@@ -691,6 +765,8 @@
             </h4>
 
             <p>
+                This filter is used to change default poster for header meta.
+                The output format is the same as in WordPress function <a href="https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src/" target="_blank">wp_get_attachment_image_src</a>.
             </p>
 
             <details>
@@ -700,7 +776,15 @@
 
                 <pre>
                     <code>
-                        function my_default_poster_src() {
+                        /**
+                         * Filters default poster data.
+                         *
+                         * @param array|false Array of image data, or boolean false if no image is available.
+                         */
+                        function my_default_poster_src( $poster ) {
+                            list( $image, $width, $height ) = my_get_poster_data();
+
+                            return array( $image, $width, $height );
                         }
 
                         add_filter( 'sharing_image_default_poster_src', 'my_default_poster_src' );
@@ -717,6 +801,7 @@
             </h4>
 
             <p>
+                This filter allows you to manage an object with plugin settings.
             </p>
 
             <details>
@@ -726,7 +811,11 @@
 
                 <pre>
                     <code>
-                        function my_settings_object() {
+                        /**
+                         * @param array $object Array of settings script object.
+                         */
+                        function my_settings_object( $object ) {
+                            return $object;
                         }
 
                         add_filter( 'sharing_image_settings_object', 'my_settings_object' );
@@ -743,6 +832,7 @@
             </h4>
 
             <p>
+                You can update template editor right after sanitization on the settings saving with this filter.
             </p>
 
             <details>
@@ -752,10 +842,15 @@
 
                 <pre>
                     <code>
-                        function my_sanitize_editor() {
+                        /**
+                         * @param array $sanitized List of sanitized editor fields.
+                         * @param array $editor    List of editor fields before sanitization.
+                         */
+                        function my_sanitize_editor( $sanitized, $editor ) {
+                            return $sanitized;
                         }
 
-                        add_filter( 'sharing_image_sanitize_editor', 'my_sanitize_editor' );
+                        add_filter( 'sharing_image_sanitize_editor', 'my_sanitize_editor', 10, 2 );
                     </code>
                 </pre>
             </details>
@@ -769,6 +864,7 @@
             </h4>
 
             <p>
+                You can update config data right after sanitization on the settings saving with this filter.
             </p>
 
             <details>
@@ -778,10 +874,15 @@
 
                 <pre>
                     <code>
-                        function my_sanitize_config() {
+                        /**
+                         * @param array $sanitized List of sanitized config fields.
+                         * @param array $config    List of config fields before sanitization.
+                         */
+                        function my_sanitize_config( $sanitized, $config ) {
+                            return $sanitized;
                         }
 
-                        add_filter( 'sharing_image_sanitize_config', 'my_sanitize_config' );
+                        add_filter( 'sharing_image_sanitize_config', 'my_sanitize_config', 10, 2 );
                     </code>
                 </pre>
             </details>
@@ -795,6 +896,7 @@
             </h4>
 
             <p>
+                This filter is used to update settings tabs. You can remove existing or add a new one.
             </p>
 
             <details>
@@ -804,7 +906,13 @@
 
                 <pre>
                     <code>
-                        function my_settings_tabs() {
+                        /**
+                         * @param array $tabs List of settings tabs.
+                         */
+                        function my_settings_tabs( $tabs ) {
+                            unset( $tabs['premium'] );
+
+                            return $tabs;
                         }
 
                         add_filter( 'sharing_image_settings_tabs', 'my_settings_tabs' );
@@ -821,6 +929,8 @@
             </h4>
 
             <p>
+                Use this filter to update availble fonts on poster generation.
+                For example you can remove irrelevant default font.
             </p>
 
             <details>
@@ -830,7 +940,13 @@
 
                 <pre>
                     <code>
-                        function my_poster_fonts() {
+                        /**
+                         * @param array List of availible poster fonts.
+                         */
+                        function my_poster_fonts( $fonts ) {
+                            unset( $fonts['open-sans'] );
+
+                            return $fonts;
                         }
 
                         add_filter( 'sharing_image_poster_fonts', 'my_poster_fonts' );
@@ -847,6 +963,8 @@
             </h4>
 
             <p>
+                Change permissions while creating new folders for posters storage with this filter.
+                By default 0755.
             </p>
 
             <details>
@@ -856,7 +974,11 @@
 
                 <pre>
                     <code>
+                        /**
+                         * @param int $permissions New directory access permissions. By default 0755.
+                         */
                         function my_directory_permissions() {
+                            return 0777;
                         }
 
                         add_filter( 'sharing_image_directory_permissions', 'my_directory_permissions' );
@@ -873,6 +995,7 @@
             </h4>
 
             <p>
+                You can use this filter to hide the metabox from some users or roles.
             </p>
 
             <details>
@@ -882,7 +1005,15 @@
 
                 <pre>
                     <code>
-                        function my_hide_metabox() {
+                        /**
+                         * @param bool $hide_metabox Set true to hide metabox.
+                         */
+                        function my_hide_metabox( $hide_metabox ) {
+                            if ( ! current_user_can( 'manage_options' ) ) {
+                                $hide_metabox = true;
+                            }
+
+                            return $hide_metabox;
                         }
 
                         add_filter( 'sharing_image_hide_metabox', 'my_hide_metabox' );
@@ -899,6 +1030,7 @@
             </h4>
 
             <p>
+                This filter allows you to change the array with widget post meta right before the update_post_meta request.
             </p>
 
             <details>
@@ -908,10 +1040,15 @@
 
                 <pre>
                     <code>
-                        function my_update_post_meta() {
+                        /**
+                         * @param string $meta    Updated post meta.
+                         * @param string $post_id Post ID.
+                         */
+                        function my_update_post_meta( $meta, $post_id ) {
+                            return $meta;
                         }
 
-                        add_filter( 'sharing_image_update_post_meta', 'my_update_post_meta' );
+                        add_filter( 'sharing_image_update_post_meta', 'my_update_post_meta', 10, 2 );
                     </code>
                 </pre>
             </details>
@@ -925,6 +1062,7 @@
             </h4>
 
             <p>
+                This filter allows you to change the array with widget term meta right before the update_term_meta request.
             </p>
 
             <details>
@@ -934,10 +1072,15 @@
 
                 <pre>
                     <code>
-                        function my_update_post_meta() {
+                        /**
+                         * @param string $meta    Updated term meta.
+                         * @param string $term_id Term ID.
+                         */
+                        function my_update_term_meta( $meta, $post_id ) {
+                            return $meta;
                         }
 
-                        add_filter( 'sharing_image_update_term_meta', 'my_update_term_meta' );
+                        add_filter( 'sharing_image_update_term_meta', 'my_update_term_meta', 10, 2 );
                     </code>
                 </pre>
             </details>
@@ -951,6 +1094,7 @@
             </h4>
 
             <p>
+                You can update widget picker data right after sanitization on the metabox saving with this filter.
             </p>
 
             <details>
@@ -960,10 +1104,15 @@
 
                 <pre>
                     <code>
-                        function my_sanitize_picker() {
+                        /**
+                         * @param array $sanitized List of sanitized picker fields.
+                         * @param array $picker    List of picker fields before sanitization.
+                         */
+                        function my_sanitize_picker( $sanitized, $picker ) {
+                            return $sanitized;
                         }
 
-                        add_filter( 'sharing_image_sanitize_picker', 'my_sanitize_picker' );
+                        add_filter( 'sharing_image_sanitize_picker', 'my_sanitize_picker', 10, 2 );
                     </code>
                 </pre>
             </details>
@@ -977,6 +1126,7 @@
             </h4>
 
             <p>
+                This filter allows you to manage an object with widget settings.
             </p>
 
             <details>
@@ -986,7 +1136,11 @@
 
                 <pre>
                     <code>
-                        function my_widget_object() {
+                        /**
+                         * @param array $object Array of widget script object.
+                         */
+                        function my_widget_object( $object ) {
+                            return $object;
                         }
 
                         add_filter( 'sharing_image_widget_object', 'my_widget_object' );
@@ -1003,6 +1157,8 @@
             </h4>
 
             <p>
+                Use this filter to update post types where the metabox is displayed.
+                By default, these are all public types of posts, excluding attachments.
             </p>
 
             <details>
@@ -1012,7 +1168,13 @@
 
                 <pre>
                     <code>
-                        function my_metabox_post_types() {
+                        /**
+                         * @param array $post_types Array of post types for which the metabox is displayed.
+                         */
+                        function my_metabox_post_types( $post_types ) {
+                            unset( $post_types['pages'] );
+
+                            return $post_types;
                         }
 
                         add_filter( 'sharing_image_metabox_post_types', 'my_metabox_post_types' );
@@ -1029,6 +1191,8 @@
             </h4>
 
             <p>
+                Use this filter to update taxonomies where the metabox is displayed.
+                By default, these are all public taxonomies.
             </p>
 
             <details>
@@ -1038,7 +1202,13 @@
 
                 <pre>
                     <code>
-                        function my_widget_taxonomies() {
+                        /**
+                         * @param array $taxonomies List of taxonomies to show settings.
+                         */
+                        function my_widget_taxonomies( $taxonomies ) {
+                            unset( $taxonomies['category'] );
+
+                            return $taxonomies;
                         }
 
                         add_filter( 'sharing_image_widget_taxonomies', 'my_widget_taxonomies' );
