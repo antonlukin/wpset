@@ -1,6 +1,6 @@
 Hi there!
 
-Someone have requested a Premium license key for the Sharing Image plugin.
+Someone has requested a Premium license key for the Sharing Image plugin.
 If this wasn’t you, please ignore this email.
 
 Your Premium key: %key%
