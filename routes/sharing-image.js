@@ -4,6 +4,7 @@ const router = new express.Router();
 const nonce = require('../utils/nonce');
 const randomizer = require('../utils/randomizer');
 const mailer = require('../utils/mailer');
+const validator = require('email-validator');
 const models = require('../models');
 const {key, host} = models['sharing-image'];
 
@@ -353,9 +354,11 @@ router.post('/registration/', async (req, res, next) => {
     return res.redirect('/sharing-image/');
   }
 
-  if (!req.body.email.match(/@/)) {
+  if (!validator.validate(req.body.email)) {
     return res.redirect('/sharing-image/?message=2');
   }
+
+  console.log(req.body.email);
 
   try {
     const license = await key.findOne({
