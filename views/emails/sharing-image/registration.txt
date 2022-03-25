@@ -5,8 +5,8 @@ If this wasn’t you, please ignore this email.
 
 Your Premium key: %key%
 
-To see detailed setup instructions visit https://wpget.org/sharing-image/
-You can manage your key visiting https://wpget.org/sharing-image/licenses/
+To see detailed setup instructions visit https://wpset.org/sharing-image/
+You can manage your key visiting https://wpset.org/sharing-image/licenses/
 
 Best Regards,
-The wpget.org team.
+The wpset.org team.

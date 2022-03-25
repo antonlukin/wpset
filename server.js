@@ -83,7 +83,7 @@ server.use((err, req, res, next) => {
   console.error(err);
 
   res.locals.meta = {
-    title: 'Server error / wpget.org',
+    title: 'Server error / wpset.org',
   };
 
   res.status(err.status || 500);
@@ -94,7 +94,7 @@ server.use((err, req, res, next) => {
 
 server.use((req, res) => {
   res.locals.meta = {
-    title: 'Page not found / wpget.org',
+    title: 'Page not found / wpset.org',
   };
 
   res.status(404);

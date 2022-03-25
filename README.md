@@ -1,6 +1,6 @@
-# wpget.org
+# wpset.org
 
-This is the public repository of [wpget.org](https://wpget.org) website. 
+This is the public repository of [wpset.org](https://wpset.org) website. 
 If you find an error in the text or code, open an issue or send a pull request. 
 We will be glad for any help.
 
