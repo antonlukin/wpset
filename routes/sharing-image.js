@@ -358,8 +358,6 @@ router.post('/registration/', async (req, res, next) => {
     return res.redirect('/sharing-image/?message=2');
   }
 
-  console.log(req.body.email);
-
   try {
     const license = await key.findOne({
       where: {email: req.body.email},
