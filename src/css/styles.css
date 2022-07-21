@@ -19,6 +19,7 @@
 @import url('component/tabs.css');
 @import url('component/message.css');
 @import url('component/mode.css');
+@import url('component/truncate.css');
 
 @import url('layout/header.css');
 @import url('layout/footer.css');

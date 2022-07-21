@@ -1,0 +1,11 @@
+.truncate {
+  position: relative;
+
+  margin-left: 0;
+  padding-left: 0;
+
+  li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
