@@ -6,6 +6,7 @@
     "url": "https://lukin.me"
   },
   "scripts": {
+    "start": "./node_modules/gulp-cli/bin/gulp.js serve",
     "build": "./node_modules/gulp-cli/bin/gulp.js build"
   },
   "license": "MIT",
