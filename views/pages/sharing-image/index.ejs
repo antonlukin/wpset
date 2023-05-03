@@ -233,6 +233,61 @@
         </p>
     </section>
 
+    <section class="section">
+        <h2 class="anchor" id="faq">
+            <span>FAQ</span>
+
+            <a aria-hidden="true" href="#faq">#</a>
+        </h2>
+
+        <p>
+            This section describes common problems when using the plugin and how to solve them.
+            If you haven't found your question, it is best to ask it in the official repository on
+            <a href="https://github.com/antonlukin/sharing-image/issues" target="_blank" rel="noopener">Github</a>.
+        </p>
+
+        <article class="article">
+            <h4 class="anchor" id="missing-poster">
+                <span>What to do if I do not see Sharing Image poster on Facebook or Twitter</span>
+
+                <a aria-hidden="true" href="#missing-poster">#</a>
+            </h4>
+
+            <p>
+                If you generated a poster but don't see it, it's likely that some other plugin or your theme is also displaying image tags.
+            </p>
+
+            <p>
+                Use snippets for popuplar plugins and themes to replace poster image.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Fix Yoast SEO Plugin</span>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        add_filter( 'sharing_image_hide_meta', '__return_true' );
+
+                        function my_add_opengraph_images( $image_container ) {
+                            $sharing_image = sharing_image_poster_src();
+                            $updated_image = array(
+                                'url'    => $sharing_image[0],
+                                'width'  => $sharing_image[1],
+                                'height' => $sharing_image[2],
+                            );
+
+                            $image_container->add_image( $updated_image );
+                        };
+
+                        add_action( 'wpseo_add_opengraph_images', 'my_add_opengraph_images' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+    </section>
+
     <%- include(views + '/parts/footer') %>
 </body>
 </html>

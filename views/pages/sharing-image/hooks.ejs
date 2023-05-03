@@ -282,17 +282,18 @@
                 <pre>
                     <code>
                         /**
-                         * @param array   $template List of template data.
-                         * @param array   $fieldset Fieldset data from picker.
-                         * @param integer $index    Template index from editor.
+                         * @param array   $template  List of template data.
+                         * @param array   $fieldset  Fieldset data from picker.
+                         * @param integer $index     Template index from editor.
+                         * @param integer $screen_id Post or term admin page id. Will be 0 if not set.
                          */
-                        function my_prepare_template( $template, $fieldset, $index ) {
+                        function my_prepare_template( $template, $fieldset, $index, $screen_id ) {
                             $template['fill'] = '#fff';
 
                             return $template;
                         }
 
-                        add_filter( 'sharing_image_prepare_template', 'my_prepare_template', 10, 3 );
+                        add_filter( 'sharing_image_prepare_template', 'my_prepare_template', 10, 4 );
                     </code>
                 </pre>
             </details>
@@ -736,7 +737,7 @@
             </h4>
 
             <p>
-                Use this filter to hide og:image meta tags from wp_head section.
+                Use this filter to hide OpenGraph and Twitter meta tags from wp_head section.
                 Useful if you want to output these tags manually or disable them completely.
             </p>
 
