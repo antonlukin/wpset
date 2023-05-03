@@ -164,9 +164,9 @@
         </h2>
 
         <p>
-            The latest version of the plugin supports automatic poster generation. 
-            First you need to select the desired template on the <strong>Configuration</strong> page of the plugin settings. 
-            Now, when saving a post, a poster will be automatically generated using presets (title, excerpt, thumbnail). 
+            The latest version of the plugin supports automatic poster generation.
+            First you need to select the desired template on the <strong>Configuration</strong> page of the plugin settings.
+            Now, when saving a post, a poster will be automatically generated using presets (title, excerpt, thumbnail).
             The plugin will not overwrite the poster if it has already been generated for the post.
         </p>
     </section>
@@ -263,7 +263,7 @@
 
             <details>
                 <summary>
-                    <span>Fix Yoast SEO Plugin</span>
+                    <span>Yoast SEO Plugin</span>
                 </summary>
 
                 <pre>
@@ -284,6 +284,58 @@
                         add_action( 'wpseo_add_opengraph_images', 'my_add_opengraph_images' );
                     </code>
                 </pre>
+            </details>
+
+            <details>
+                <summary>
+                    <span>The SEO Framework Plugin</span>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        /**
+                         * @link https://kb.theseoframework.com/kb/filter-reference-for-the-seo-framework/#image-related
+                         */
+                        add_filter( 'the_seo_framework_image_generation_params', 'my_image_generation_params', 10, 3);
+
+                        function my_image_generation_params( $params = [], $args = null, $context = 'social' ) {
+                            if ( 'social' !== $context ) {
+                                return $params;
+                            }
+
+                            if ( null === $args ) {
+                                if ( is_singular( 'post' ) ) {
+                                    $params['cbs']['custom'] = 'my_sharing_image_poster';
+                                }
+                            } else {
+                                if ( ! $args['taxonomy'] ) {
+                                    $params['cbs']['custom'] = 'my_sharing_image_poster';
+                                }
+                            }
+
+                            return $params;
+                        }, 10, 3 );
+
+                        function my_sharing_image_poster( $args = null, $size = 'full' ) {
+                            $post_id = $args['id'] ?? the_seo_framework()->get_the_real_ID();
+
+                            $sharing_image = sharing_image_poster_src( $post_id );
+
+                            if ( $sharing_image ) {
+                                yield [
+                                    'url' => $sharing_image[0],
+                                ];
+                            } else {
+                                yield [
+                                    'url' => '',
+                                    'id'  => 0,
+                                ];
+                            }
+                        }
+                    </code>
+                </pre>
+
+                <p>Props to <a href="https://github.com/mihdan" target="_blank" rel="noopener">Mikhail Kobzarev</a></p>
             </details>
         </article>
     </section>

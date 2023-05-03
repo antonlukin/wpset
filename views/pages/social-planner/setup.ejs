@@ -378,27 +378,27 @@
         </h2>
 
         <p>
-            To set up this provider, you need to have full access to your Twitter account,
-            as well as access to the attached Email in order to receive messages from support.
-            If you already have a developer account and you created the application earlier,
+            To set up this provider, you should create the developer Twitter account.
+            If you already have it and you created the application earlier,
             then skip directly to the <a href="#twitter-tokens">last step</a>.
         </p>
 
         <p>
-            <strong>Attention!</strong> Getting keys on Twitter can take patience and time.
-            It is plugin independent and completely on your shoulders.
+            <strong>Attention!</strong> For new developer accounts only <strong>Twitter API v2</strong> availible.
         </p>
 
         <p>
-            Log in to <a href="https://developer.twitter.com/en/apply-for-access" target="_blank" rel="noopener">Twitter
-                Developers</a>
-            and click on the <strong>Apply for a developer account</strong> button.
+            <strong>Attention!</strong> The following steps assume that you have just created your developer account.
+        </p>
+
+        <p>
+            Log in to <a href="https://developer.twitter.com/" target="_blank" rel="noopener">Twitter Developers</a>
+            and click on the <strong>Developer Portal</strong> header menu button. Start with a free account to get started.
         </p>
 
         <p>
             Now you need to fill out a form to obtain developer status.
-            Fill in all fields and submit. You will receive a response in about 12 hours.
-            Try to describe in as much detail how you will use the keys and on which specific site.
+            Fill in all fields and checkboxes and submit. Try to describe in as much detail how you will use the keys and on which specific site.
 
             A sample description is given below.
         </p>
@@ -419,11 +419,11 @@
         </blockquote>
 
         <figure>
-            <a href="/images/social-planner/twitter-1.png" target="_blank">
+            <a href="/images/social-planner/twitter-4.png" target="_blank">
                 <picture>
-                    <source type="image/webp" srcset="/images/social-planner/twitter-1.webp">
-                    <source type="image/png" srcset="/images/social-planner/twitter-1.png">
-                    <img src="/images/social-planner/twitter-1.png" width="1440" height="875" alt="Social Planner Twitter configuration">
+                    <source type="image/webp" srcset="/images/social-planner/twitter-4.webp">
+                    <source type="image/png" srcset="/images/social-planner/twitter-4.png">
+                    <img src="/images/social-planner/twitter-4.png" width="1440" height="899" alt="Social Planner Twitter configuration">
                 </picture>
             </a>
 
@@ -431,57 +431,58 @@
         </figure>
 
         <p>
-            Once the developer account gets approved, you will get a mail from Twitter. Then you can create a new
-            app.
-            In the create app section we can add the App Name, Application description, website url, and tell how
-            the app is used.
-            A sample description is given below.
-        </p>
-
-        <blockquote>
-            <p>
-                I am using a WordPress plugin to publish posts automatically from blog to Twitter as a simple text
-                message or or as text message with image.
-                The plugin requires Twitter App to publish posts from WordPress to Twitter.
-                For this I must create an app and provide the app details such as API key, API secret, Access token
-                and Access token secret.
-            </p>
-        </blockquote>
-
-        <p>
-            Review the terms and create the app. Go to the <strong>Keys and tokens</strong> section.
-            Click on the <strong>Create</strong> button under <strong>Access token & access token secret</strong>
-            section.
-        </p>
-
-        <p id="twitter-tokens">
-            Now you can use the received keys to configure the plugin.
-            Access level should be <strong>Read and write</strong>.
+            Once the developer account is created you get new project and application.
+            Now you should set up <strong>User authentication settings</strong>.
+            Choose at lease Read and write permissions, set any type of application.
+            Use your website url in App info section. These options do not affect the operation of the plugin.
+            You <strong>do not need</strong> OAuth 2.0 Client ID and Client Secret.
         </p>
 
         <figure>
-            <a href="/images/social-planner/twitter-2.png" target="_blank">
+            <a href="/images/social-planner/twitter-5.png" target="_blank">
                 <picture>
-                    <source type="image/webp" srcset="/images/social-planner/twitter-2.webp">
-                    <source type="image/png" srcset="/images/social-planner/twitter-2.png">
-                    <img src="/images/social-planner/twitter-2.png" width="1440" height="1055" alt="Social Planner Twitter configuration">
+                    <source type="image/webp" srcset="/images/social-planner/twitter-5.webp">
+                    <source type="image/png" srcset="/images/social-planner/twitter-5.png">
+                    <img src="/images/social-planner/twitter-5.png" width="1440" height="899" alt="Social Planner Twitter configuration">
                 </picture>
             </a>
 
-            <figcaption>Necessary Twitter access tokens.</figcaption>
+            <figcaption>Set up user authentication.</figcaption>
         </figure>
 
         <p>
-            You need to use all keys and tokens when configuring the plugin.
-            Fields order on the settings page is the same as the order in Twitter.
+            Navigate to <strong>Keys and tokens</strong> page and generate Consumer Keys and Access Token, Secret.
+            Check that you app has Read and Write permissions.
         </p>
 
         <figure>
-            <a href="/images/social-planner/twitter-3.png" target="_blank">
+            <a href="/images/social-planner/twitter-6.png" target="_blank">
                 <picture>
-                    <source type="image/webp" srcset="/images/social-planner/twitter-3.webp">
-                    <source type="image/png" srcset="/images/social-planner/twitter-3.png">
-                    <img src="/images/social-planner/twitter-3.png" width="1440" height="875" alt="Social Planner Twitter configuration">
+                    <source type="image/webp" srcset="/images/social-planner/twitter-6.webp">
+                    <source type="image/png" srcset="/images/social-planner/twitter-6.png">
+                    <img src="/images/social-planner/twitter-6.png" width="1440" height="899" alt="Social Planner Twitter configuration">
+                </picture>
+            </a>
+
+            <figcaption>Generate requred keys.</figcaption>
+        </figure>
+
+        <p id="twitter-tokens">
+            Now you can use the received keys to configure the plugin.
+        </p>
+
+        <p>
+            You need to Consumer Key and Consumer Secret, Access Token and Access secret.
+            Fields order on the settings page is the same as the order in Twitter.
+            Use <strong>Twitter API v2</strong> provider if you followed the steps above.
+        </p>
+
+        <figure>
+            <a href="/images/social-planner/twitter-7.png" target="_blank">
+                <picture>
+                    <source type="image/webp" srcset="/images/social-planner/twitter-7.webp">
+                    <source type="image/png" srcset="/images/social-planner/twitter-7.png">
+                    <img src="/images/social-planner/twitter-7.png" width="1440" height="899" alt="Social Planner Twitter configuration">
                 </picture>
             </a>
 

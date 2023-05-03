@@ -15,7 +15,7 @@
 
   script.addEventListener('load', () => {
     if ('hljs' in window) {
-      window.hljs.initHighlightingOnLoad();
+      window.hljs.highlightAll();
     }
   });
 
