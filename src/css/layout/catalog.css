@@ -17,7 +17,7 @@
   .catalog-header {
     display: inline-block;
 
-    font-size: var(--font-lg);
+    font-size: var(--font-md);
     font-weight: var(--font-medium);
 
     &::after {
@@ -33,7 +33,7 @@
     }
 
     @media screen and (min-width: 768px) {
-      font-size: var(--font-xl);
+      font-size: var(--font-lg);
     }
   }
 
