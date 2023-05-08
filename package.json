@@ -1,5 +1,5 @@
 {
-  "name": "wget-org",
+  "name": "wpset-org",
   "author": {
     "name": "Anton Lukin",
     "email": "anton@lukin.me",
@@ -9,7 +9,7 @@
     "build": "./node_modules/gulp-cli/bin/gulp.js build"
   },
   "license": "MIT",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "dependencies": {
     "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",

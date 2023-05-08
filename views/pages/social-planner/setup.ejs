@@ -69,6 +69,14 @@
 
                 <span>OK.ru</span>
             </a>
+
+            <a class="tab" href="#linkedin">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#0a66c2">
+                    <path d="M464 0h-416c-26.4 0-48 21.6-48 48v416c0 26.4 21.6 48 48 48h416c26.4 0 48-21.6 48-48v-416c0-26.4-21.6-48-48-48zM192 416h-64v-224h64v224zM160 160c-17.7 0-32-14.3-32-32s14.3-32 32-32c17.7 0 32 14.3 32 32s-14.3 32-32 32zM416 416h-64v-128c0-17.7-14.3-32-32-32s-32 14.3-32 32v128h-64v-224h64v39.7c13.2-18.1 33.4-39.7 56-39.7 39.8 0 72 35.8 72 80v144z"></path>
+                </svg>
+
+                <span>LinkedIn</span>
+            </a>
         </nav>
 
         <p>
@@ -510,7 +518,7 @@
         </p>
 
         <p>
-            Log in to OK.ru and go to the <a href="https://ok.ru/app/setup" target="_blank" rel="noopener"></a>develpment page</a>
+            Log in to OK.ru and go to the <a href="https://ok.ru/app/setup" target="_blank" rel="noopener">development page</a>
             for creating a new application.
         </p>
 
@@ -602,6 +610,149 @@
             </a>
 
             <figcaption>Example settings for OK.ru.</figcaption>
+        </figure>
+    </section>
+
+    <section class="section">
+        <h2 class="anchor" id="linkedin">
+            <span>LinkedIn</span>
+
+            <a aria-hidden="true" href="#linkedin">#</a>
+        </h2>
+
+        <p>
+            If you already have an authorization key and ability to publish to your Personal or Company Page,
+            you can immediately proceed to the <a href="#linkedin-settings">configuring</a> the plugin.
+        </p>
+
+        <p>
+            <strong>Attention!</strong> At the moment, the plugin does not allow you to receive keys automatically,
+            so the process may seem quite complicated. Perhaps in the future the possibility of authorization in a few clicks will be added.
+        </p>
+
+        <p>
+            <strong>Attention!</strong> You can publish to LinkedIn Company Pages with the approved app only.
+            So you need to fill in a special form and request necessary permissions.
+            If you want to publish to your Personal page only, you can get keys without approving.
+        </p>
+
+        <p>
+            Log in to LinkedIn and go to the <a href="https://www.linkedin.com/developers/apps/new" target="_blank" rel="noopener">development page</a>
+            for creating a new application.
+        </p>
+
+        <p>
+            Fill in the settings fields. Add app logo and connect with LinkedIn Page.
+            Each app must be associated with a Company Page, so you should create one if it doesn't exist.
+        </p>
+
+        <figure>
+            <a href="/images/social-planner/linkedin-1.png" target="_blank">
+                <picture>
+                    <source type="image/webp" srcset="/images/social-planner/linkedin-1.webp">
+                    <source type="image/png" srcset="/images/social-planner/linkedin-1.png">
+                    <img src="/images/social-planner/linkedin-1.png" width="1440" height="1166" alt="Social Planner LinkedIn configuration">
+                </picture>
+            </a>
+
+            <figcaption>Do not forget to associate your app with a Company Page.</figcaption>
+        </figure>
+
+        <p>
+            Now you should request access to application products. Choose <strong>Share on LinkedIn</strong> and <strong>Sign In with LinkedIn</strong>
+            if you need to share just to your Personal page. Add <strong>Advertising API</strong> to be able to post on your Company Page.
+        </p>
+
+        <figure>
+            <a href="/images/social-planner/linkedin-2.png" target="_blank">
+                <picture>
+                    <source type="image/webp" srcset="/images/social-planner/linkedin-2.webp">
+                    <source type="image/png" srcset="/images/social-planner/linkedin-2.png">
+                    <img src="/images/social-planner/linkedin-2.png" width="1440" height="1166" alt="Social Planner LinkedIn configuration">
+                </picture>
+            </a>
+
+            <figcaption>With these permissions you can publish only to your personal page.</figcaption>
+        </figure>
+
+        <p>
+            Add callback URL on <strong>Auth</strong> tab.
+            It's easiest to specify <code>http://localhost/</code> address. After that you can get the key.
+            Create an URL using your own <strong>Client ID</strong> instead of <code>{client_id}</code> placeholder.
+        </p>
+
+        <pre>
+            <code>https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={client_id}&redirect_uri=http://localhost/&scope=w_member_social r_liteprofile </code>
+        </pre>
+
+        <p>
+            If you have access to <strong>Advertising API</strong>, you need to request extended permissions.
+        </p>
+
+        <pre>
+            <code>https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={client_id}&redirect_uri=http://localhost/&scope=w_organization_social r_organization_social w_member_social r_basicprofile r_liteprofile rw_organization_admin </code>
+        </pre>
+
+        <p>
+            Now follow the link generated above, you will be redirected to the callback URL,
+            and the <code>code</code> parameter will contain a temporary key. Save it.
+        </p>
+
+        <figure>
+            <a href="/images/social-planner/linkedin-3.png" target="_blank">
+                <picture>
+                    <source type="image/webp" srcset="/images/social-planner/linkedin-3.webp">
+                    <source type="image/png" srcset="/images/social-planner/linkedin-3.png">
+                    <img src="/images/social-planner/linkedin-3.png" width="1440" height="1166" alt="Social Planner LinkedIn configuration">
+                </picture>
+            </a>
+
+            <figcaption>Add callback and get your Client ID and Secret key.</figcaption>
+        </figure>
+
+        <p>
+            Finally you can get authorization token using that temporary code.
+            Replace placeholders in example below and send cURL or HTTP request.
+        </p>
+
+        <pre>
+            <code>curl --location --request POST 'https://www.linkedin.com/oauth/v2/accessToken' \
+            --header 'Content-Type: application/x-www-form-urlencoded' \
+            --data-urlencode 'grant_type=authorization_code' \
+            --data-urlencode 'code={code}' \
+            --data-urlencode 'client_id={client_id}' \
+            --data-urlencode 'client_secret={client_secret}' \
+            --data-urlencode 'redirect_uri=http://localhost/'</code>
+        </pre>
+
+        <p>
+            Get <code>access_token</code> field from the response. Great! Almost everything is ready to send messages.
+        </p>
+
+        <p id="linkedin-settings">
+            If you want to post to your Personal page, you need to get its <strong>ID</strong>. Now it is possible to do this with your new key.
+            Send another request to the address below, using the <code>access_token</code> you received above.
+        </p>
+
+        <pre>
+            <code>curl -H "Authorization: Bearer {access_token}" "https://api.linkedin.com/v2/me?projection=(id)"</code>
+        </pre>
+
+        <p>
+            Then generate your string-based <strong>URN</strong>. For example <code>urn:li:person:Rr6NbIyGpX</code> for a Personal Page and
+            <code>urn:li:organization:93249193</code> for a Company Page. Get ID from page URL for organization URN.
+        </p>
+
+        <figure>
+            <a href="/images/social-planner/linkedin-4.png" target="_blank">
+                <picture>
+                    <source type="image/webp" srcset="/images/social-planner/linkedin-4.webp">
+                    <source type="image/png" srcset="/images/social-planner/linkedin-4.png">
+                    <img src="/images/social-planner/linkedin-4.png" width="1440" height="997" alt="Social Planner LinkedIn configuration">
+                </picture>
+            </a>
+
+            <figcaption>Example settings for LinkedIn.</figcaption>
         </figure>
     </section>
 

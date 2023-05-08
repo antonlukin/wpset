@@ -31,4 +31,12 @@ router.get('/hooks/', (req, res) => {
   res.render('pages/social-planner/hooks');
 });
 
+router.get('/callback/', (req, res) => {
+  if (!req.query.code) {
+    return res.send('Code is not set');
+  }
+
+  res.send(req.query.code);
+});
+
 module.exports = router;

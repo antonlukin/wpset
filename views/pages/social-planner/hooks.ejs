@@ -61,7 +61,6 @@
                         add_action( 'social_planner_dashboard_before', 'my_dashboard_before' );
                     </code>
                 </pre>
-
             </details>
         </article>
 
@@ -115,19 +114,19 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array  $results List of results after task sending.
-                     * @param string $key     Task key.
-                     * @param int    $post_id Post ID.
-                     */
-                    function my_task_sent( $results, $key, $post_id ) {
-                        my_save_results( $results, $key );
-                    }
+                    <code class="language-php">
+                        /**
+                        * @param array  $results List of results after task sending.
+                        * @param string $key     Task key.
+                        * @param int    $post_id Post ID.
+                        */
+                        function my_task_sent( $results, $key, $post_id ) {
+                            my_save_results( $results, $key );
+                        }
 
-                    add_action( 'social_planner_task_sent', 'my_task_sent', 10, 3 );
-                </code>
-            </pre>
+                        add_action( 'social_planner_task_sent', 'my_task_sent', 10, 3 );
+                    </code>
+                </pre>
             </details>
         </article>
     </section>
@@ -198,22 +197,22 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param string $label Network label.
-                     * @param string $class Current network class.
-                     */
-                    function my_network_label( $label, $class ) {
-                        if ( 'Social_Planner\Network_Telegram' === $class ) {
-                            $label = 'My custom ' . $label;
+                    <code class="language-php">
+                        /**
+                         * @param string $label Network label.
+                         * @param string $class Current network class.
+                         */
+                        function my_network_label( $label, $class ) {
+                            if ( 'Social_Planner\Network_Telegram' === $class ) {
+                                $label = 'My custom ' . $label;
+                            }
+
+                            return $label;
                         }
 
-                        return $label;
-                    }
-
-                    add_filter( 'social_planner_network_label', 'my_network_label', 10, 2 );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_network_label', 'my_network_label', 10, 2 );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -237,17 +236,17 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param string $format Datetime format.
-                     */
-                    function my_time_format( $format ) {
-                        return 'F j, Y h:i';
-                    }
+                    <code class="language-php">
+                        /**
+                         * @param string $format Datetime format.
+                         */
+                        function my_time_format( $format ) {
+                            return 'F j, Y h:i';
+                        }
 
-                    add_filter( 'social_planner_time_format', 'my_time_format' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_time_format', 'my_time_format' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -268,21 +267,21 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param bool $hide_dashboard Set true to hide dashboard.
-                     */
-                    function my_hide_dashboard( $hide_dashboard ) {
-                        if ( ! current_user_can( 'manage_options' ) ) {
-                            $hide_dashboard = true;
+                    <code class="language-php">
+                        /**
+                         * @param bool $hide_dashboard Set true to hide dashboard.
+                         */
+                        function my_hide_dashboard( $hide_dashboard ) {
+                            if ( ! current_user_can( 'manage_options' ) ) {
+                                $hide_dashboard = true;
+                            }
+
+                            return $hide_dashboard;
                         }
 
-                        return $hide_dashboard;
-                    }
-
-                    add_filter( 'social_planner_hide_dashboard', 'my_hide_dashboard' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_hide_dashboard', 'my_hide_dashboard' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -303,19 +302,19 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array $object Array of dashboard script object.
-                     */
-                    function my_dashboard_object( $object ) {
-                        $object['tasks'] = my_dashboard_handler( 'tasks' );
+                    <code class="language-php">
+                        /**
+                         * @param array $object Array of dashboard script object.
+                         */
+                        function my_dashboard_object( $object ) {
+                            $object['tasks'] = my_dashboard_handler( 'tasks' );
 
-                        return $object;
-                    }
+                            return $object;
+                        }
 
-                    add_filter( 'social_planner_dashboard_object', 'my_dashboard_object' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_dashboard_object', 'my_dashboard_object' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -334,18 +333,18 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array $sanitized List of tasks after sanitization.
-                     * @param array $tasks     List of tasks before sanitization.
-                     */
-                    function my_sanitize_tasks( $sanitized_tasks, $tasks ) {
-                        return my_tasks_sanitization( $tasks );
-                    }
+                    <code class="language-php">
+                        /**
+                         * @param array $sanitized List of tasks after sanitization.
+                         * @param array $tasks     List of tasks before sanitization.
+                         */
+                        function my_sanitize_tasks( $sanitized_tasks, $tasks ) {
+                            return my_tasks_sanitization( $tasks );
+                        }
 
-                    add_filter( 'social_planner_sanitize_tasks', 'my_sanitize_tasks', 10, 2 );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_sanitize_tasks', 'my_sanitize_tasks', 10, 2 );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -366,22 +365,22 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array $tasks   List of tasks from post meta.
-                     * @param int   $post_id Post ID.
-                     */
-                    function my_get_tasks( $tasks, $post_id ) {
-                        if ( 0 === $post_id ) {
-                            $tasks = array();
+                    <code class="language-php">
+                        /**
+                         * @param array $tasks   List of tasks from post meta.
+                         * @param int   $post_id Post ID.
+                         */
+                        function my_get_tasks( $tasks, $post_id ) {
+                            if ( 0 === $post_id ) {
+                                $tasks = array();
+                            }
+
+                            return $tasks;
                         }
 
-                        return $tasks;
-                    }
-
-                    add_filter( 'social_planner_get_tasks', 'my_get_tasks', 10, 2 );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_get_tasks', 'my_get_tasks', 10, 2 );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -402,22 +401,22 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array  $tasks   List of tasks from post meta.
-                     * @param int    $post_id Post ID.
-                     */
-                    function my_update_tasks( $tasks, $post_id ) {
-                        if ( 0 === $post_id ) {
-                            $tasks = array();
+                    <code class="language-php">
+                        /**
+                         * @param array  $tasks   List of tasks from post meta.
+                         * @param int    $post_id Post ID.
+                         */
+                        function my_update_tasks( $tasks, $post_id ) {
+                            if ( 0 === $post_id ) {
+                                $tasks = array();
+                            }
+
+                            return $tasks;
                         }
 
-                        return $tasks;
-                    }
-
-                    add_filter( 'social_planner_update_tasks', 'my_update_tasks', 10, 2 );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_update_tasks', 'my_update_tasks', 10, 2 );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -438,22 +437,22 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array $results List of results from post meta.
-                     * @param int   $post_id Post ID.
-                     */
-                    function my_get_results( $results, $post_id ) {
-                        if ( 0 === $post_id ) {
-                            $results = array();
+                    <code class="language-php">
+                        /**
+                         * @param array $results List of results from post meta.
+                         * @param int   $post_id Post ID.
+                         */
+                        function my_get_results( $results, $post_id ) {
+                            if ( 0 === $post_id ) {
+                                $results = array();
+                            }
+
+                            return $results;
                         }
 
-                        return $results;
-                    }
-
-                    add_filter( 'social_planner_get_results', 'my_get_results', 10, 2 );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_get_results', 'my_get_results', 10, 2 );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -474,22 +473,22 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array $results List of tasks from post meta.
-                     * @param int   $post_id Post ID.
-                     */
-                    function my_update_results( $results, $post_id ) {
-                        if ( 0 === $post_id ) {
-                            $results = array();
+                    <code class="language-php">
+                        /**
+                         * @param array $results List of tasks from post meta.
+                         * @param int   $post_id Post ID.
+                         */
+                        function my_update_results( $results, $post_id ) {
+                            if ( 0 === $post_id ) {
+                                $results = array();
+                            }
+
+                            return $results;
                         }
 
-                        return $results;
-                    }
-
-                    add_filter( 'social_planner_update_results', 'my_update_results', 10, 2 );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_update_results', 'my_update_results', 10, 2 );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -510,30 +509,30 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array $object  Array of metabox script object.
-                     * @param int   $post_id Current post ID.
-                     */
-                    function my_metabox_object( $object, $post_id ) {
-                        $object = array(
-                            'meta'      => my_metabox_handler( 'meta' ),
-                            'action'    => my_metabox_handler( 'action' ),
-                            'nonce'     => my_metabox_handler( 'nonce' ),
-                            'tasks'     => my_metabox_handler( 'tasks' ),
-                            'results'   => my_metabox_handler( 'results' ),
-                            'offset'    => my_metabox_handler( 'offset' ),
-                            'calendar'  => my_metabox_handler( 'calendar' ),
-                            'providers' => my_metabox_handler( 'providers' ),
-                            'schedules' => my_metabox_handler( 'schedules' ),
-                        );
+                    <code class="language-php">
+                        /**
+                         * @param array $object  Array of metabox script object.
+                         * @param int   $post_id Current post ID.
+                         */
+                        function my_metabox_object( $object, $post_id ) {
+                            $object = array(
+                                'meta'      => my_metabox_handler( 'meta' ),
+                                'action'    => my_metabox_handler( 'action' ),
+                                'nonce'     => my_metabox_handler( 'nonce' ),
+                                'tasks'     => my_metabox_handler( 'tasks' ),
+                                'results'   => my_metabox_handler( 'results' ),
+                                'offset'    => my_metabox_handler( 'offset' ),
+                                'calendar'  => my_metabox_handler( 'calendar' ),
+                                'providers' => my_metabox_handler( 'providers' ),
+                                'schedules' => my_metabox_handler( 'schedules' ),
+                            );
 
-                        return $object;
-                    }
+                            return $object;
+                        }
 
-                    add_filter( 'social_planner_metabox_object', 'my_metabox_object', 10, 2 );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_metabox_object', 'my_metabox_object', 10, 2 );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -554,21 +553,21 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param bool $hide_metabox Set true to hide metabox.
-                     */
-                     function my_hide_metabox( $hide_metabox ) {
-                        if ( ! current_user_can( 'manage_options' ) ) {
-                            $hide_metabox = true;
+                    <code class="language-php">
+                        /**
+                         * @param bool $hide_metabox Set true to hide metabox.
+                         */
+                        function my_hide_metabox( $hide_metabox ) {
+                            if ( ! current_user_can( 'manage_options' ) ) {
+                                $hide_metabox = true;
+                            }
+
+                            return $hide_metabox;
                         }
 
-                        return $hide_metabox;
-                    }
-
-                    add_filter( 'social_planner_hide_metabox', 'my_hide_metabox' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_hide_metabox', 'my_hide_metabox' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -590,25 +589,25 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array $post_types Array of post types for which the metabox is displayed.
-                     */
-                    function my_post_types( $post_types ) {
-                        $post_types[] = 'my_hidden_type';
+                    <code class="language-php">
+                        /**
+                         * @param array $post_types Array of post types for which the metabox is displayed.
+                         */
+                        function my_post_types( $post_types ) {
+                            $post_types[] = 'my_hidden_type';
 
-                        foreach ( $post_types as $i => $name ) {
-                            if ( 'page' === $name ) {
-                                unset( $post_types[ $i ] );
+                            foreach ( $post_types as $i => $name ) {
+                                if ( 'page' === $name ) {
+                                    unset( $post_types[ $i ] );
+                                }
                             }
+
+                            return $post_types;
                         }
 
-                        return $post_types;
-                    }
-
-                    add_filter( 'social_planner_post_types', 'my_post_types' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_post_types', 'my_post_types' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -629,17 +628,17 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param int $days_count Number of days in task calendar select box.
-                     */
-                    function my_calendar_days( $days_number ) {
-                        return 7;
-                    }
+                    <code class="language-php">
+                        /**
+                         * @param int $days_count Number of days in task calendar select box.
+                         */
+                        function my_calendar_days( $days_number ) {
+                            return 7;
+                        }
 
-                    add_filter( 'social_planner_calendar_days', 'my_calendar_days' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_calendar_days', 'my_calendar_days' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -661,19 +660,19 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param int $offset Time offset in seconds from UTC.
-                     */
-                    function my_time_offset( $offset ) {
-                        $offset = timezone_offset_get( wp_timezone(), date_create( 'now' ) );
+                    <code class="language-php">
+                        /**
+                         * @param int $offset Time offset in seconds from UTC.
+                         */
+                        function my_time_offset( $offset ) {
+                            $offset = timezone_offset_get( wp_timezone(), date_create( 'now' ) );
 
-                        return $offset;
-                    }
+                            return $offset;
+                        }
 
-                    add_filter( 'social_planner_time_offset', 'my_time_offset' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_time_offset', 'my_time_offset' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -696,19 +695,19 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array $statuses List of post statuses.
-                     */
-                    function my_post_statuses( $statuses ) {
-                        $statuses = array( 'private', 'pending', 'future', 'publish' );
+                    <code class="language-php">
+                        /**
+                         * @param array $statuses List of post statuses.
+                         * /
+                        function my_post_statuses( $statuses ) {
+                            $statuses = array( 'private', 'pending', 'future', 'publish' );
 
-                        return $statuses;
-                    }
+                            return $statuses;
+                        }
 
-                    add_filter( 'social_planner_post_statuses', 'my_post_statuses' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_post_statuses', 'my_post_statuses' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -730,25 +729,25 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array  $message Sending message data.
-                     * @param string $target  Target provider name.
-                     * @param array  $task    Scheduled task data.
-                     */
-                    function my_prepare_message( $message, $target, $task ) {
-                        $message['link'] = my_message_link( $message['post_id'] );
+                    <code class="language-php">
+                        /**
+                         * @param array  $message Sending message data.
+                         * @param string $target  Target provider name.
+                         * @param array  $task    Scheduled task data.
+                         */
+                        function my_prepare_message( $message, $target, $task ) {
+                            $message['link'] = my_message_link( $message['post_id'] );
 
-                        if ( ! empty( $message['excerpt'] ) ) {
-                            $message['excerpt'] = $message['excerpt'] . "\n\n" . '#some_hashtag';
+                            if ( ! empty( $message['excerpt'] ) ) {
+                                $message['excerpt'] = $message['excerpt'] . "\n\n" . '#some_hashtag';
+                            }
+
+                            return $message;
                         }
 
-                        return $message;
-                    }
-
-                    add_filter( 'social_poster_prepare_message', 'my_prepare_message', 10, 3 );
-                </code>
-            </pre>
+                        add_filter( 'social_poster_prepare_message', 'my_prepare_message', 10, 3 );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -769,23 +768,23 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param bool $hide_settings Set true to hide settings page.
-                     */
-                     function my_hide_settings( $hide_settings ) {
-                        $user = wp_get_current_user();
+                    <code class="language-php">
+                        /**
+                         * @param bool $hide_settings Set true to hide settings page.
+                         */
+                        function my_hide_settings( $hide_settings ) {
+                            $user = wp_get_current_user();
 
-                        if ( empty( $user->user_login ) || 'admin' !== $user->user_login ) {
-                            $hide_settings = true;
+                            if ( empty( $user->user_login ) || 'admin' !== $user->user_login ) {
+                                $hide_settings = true;
+                            }
+
+                            return $hide_settings;
                         }
 
-                        return $hide_settings;
-                    }
-
-                    add_filter( 'social_planner_hide_settings', 'my_hide_settings' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_hide_settings', 'my_hide_settings' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -807,24 +806,24 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array $providers List of provders options.
-                     */
-                     function my_get_providers( $providers ) {
-                        $providers = array(
-                            'facebook-1' => array(
-                                'token' => 'token',
-                                'group' => 'group',
-                            ),
-                        );
+                    <code class="language-php">
+                        /**
+                         * @param array $providers List of provders options.
+                         */
+                        function my_get_providers( $providers ) {
+                            $providers = array(
+                                'facebook-1' => array(
+                                    'token' => 'token',
+                                    'group' => 'group',
+                                ),
+                            );
 
-                        return $providers;
-                    }
+                            return $providers;
+                        }
 
-                    add_filter( 'social_planner_get_providers', 'my_get_providers' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_get_providers', 'my_get_providers' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -845,23 +844,23 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param array $object Array of settings script object.
-                     */
-                    function my_settings_object( $object ) {
-                        $object = array(
-                            'option'    => my_settings_handler( 'option' ),
-                            'networks'  => my_settings_handler( 'networks' ),
-                            'providers' => my_settings_handler( 'providers' ),
-                        );
+                    <code class="language-php">
+                        /**
+                         * @param array $object Array of settings script object.
+                         */
+                        function my_settings_object( $object ) {
+                            $object = array(
+                                'option'    => my_settings_handler( 'option' ),
+                                'networks'  => my_settings_handler( 'networks' ),
+                                'providers' => my_settings_handler( 'providers' ),
+                            );
 
-                        return $object;
-                    }
+                            return $object;
+                        }
 
-                    add_filter( 'social_planner_settings_object', 'my_settings_object' );
-                </code>
-            </pre>
+                        add_filter( 'social_planner_settings_object', 'my_settings_object' );
+                    </code>
+                </pre>
             </details>
         </article>
 
@@ -880,23 +879,92 @@
                 </summary>
 
                 <pre>
-                <code class="language-php">
-                    /**
-                     * @param string $excerpt Message excerpt.
-                     * @param array  $message Original message array.
-                     * @param string $network Network name.
-                     */
-                    function my_prepare_excerpt( $excerpt, $message, $network ) {
-                        if ( empty( $excerpt ) ) {
-                            $excerpt = get_the_title( $message[ $post_id ] );
+                    <code class="language-php">
+                        /**
+                         * @param string $excerpt Message excerpt.
+                         * @param array  $message Original message array.
+                         * @param string $network Network name.
+                         */
+                        function my_prepare_excerpt( $excerpt, $message, $network ) {
+                            if ( empty( $excerpt ) ) {
+                                $excerpt = get_the_title( $message[ $post_id ] );
+                            }
+
+                            return $message;
                         }
 
-                        return $message;
-                    }
+                        add_filter( 'social_planner_prepare_excerpt', 'my_prepare_excerpt', 10, 3 );
+                    </code>
+                </pre>
+            </details>
+        </article>
 
-                    add_filter( 'social_planner_prepare_excerpt', 'my_prepare_excerpt', 10, 3 );
-                </code>
-            </pre>
+        <article class="article">
+            <h4 class="anchor" id="social_planner_before_request">
+                <span>social_planner_before_request</span>
+
+                <a aria-hidden="true" href="/social-planner/hooks/#social_planner_before_request">#</a>
+            </h4>
+
+            <p>Filter any request argument of wp_remote_post function in network class.</p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        /**
+                         * @param string $args    Request arguments.
+                         * @param array  $url     URL to retrieve.
+                         * @param string $network Network name.
+                         */
+                        function my_before_request( $args, $url, $network ) {
+                            $args['user-agent'] = 'my-custom-snippet';
+
+                            return $args;
+                        }
+
+                        add_filter( 'social_planner_before_request', 'my_before_request', 10, 3 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="article">
+            <h4 class="anchor" id="social_planner_filter_request_body">
+                <span>social_planner_filter_request_body</span>
+
+                <a aria-hidden="true" href="/social-planner/hooks/#social_planner_filter_request_body">#</a>
+            </h4>
+
+            <p>This filter exists to update a body of network request. Use it as a last chance to replace your announcement content according to Post ID.</p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code class="language-php">
+                        /**
+                         * @param string $body    Request body arguments.
+                         * @param array  $message Message data.
+                         * @param string $network Network name.
+                         * @param string $url     Remote API URL.
+                         */
+                        function my_request_body( $body, $message, $network, $url ) {
+                            if ( $message['post_id'] === 1 ) {
+                                $body['message'] = 'new message';
+                            }
+
+                            return $body;
+                        }
+
+                        add_filter( 'social_planner_filter_request_body', 'my_request_body', 10, 4 );
+                    </code>
+                </pre>
             </details>
         </article>
     </section>
