@@ -286,14 +286,17 @@
                          * @param array   $fieldset  Fieldset data from picker.
                          * @param integer $index     Template index from editor.
                          * @param integer $screen_id Post or term admin page id. Will be 0 if not set.
+                         * @param integer $screen_id Screen ID context field. Can be settings, post or term.
                          */
-                        function my_prepare_template( $template, $fieldset, $index, $screen_id ) {
-                            $template['fill'] = '#fff';
+                        function my_prepare_template( $template, $fieldset, $index, $screen_id, $context ) {
+                            if ( 'post' === $context && 1 === $screen_id ) {
+                                $template['fill'] = '#fff';
+                            }
 
                             return $template;
                         }
 
-                        add_filter( 'sharing_image_prepare_template', 'my_prepare_template', 10, 4 );
+                        add_filter( 'sharing_image_prepare_template', 'my_prepare_template', 10, 5 );
                     </code>
                 </pre>
             </details>
