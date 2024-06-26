@@ -21,6 +21,16 @@ router.get('/contact/', (req, res, next) => {
   res.render('pages/contact');
 });
 
+router.get('/privacy/', (req, res, next) => {
+  res.locals.meta = {
+    title: 'Privacy Policy / wpset.org',
+    description: 'Information about how we handle user data.',
+    url: '/privacy/',
+  };
+
+  res.render('pages/privacy');
+});
+
 router.get('/', (req, res, next) => {
   res.locals.meta = {
     title: 'wpset.org / Progressive software solutions for WordPress',
