@@ -1,0 +1,24 @@
+.heading {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-end;
+
+  margin-bottom: 1rem;
+
+  h1 {
+    margin-right: auto;
+  }
+
+  .heading-links {
+    display: block;
+    position: relative;
+    z-index: 2;
+
+    padding: 0.5rem 0 0;
+    font-size: var(--font-sm);
+
+    & > * {
+      margin-right: 0.75rem;
+    }
+  }
+}

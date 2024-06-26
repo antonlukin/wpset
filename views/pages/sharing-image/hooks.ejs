@@ -24,18 +24,18 @@
         <h2 class="anchor" id="actions">
             <span>Actions</span>
 
-            <a aria-hidden="true" href="#actions">#</a>
+            <a href="#actions">#</a>
         </h2>
 
         <p>
             WordPress actions are benchmarks where the developer need to execute a specific code at a specific event.
         </p>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_settings">
                 <span>sharing_image_settings</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_settings">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_settings">#</a>
             </h4>
 
             <p>
@@ -61,11 +61,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_widget">
                 <span>sharing_image_widget</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_widget">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_widget">#</a>
             </h4>
 
             <p>
@@ -99,7 +99,7 @@
         <h2 class="anchor" id="hooks">
             <span>Filters</span>
 
-            <a aria-hidden="true" href="#hooks">#</a>
+            <a href="#hooks">#</a>
         </h2>
 
         <p>
@@ -108,11 +108,11 @@
             Unlike actions, filters code must return a value, which is the modified copy of the original value.
         </p>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_poster_src">
                 <span>sharing_image_poster_src</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_poster_src">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_poster_src">#</a>
             </h4>
 
             <p>
@@ -146,11 +146,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_singular_poster_meta">
                 <span>sharing_image_singular_poster_meta</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_singular_poster_meta">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_singular_poster_meta">#</a>
             </h4>
 
             <p>
@@ -186,11 +186,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_taxonomy_poster_meta">
                 <span>sharing_image_taxonomy_poster_meta</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_taxonomy_poster_meta">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_taxonomy_poster_meta">#</a>
             </h4>
 
             <p>
@@ -227,11 +227,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_plugin_classes">
                 <span>sharing_image_plugin_classes</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_plugin_classes">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_plugin_classes">#</a>
             </h4>
 
             <p>
@@ -262,11 +262,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_prepare_template">
                 <span>sharing_image_prepare_template</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_prepare_template">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_prepare_template">#</a>
             </h4>
 
             <p>
@@ -284,26 +284,29 @@
                         /**
                          * @param array   $template  List of template data.
                          * @param array   $fieldset  Fieldset data from picker.
-                         * @param integer $index     Template index from editor.
-                         * @param integer $screen_id Post or term admin page id. Will be 0 if not set.
+                         * @param string  $index     Template index from editor.
+                         * @param int     $screen_id Post or term admin page id. Will be 0 if not set.
+                         * @param string  $context   Screen ID context field. Can be settings, post or term.
                          */
-                        function my_prepare_template( $template, $fieldset, $index, $screen_id ) {
-                            $template['fill'] = '#fff';
+                        function my_prepare_template( $template, $fieldset, $index, $screen_id, $context ) {
+                            if ( 'post' === $context && 1 === $screen_id ) {
+                                $template['fill'] = '#fff';
+                            }
 
                             return $template;
                         }
 
-                        add_filter( 'sharing_image_prepare_template', 'my_prepare_template', 10, 4 );
+                        add_filter( 'sharing_image_prepare_template', 'my_prepare_template', 10, 5 );
                     </code>
                 </pre>
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_get_fontpath">
                 <span>sharing_image_get_fontpath</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_get_fontpath">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_get_fontpath">#</a>
             </h4>
 
             <p>
@@ -331,11 +334,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_get_upload_file">
                 <span>sharing_image_get_upload_file</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_get_upload_file">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_get_upload_file">#</a>
             </h4>
 
             <p>
@@ -372,11 +375,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_hide_settings">
                 <span>sharing_image_hide_settings</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_hide_settings">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_hide_settings">#</a>
             </h4>
 
             <p>
@@ -409,11 +412,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_disable_custom_fonts">
                 <span>sharing_image_disable_custom_fonts</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_disable_custom_fonts">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_disable_custom_fonts">#</a>
             </h4>
 
             <p>
@@ -441,11 +444,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_get_templates">
                 <span>sharing_image_get_templates</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_get_templates">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_get_templates">#</a>
             </h4>
 
             <p>
@@ -473,11 +476,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_update_templates">
                 <span>sharing_image_update_templates</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_templates">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_update_templates">#</a>
             </h4>
 
             <p>
@@ -504,11 +507,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_get_config">
                 <span>sharing_image_get_config</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_get_config">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_get_config">#</a>
             </h4>
 
             <p>
@@ -535,11 +538,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_update_config">
                 <span>sharing_image_update_config</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_config">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_update_config">#</a>
             </h4>
 
             <p>
@@ -566,11 +569,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_develop">
                 <span>sharing_image_develop</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_develop">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_develop">#</a>
             </h4>
 
             <p>
@@ -598,11 +601,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_get_license">
                 <span>sharing_image_get_license</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_get_license">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_get_license">#</a>
             </h4>
 
             <p>
@@ -630,11 +633,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_upload_dir">
                 <span>sharing_image_upload_dir</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_upload_dir">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_upload_dir">#</a>
             </h4>
 
             <p>
@@ -664,11 +667,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_file_format">
                 <span>sharing_image_file_format</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_file_format">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_file_format">#</a>
             </h4>
 
             <p>
@@ -696,11 +699,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_poster_quality">
                 <span>sharing_image_poster_quality</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_poster_quality">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_poster_quality">#</a>
             </h4>
 
             <p>
@@ -765,7 +768,7 @@
             <h4 class="anchor" id="sharing_image_default_poster_src">
                 <span>sharing_image_default_poster_src</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_default_poster_src">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_default_poster_src">#</a>
             </h4>
 
             <p>
@@ -795,11 +798,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_settings_object">
                 <span>sharing_image_settings_object</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_settings_object">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_settings_object">#</a>
             </h4>
 
             <p>
@@ -826,11 +829,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_sanitize_editor">
                 <span>sharing_image_sanitize_editor</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_sanitize_editor">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_sanitize_editor">#</a>
             </h4>
 
             <p>
@@ -858,11 +861,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_sanitize_config">
                 <span>sharing_image_sanitize_config</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_sanitize_config">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_sanitize_config">#</a>
             </h4>
 
             <p>
@@ -890,11 +893,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_settings_tabs">
                 <span>sharing_image_settings_tabs</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_settings_tabs">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_settings_tabs">#</a>
             </h4>
 
             <p>
@@ -923,11 +926,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_poster_fonts">
                 <span>sharing_image_poster_fonts</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_poster_fonts">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_poster_fonts">#</a>
             </h4>
 
             <p>
@@ -957,11 +960,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_directory_permissions">
                 <span>sharing_image_directory_permissions</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_directory_permissions">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_directory_permissions">#</a>
             </h4>
 
             <p>
@@ -989,11 +992,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_hide_metabox">
                 <span>sharing_image_hide_metabox</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_hide_metabox">#</a>
+                <a href="/sharing-image/hooks/#sharing_image_hide_metabox">#</a>
             </h4>
 
             <p>
@@ -1024,107 +1027,11 @@
             </details>
         </article>
 
-        <article class="article">
-            <h4 class="anchor" id="sharing_image_update_post_meta">
-                <span>sharing_image_update_post_meta</span>
-
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_post_meta">#</a>
-            </h4>
-
-            <p>
-                This filter allows you to change the array with widget post meta right before the update_post_meta request.
-            </p>
-
-            <details>
-                <summary>
-                    <span>Show me an example</span>
-                </summary>
-
-                <pre>
-                    <code>
-                        /**
-                         * @param string $meta    Updated post meta.
-                         * @param string $post_id Post ID.
-                         */
-                        function my_update_post_meta( $meta, $post_id ) {
-                            return $meta;
-                        }
-
-                        add_filter( 'sharing_image_update_post_meta', 'my_update_post_meta', 10, 2 );
-                    </code>
-                </pre>
-            </details>
-        </article>
-
-        <article class="article">
-            <h4 class="anchor" id="sharing_image_update_term_meta">
-                <span>sharing_image_update_term_meta</span>
-
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_term_meta">#</a>
-            </h4>
-
-            <p>
-                This filter allows you to change the array with widget term meta right before the update_term_meta request.
-            </p>
-
-            <details>
-                <summary>
-                    <span>Show me an example</span>
-                </summary>
-
-                <pre>
-                    <code>
-                        /**
-                         * @param string $meta    Updated term meta.
-                         * @param string $term_id Term ID.
-                         */
-                        function my_update_term_meta( $meta, $post_id ) {
-                            return $meta;
-                        }
-
-                        add_filter( 'sharing_image_update_term_meta', 'my_update_term_meta', 10, 2 );
-                    </code>
-                </pre>
-            </details>
-        </article>
-
-        <article class="article">
-            <h4 class="anchor" id="sharing_image_sanitize_picker">
-                <span>sharing_image_sanitize_picker</span>
-
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_sanitize_picker">#</a>
-            </h4>
-
-            <p>
-                You can update widget picker data right after sanitization on the metabox saving with this filter.
-            </p>
-
-            <details>
-                <summary>
-                    <span>Show me an example</span>
-                </summary>
-
-                <pre>
-                    <code>
-                        /**
-                         * @param array $sanitized List of sanitized picker fields.
-                         * @param array $picker    List of picker fields before sanitization.
-                         */
-                        function my_sanitize_picker( $sanitized, $picker ) {
-                            return $sanitized;
-                        }
-
-                        add_filter( 'sharing_image_sanitize_picker', 'my_sanitize_picker', 10, 2 );
-                    </code>
-                </pre>
-            </details>
-        </article>
-
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_widget_object">
                 <span>sharing_image_widget_object</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_widget_object">#</a>
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_post_meta">#</a>
             </h4>
 
             <p>
@@ -1151,11 +1058,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_metabox_post_types">
                 <span>sharing_image_metabox_post_types</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_metabox_post_types">#</a>
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_term_meta">#</a>
             </h4>
 
             <p>
@@ -1185,11 +1092,11 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_widget_taxonomies">
                 <span>sharing_image_widget_taxonomies</span>
 
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_widget_taxonomies">#</a>
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_sanitize_picker">#</a>
             </h4>
 
             <p>
@@ -1219,17 +1126,17 @@
             </details>
         </article>
 
-        <article class="article">
+        <article class="hook">
             <h4 class="anchor" id="sharing_image_autogenerated_poster">
                 <span>sharing_image_autogenerated_poster</span>
 
                 <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_autogenerated_poster">#</a>
+                <strong>since 2.0.11</strong>
             </h4>
 
             <p>
                 This filter allows you to update autogenerated poster data.
                 It can be useful to replace autogenerated poster or their sizes for certain Post ID.
-                Available since <strong>2.0.11</strong>.
             </p>
 
             <details>
@@ -1259,17 +1166,494 @@
             </details>
         </article>
 
-        <article class="article">
-            <h4 class="anchor" id="sharing_image_disable_autogeneration">
-                <span>sharing_image_disable_autogeneration</span>
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_hide_twitter_meta">
+                <span>sharing_image_hide_twitter_meta</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_metabox_post_types">#</a>
+            </h4>
+
+            <p>
+                This filter allows to hide only Twitter meta tags.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @since 2.0.12
+                         *
+                         * @param bool $hide_twitter_meta Set true to hide poster meta.
+                         */
+                        function my_hide_twitter_meta( $hide_twitter_meta ) {
+                            return true;
+                        }
+
+                        add_filter( 'sharing_image_hide_twitter_meta', 'my_hide_twitter_meta' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_active_snippets">
+                <span>sharing_image_active_snippets</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_active_snippets">#</a>
+                <strong>since 3.0</strong>
+            </h4>
+
+            <p>
+                Last chance to activate plugin snippets.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @since 3.0
+                         *
+                         * @param bool $active_snippets Set true to activate plugin snippets.
+                         */
+                        function my_active_snippets( $active_snippets ) {
+                            return true;
+                        }
+
+                        add_filter( 'sharing_image_active_snippets', 'my_active_snippets' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_show_header">
+                <span>sharing_image_show_header</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_widget_taxonomies">#</a>
+            </h4>
+
+            <p>
+                Last chance to show customer header meta.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @since 3.0
+                         *
+                         * @param bool $show_header Set true to show custom header meta.
+                         */
+                        function my_show_header( $show_header ) {
+                            return true;
+                        }
+
+                        add_filter( 'sharing_image_show_header', 'my_show_header' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_unique_index">
+                <span>sharing_image_unique_index</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_unique_index">#</a>
+                <strong>since 3.0</strong>
+            </h4>
+
+            <p>
+                Filter template unique index on creation. It may be useful when you want to override template index names.
+                Use in conjunction with the <code>sharing_image_valid_unique_index</code> filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @since 3.0
+                         *
+                         * @param array $index     Generated template index.
+		                 * @param array $templates List of templates.
+                         */
+                        function my_unique_index( $index, $templates ) {
+                            return md5( time() );
+                        }
+
+                        add_filter( 'sharing_image_unique_index', 'my_unique_index', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_valid_unique_index">
+                <span>sharing_image_valid_unique_index</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_autogenerated_poster">#</a>
+            </h4>
+
+            <p>
+                This filter allows you to change the template index validation. It may be useful when you want to override template index names.
+                Use in conjunction with the <code>sharing_image_unique_index</code> filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @since 3.0
+                         *
+                         * @param bool   $valid Valid flag.
+                         * @param string $index Template index.
+                         */
+                        function my_valid_unique_index( $valid, $index ) {
+                            if ( ! is_numeric( $index ) ) {
+                                $valid = false;
+                            }
+
+                            return $valid;
+                        }
+
+                        add_filter( 'sharing_image_valid_unique_index', 'my_valid_unique_index', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_sanitize_source">
+                <span>sharing_image_sanitize_source</span>
 
                 <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_disable_autogeneration">#</a>
             </h4>
 
             <p>
+                You can update <code>_sharing_image</code> meta data right after sanitization on the metabox or sidebar saving with this filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @since 3.0
+                         *
+                         * @param array $sanitized List of sanitized fields.
+                         * @param array $source    List of fields before sanitization.
+                         */
+                        function my_sanitize_source( $sanitized, $source ) {
+                            return $sanitized;
+                        }
+
+                        add_filter( 'sharing_image_sanitize_source', 'my_sanitize_source', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_sanitize_fieldset">
+                <span>sharing_image_sanitize_fieldset</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_sanitize_fieldset">#</a>
+                <strong>since 3.0</strong>
+            </h4>
+
+            <p>
+                You can update <code>_sharing_image_fieldset</code> meta data right after sanitization on the metabox or sidebar saving with this filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @since 3.0
+                         *
+                         * @param array $sanitized Sanitized fieldset list.
+                         * @param array $fieldset  Fieldset list before sanitization.
+                         */
+                        function my_sanitize_fieldset( $sanitized, $fieldset ) {
+                            return $fieldset;
+                        }
+
+                        add_filter( 'sharing_image_sanitize_fieldset', 'my_sanitize_fieldset', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_autogenerated_fieldset">
+                <span>sharing_image_autogenerated_fieldset</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_autogenerated_fieldset">#</a>
+                <strong>since 3.0</strong>
+            </h4>
+
+            <p>
+                Use this filter to update the fieldset during poster auto-generation.
+                This can be very useful if you want to ignore widget settings and provide your own values under certain conditions.
+                Additionally, use this filter if you have removed the widget from the post editing page but still want to provide your own values for the poster.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @since 3.0
+                         *
+                         * @param array  $fieldset Prepared fieldset data.
+                         * @param string $index    Template index.
+                         * @param int    $post_id  Post ID.
+                         */
+                        function my_autogenerated_fieldset( $fieldset, $index, $post_id ) {
+                            if ( 10 === $post_id ) {
+                                $fieldset['ghI3l4Ertyid'] = esc_html( 'Custom text' );
+                            }
+
+                            return $fieldset;
+                        }
+
+                        add_filter( 'sharing_image_autogenerated_fieldset', 'my_autogenerated_fieldset', 10, 3 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_attachment_data">
+                <span>sharing_image_attachment_data</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_attachment_data">#</a>
+                <strong>since 3.0</strong>
+            </h4>
+
+            <p>
+                This filter allows you to customize the attachment that will be added during poster generation if such a setting is used.
+                Return an empty value if you do not want to save the attachment.
+                For example, you may choose not to save the attachment only for auto-generated posts.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @since 3.0
+                         *
+                         * @param string $attachment Attachment data.
+                         * @param string $path       Path to poster image.
+                         * @param string $screen_id  Post or taxonomy screen ID.
+                         * @param string $context    Widget context. For example: metabox or autogenerate.
+                         */
+                        function my_attachment_data( $attachment, $path, $screen_id, $context ) {
+                            if ( autogenerate === $context ) {
+                                $attachment = null;
+                            }
+
+                            return $attachment;
+                        }
+
+                        add_filter( 'sharing_image_attachment_data', 'my_attachment_data', 10, 4 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_hide_meta">
+                <span>sharing_image_hide_meta</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_hide_meta">#</a>
+            </h4>
+
+            <figure class="note">
+                This hook was removed in version 3.0 and is no longer available.
+            </figure>
+
+            <p>
+                Use this filter to hide OpenGraph and Twitter meta tags from wp_head section.
+                Useful if you want to output these tags manually or disable them completely.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param bool $hide_header Set true to hide poster meta.
+                         */
+                        function my_default_hide_meta( $hide_meta ) {
+                            return true;
+                        }
+
+                        add_filter( 'sharing_image_hide_meta', 'my_default_hide_meta' );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_update_post_meta">
+                <span>sharing_image_update_post_meta</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_update_post_meta">#</a>
+            </h4>
+
+            <figure class="note">
+                This hook was removed in version 3.0 and is no longer available.
+            </figure>
+
+            <p>
+                This filter allows you to change the array with widget post meta right before the update_post_meta request.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param string $meta    Updated post meta.
+                         * @param string $post_id Post ID.
+                         */
+                        function my_update_post_meta( $meta, $post_id ) {
+                            return $meta;
+                        }
+
+                        add_filter( 'sharing_image_update_post_meta', 'my_update_post_meta', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_update_term_meta">
+                <span>sharing_image_update_term_meta</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_hide_twitter_meta">#</a>
+            </h4>
+
+            <figure class="note">
+                This hook was removed in version 3.0 and is no longer available.
+            </figure>
+
+            <p>
+                This filter allows you to change the array with widget term meta right before the update_term_meta request.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param string $meta    Updated term meta.
+                         * @param string $term_id Term ID.
+                         */
+                        function my_update_term_meta( $meta, $post_id ) {
+                            return $meta;
+                        }
+
+                        add_filter( 'sharing_image_update_term_meta', 'my_update_term_meta', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_sanitize_picker">
+                <span>sharing_image_sanitize_picker</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_sanitize_picker">#</a>
+            </h4>
+
+            <figure class="note">
+                This hook was removed in version 3.0 and is no longer available.
+            </figure>
+
+            <p>
+                You can update widget picker data right after sanitization on the metabox saving with this filter.
+            </p>
+
+            <details>
+                <summary>
+                    <span>Show me an example</span>
+                </summary>
+
+                <pre>
+                    <code>
+                        /**
+                         * @param array $sanitized List of sanitized picker fields.
+                         * @param array $picker    List of picker fields before sanitization.
+                         */
+                        function my_sanitize_picker( $sanitized, $picker ) {
+                            return $sanitized;
+                        }
+
+                        add_filter( 'sharing_image_sanitize_picker', 'my_sanitize_picker', 10, 2 );
+                    </code>
+                </pre>
+            </details>
+        </article>
+
+        <article class="hook">
+            <h4 class="anchor" id="sharing_image_disable_autogeneration">
+                <span>sharing_image_disable_autogeneration</span>
+
+                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_disable_autogeneration">#</a>
+                <strong>since 2.0.12</strong>
+            </h4>
+
+            <figure class="note">
+                This hook was removed in version 3.0 and is no longer available.
+            </figure>
+
+            <p>
                 Use this filter to disable posters autogeneration process based on Post ID.
                 It is good idea to skip autogeneration for some post types.
-                Available since <strong>2.0.12</strong>.
             </p>
 
             <details>
@@ -1292,40 +1676,6 @@
                         }
 
                         add_filter( 'sharing_image_disable_autogeneration', 'my_disable_autogeneration', 10, 2 );
-                    </code>
-                </pre>
-            </details>
-        </article>
-
-        <article class="article">
-            <h4 class="anchor" id="sharing_image_hide_twitter_meta">
-                <span>sharing_image_hide_twitter_meta</span>
-
-                <a aria-hidden="true" href="/sharing-image/hooks/#sharing_image_hide_twitter_meta">#</a>
-            </h4>
-
-            <p>
-                This filter allows to hide only Twitter meta tags. 
-                Available since <strong>2.0.12</strong>.
-            </p>
-
-            <details>
-                <summary>
-                    <span>Show me an example</span>
-                </summary>
-
-                <pre>
-                    <code>
-                        /**
-                         * @since 2.0.12
-                         *
-                         * @param bool $hide_twitter_meta Set true to hide poster meta.
-                         */
-                        function my_hide_twitter_meta( $hide_twitter_meta ) {
-                            return true;
-                        }
-
-                        add_filter( 'sharing_image_hide_twitter_meta', 'my_hide_twitter_meta' );
                     </code>
                 </pre>
             </details>

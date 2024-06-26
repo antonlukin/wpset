@@ -10,6 +10,7 @@
   --color-field: #F4F4F5;
   --color-error: #bf1f1f;
   --color-success: #237c23;
+  --color-note: #eee;
 
   --color-table-back: #fff;
   --color-table-head: #e8e8e8;
@@ -30,6 +31,7 @@ html.is-dark {
   --color-field: #27272A;
   --color-error: #ff4545;
   --color-success: #20af20;
+  --color-note: #2a2a2a;
 
   --color-table-back: #25252b;
   --color-table-head: #2e2e3a;

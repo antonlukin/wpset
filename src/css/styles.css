@@ -10,6 +10,7 @@
 @import url('component/table.css');
 @import url('component/anchor.css');
 @import url('component/logout.css');
+@import url('component/heading.css');
 @import url('component/pitch.css');
 @import url('component/control.css');
 @import url('component/backlink.css');
@@ -17,6 +18,7 @@
 @import url('component/hint.css');
 @import url('component/menu.css');
 @import url('component/tabs.css');
+@import url('component/note.css');
 @import url('component/message.css');
 @import url('component/mode.css');
 @import url('component/truncate.css');
@@ -26,6 +28,7 @@
 @import url('layout/section.css');
 @import url('layout/article.css');
 @import url('layout/catalog.css');
+@import url('layout/hook.css');
 
 @import url('extend/highlight-light.css');
 @import url('extend/highlight-dark.css');

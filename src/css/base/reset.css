@@ -246,6 +246,7 @@ pre {
   code {
     display: block;
 
+    margin-top: -0.5rem;
     padding: 0;
     white-space: pre;
 

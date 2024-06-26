@@ -1,11 +1,13 @@
 .anchor {
-  display: block;
+  display: flex;
+  flex-flow: row wrap;
 
   & > a {
-    display: inline-block;
+    display: block;
 
-    width: 0.75rem;
+    width: 2rem;
     height: 0.75rem;
+    margin-right: auto;
 
     mask-image: svg-load('icons/anchor.svg');
     mask-size: contain;
@@ -24,7 +26,7 @@
     }
 
     @media screen and (min-width: 768px) {
-      width: 1rem;
+      width: 2rem;
       height: 1rem;
 
       transform: translate(0.75rem, 0.375rem);
@@ -33,6 +35,22 @@
     @media (hover: hover) {
       opacity: 0;
     }
+  }
+
+  & > span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  & > strong {
+    display: block;
+
+    font-weight: 500;
+    font-style: normal;
+    font-size: var(--font-sm);
+
+    color: var(--color-success);
   }
 
   &:hover > a {
