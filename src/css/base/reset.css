@@ -265,7 +265,7 @@ figure {
   img {
     display: block;
 
-    border-radius: var(--rounded-lg);
+    border-radius: var(--rounded);
     box-shadow: var(--shadow-md);
   }
 }

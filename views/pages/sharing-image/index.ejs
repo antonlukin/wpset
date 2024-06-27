@@ -96,12 +96,15 @@
                 The text can be static for all posters of this template, or set manually for each post.
                 The starting position and the size of the text block are set relative to the size of the entire template.
                 You can also upload your own font or choose from the suggested.
+                For the dynamic field, you can preset a value from the post title, the excerpt field, the list of categories, or tags.
+                Additionally, negative values can be used for the positioning and sizing of the layer.
+                A negative width or height value will count the size from the edge of the canvas.
             </li>
 
             <li>
                 <strong>Image layer.</strong>
                 You can also add a static image to your poster, such as a logo or watermark.
-                Set its size and location.
+                Use the dynamic field to set the image on the post editing page. This field can also be used for the poster background.
             </li>
 
             <li>
@@ -119,6 +122,11 @@
         <p>
             On the <strong>Configuration tab</strong> you can select the poster image format,
             the download directory and the default poster — it will be used for all pages where there is no generated.
+            You can also hide the widget from the post editing pages. Use this option in conjunction with automatic template generation.
+        </p>
+
+        <p>
+            The options on the <strong>Tools</strong> page allow you to import and export templates, clone existing ones, and clear post meta for already created posters.
         </p>
 
         <figure>
@@ -141,7 +149,7 @@
 
         <p>
             Load the background and enter text if necessary, then generate a poster and save the post.
-            All is ready!
+            To display the poster manually, use the <code>sharing_image_poster()</code> or <code>sharing_image_poster_src()</code> functions.
         </p>
 
         <figure>
@@ -155,12 +163,6 @@
 
             <figcaption>Example of a poster in Twitter feed.</figcaption>
         </figure>
-
-        <p>
-            By default, posters are displayed in the page meta tags for all posts,
-            if you want to manage this yourself, you can disable the meta display using <code>sharing_image_hide_meta</code> <a href="/sharing-image/hooks/#sharing_image_hide_meta">filter</a>.
-            To display the poster manually, use the <code>sharing_image_poster()</code> or <code>sharing_image_poster_src()</code> functions.
-        </p>
     </section>
 
     <section class="section">
@@ -173,8 +175,7 @@
         <p>
             The latest version of the plugin supports automatic poster generation.
             First you need to select the desired template on the <strong>Configuration</strong> page of the plugin settings.
-            Now, when saving a post, a poster will be automatically generated using presets (title, excerpt, thumbnail).
-            The plugin will not overwrite the poster if it has already been generated for the post.
+            Now, when saving a post, a poster will be automatically generated using presets: title, excerpt, categories, tags, thumbnail.
         </p>
     </section>
 
