@@ -20,7 +20,7 @@
     "express-slash": "^2.0.1",
     "form-data": "^4.0.0",
     "license-key-generator": "^1.1.2",
-    "mailgun.js": "^3.7.2",
+    "mailgun.js": "^12.7.1",
     "md5": "^2.3.0",
     "mysql2": "^2.3.0",
     "project-version": "^2.0.0",

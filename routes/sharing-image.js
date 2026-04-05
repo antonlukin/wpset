@@ -386,6 +386,8 @@ router.post('/registration/', async (req, res, next) => {
       status: 'valid',
     });
   } catch (err) {
+    console.error(err);
+
     return res.redirect('/sharing-image/?message=4');
   }
 
