@@ -1,0 +1,12 @@
+/* Off-screen auxiliary field, kept out of view and interaction. */
+input.spare {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0;
+  pointer-events: none;
+}

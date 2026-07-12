@@ -9,6 +9,24 @@ const models = require('../models');
 const {key, host} = models['sharing-image'];
 
 /**
+ * Action name for the anonymous registration form nonce.
+ */
+const registrationAction = 'sharing-image-registration';
+
+/**
+ * Build the nonce subject for the registration form.
+ *
+ * Combines a server-side secret with the client IP so the token cannot be
+ * forged (secret is unknown to the client) or replayed from another address.
+ *
+ * @param {Object} req Express request.
+ * @return {String}
+ */
+const registrationSubject = (req) => {
+  return (process.env.NONCE_SECRET || '') + req.clientIp;
+};
+
+/**
  * Show index page
  */
 router.get('/', (req, res) => {
@@ -44,6 +62,14 @@ router.get('/', (req, res) => {
         title: 'Failed to send email. Try again later.',
         class: 'error',
       };
+
+      break;
+
+    case '5':
+      message = {
+        title: 'Your session has expired. Please reload the page and try again.',
+        class: 'error',
+      };
   }
 
   res.locals.meta = {
@@ -54,6 +80,7 @@ router.get('/', (req, res) => {
 
   res.render('pages/sharing-image/index', {
     message: message,
+    formNonce: nonce.create(registrationSubject(req), registrationAction),
   });
 });
 
@@ -350,6 +377,18 @@ router.post('/verify/', async (req, res) => {
 
 
 router.post('/registration/', async (req, res, next) => {
+  // Silently drop bots that fill the hidden spare field.
+  if (req.body.website) {
+    return res.redirect('/sharing-image/?message=1');
+  }
+
+  // Reject submits without a valid, recent form token.
+  const subject = registrationSubject(req);
+
+  if (!nonce.verify(req.body.nonce, subject, registrationAction)) {
+    return res.redirect('/sharing-image/?message=5');
+  }
+
   if (!req.body.email) {
     return res.redirect('/sharing-image/');
   }
